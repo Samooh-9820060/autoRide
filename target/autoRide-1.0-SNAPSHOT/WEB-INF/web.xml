@@ -16,6 +16,14 @@
         <servlet-name>signUp</servlet-name>
         <servlet-class>mvc.controller.signUp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showInvoice</servlet-name>
+        <servlet-class>mvc.controller.showInvoice</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminLogIn</servlet-name>
+        <servlet-class>mvc.controller.adminLogIn</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>signUp</servlet-name>
         <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showInvoice</servlet-name>
+        <url-pattern>/showInvoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminLogIn</servlet-name>
+        <url-pattern>/adminLogIn</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

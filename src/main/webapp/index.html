@@ -140,19 +140,6 @@
                       <div class="mb-3">
                            <input type="password" placeholder="Password *" class="form-control" id="password" name="signUpPassword" required data-validation-required-message="Please enter your password" autocomplete="off">
                       </div>
-                      <div class="form-group">
-                           <label><span class="req"></span> </label>
-                           <input type="radio"  name="rdbType" autocomplete="off" checked value="passenger" onclick="hideVehicles();"/>  Passenger
-                           <input type="radio" name="rdbType" autocomplete="off" style="margin-left:5em" value="driver" onclick="showVehicles();"/>  Driver   
-                           <p class="help-block text-danger"></p>
-                      </div>
-                      <div>
-                          <select name="vehicles" class="form-control" id="typeVehicle" hidden>
-                               <option value="Car">Car</option>
-                               <option value="Cycle">Cycle</option>
-                               <option value="Pickup">Pickup</option>
-                           </select>
-                      </div>
                       
                       <div class="text-center">
                         <button
@@ -223,14 +210,6 @@
         };
         Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
       }
-    </script>
-    <script>
-        function showVehicles(){
-            document.getElementById("typeVehicle").removeAttribute("hidden");
-        }
-        function hideVehicles(){
-            document.getElementById("typeVehicle").setAttribute("hidden","true");                              
-        }
     </script>
   </body>
 </html>

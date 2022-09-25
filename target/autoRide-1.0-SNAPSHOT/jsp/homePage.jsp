@@ -44,9 +44,9 @@
         response.setHeader("Pragma","no-cache");
         response.setHeader("Expires","0");
         
-        /*if(session.getAttribute("session")==null){
-            response.sendRedirect("loginPage.html");
-        }*/
+        if(session.getAttribute("session")==null){
+            response.sendRedirect("../jsp/signIn.jsp");
+        }
     %>
   
     <section data-bs-version="5.1" class="menu cid-s48OLK6784" once="menu" id="menu1-h">
@@ -112,6 +112,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
 
                             </div>
+                            <form method="POST" action="../bookRide">
                             <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="name">
                                 <input type="date" name="bookedDate" placeholder="Date" data-form-field="date" class="form-control" value="" id="bookedDate" required>
                             </div>
@@ -125,13 +126,34 @@
                                 <input type="location" name="bookedDestination" placeholder="Destination" data-form-field="destination" class="form-control" value="" id="bookingDestination" required>
                             </div>
                             <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="type">
-                                <select name="vehicles" name="vehicleType" class="form-control" id="typeVehicle">
+                                <select name="vehicleType" class="form-control" id="typeVehicle">
                                     <option value="Car">Car (MVR 25+)</option>
                                     <option value="Cycle">Cycle (MVR 10+)</option>
                                     <option value="Pickup">Pickup (MVR 40+)</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-md-auto mbr-section-btn"><button type="submit" name="orderNowButton" class="btn btn-secondary display-4" onclick="doGeocodePickupLocation()" ><span class="mobi-mbri mobi-mbri-touch mbr-iconfont mbr-iconfont-btn"></span>Order</button></div>
+                            <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="bookPrice" id="bookPriceDiv" hidden>
+                                <input type="location" name="bookPriceLabel" placeholder="MVR " data-form-field="destination" class="form-control" value="" id="bookPriceLabel" disabled>
+                            </div>
+
+                            <input type="text" id="carryDate" name="carryDate"  hidden value="OK" ></input>
+                            <input type="text" id="carryTime" name="carryTime"  hidden value="OK" ></input>
+                            <input type="text" id="carryLocation" name="carryLocation" hidden value="OK" ></input>
+                            <input type="text" id="carryDestination" name="carryDestination" hidden value="OK" ></input>
+                            <input type="text" id="carryVehicle" name="carryVehicle" hidden value="OK" ></input>
+
+                            <input type="text" id="locationLat" name="locationLat" hidden value="OK" ></input>
+                            <input type="text" id="locationLng" name="locationLng" hidden value="OK" ></input>
+                            <input type="text" id="destLat" name="destLat" hidden value="OK" ></input>
+                            <input type="text" id="destLng" name="destLng" hidden value="OK" ></input>
+                            <input type="text" id="inputDuration" name="inputDuration" hidden value="OK" ></input>
+                            <input type="text" id="inputDistance" name="inputDistance" hidden value="OK" ></input>
+                            <div>
+                            <div class="col-12 col-md-auto mbr-section-btn"><button name="calculateDistanceAndPriceButton" id="calculateDistanceAndPriceButton" class="btn btn-secondary display-4" onclick="return bookNowButton()"><span class="mobi-mbri mobi-mbri-touch mbr-iconfont mbr-iconfont-btn"></span>Book Now</button></div>
+                            <div class="col-12 col-md-auto mbr-section-btn"><button type="submit" name="confirmOrderButton" id="confirmOrderButton" class="btn btn-secondary display-4" hidden><span class="mobi-mbri mobi-mbri-touch mbr-iconfont mbr-iconfont-btn"></span>Confirm</button></div>
+                            <div class="col-12 col-md-auto mbr-section-btn"><button name="cancelOrderButton" id="cancelOrderButton" class="btn btn-secondary display-4" onclick="return backButton()" hidden><span class="mobi-mbri mobi-mbri-touch mbr-iconfont mbr-iconfont-btn"></span>Back</button></div>
+                            </div>
+                            </form>
                         </div>
                 </div>
                 <div class="col-lg-7 offset-lg-1 col-12">
@@ -367,7 +389,14 @@
                 }
             }
             return "";
-        }        
+        } 
+        
+        let type = getCookie("type");
+        if (type!=="Passenger"){
+            document.forms[0].action="../logOut";
+            document.forms[0].submit();
+        }
+        
         let firstName = getCookie("firstName");
         document.getElementById("HiName").innerHTML = "Hi, "+firstName+"!";   
     </script>
@@ -445,6 +474,32 @@
         var destLat = null;
         var destLng = null;
         
+        function bookNowButton(){
+            if (document.getElementById("bookedDate").value === ""){
+                alert("Please enter valid date");
+            } else if (document.getElementById("bookingTime").value === ""){
+                alert("Please enter valid Time");
+            } else {
+                doGeocodePickupLocation();            
+            }
+            return false;
+        }
+        
+        function backButton(){
+            
+            document.getElementById("calculateDistanceAndPriceButton").hidden = false;
+            document.getElementById("confirmOrderButton").hidden = true;
+            document.getElementById("cancelOrderButton").hidden = true;
+            document.getElementById("bookPriceDiv").hidden = true;
+            
+            document.getElementById("bookedDate").disabled = false;
+            document.getElementById("bookingTime").disabled = false;
+            document.getElementById("bookingCurrentLocation").disabled = false;
+            document.getElementById("bookingDestination").disabled = false;
+            document.getElementById("typeVehicle").disabled = false;
+            return false;
+        }
+        
         function doGeocodePickupLocation() {
             var bookingLocation = document.getElementById("bookingCurrentLocation");
             // Get geocoder instance
@@ -462,11 +517,14 @@
                     var longitude = results[0].geometry.location.lng();
                     bookingLat = latitude;
                     bookingLng = longitude;
-                    document.cookie = "bookPickupLatitude = "+encodeURIComponent(latitude);
-                    document.cookie = "bookPickupLongitude = "+encodeURIComponent(longitude);
+                    
+                    document.getElementById("locationLat").value = encodeURIComponent(latitude);
+                    document.getElementById("locationLng").value = encodeURIComponent(longitude);
+
+                    //document.cookie = "bookPickupLatitude = "+encodeURIComponent(latitude);
+                    //document.cookie = "bookPickupLongitude = "+encodeURIComponent(longitude);
                     
                     bookingLocation.value = results[0].formatted_address;
-                    //document.getElementById("placedOrder").removeAttribute("hidden");
                     doGeocodeDestinationLocation();
                 } else {
                     // show an error if it's not
@@ -493,8 +551,11 @@
                     var longitude = results[0].geometry.location.lng();
                     destLat = latitude;
                     destLng = longitude;
-                    document.cookie = "bookDestinationLatitude = "+encodeURIComponent(latitude);
-                    document.cookie = "bookDestinationLongitude = "+encodeURIComponent(longitude);
+                    //document.cookie = "bookDestinationLatitude = "+encodeURIComponent(latitude);
+                    //document.cookie = "bookDestinationLongitude = "+encodeURIComponent(longitude);
+                    
+                    document.getElementById("destLat").value = encodeURIComponent(latitude);
+                    document.getElementById("destLng").value = encodeURIComponent(longitude);
                     
                     destinationLocation.value = results[0].formatted_address;
                     calculateDistance();
@@ -534,9 +595,30 @@
                                 var duration = element.duration.text;
                                 var from = origins[i];
                                 var to = destinations[j]; 
-                                document.cookie = "distance = "+encodeURIComponent(distance);
-                                document.cookie = "duration = "+encodeURIComponent(duration);
-                                bookRide();
+                                //document.cookie = "distance = "+encodeURIComponent(distance);
+                                //document.cookie = "duration = "+encodeURIComponent(duration);
+                                document.getElementById("inputDuration").value = encodeURIComponent(duration);
+                                document.getElementById("inputDistance").value = encodeURIComponent(distance);
+                                //bookRide();
+                                document.getElementById("confirmOrderButton").hidden = false;
+                                document.getElementById("cancelOrderButton").hidden = false;
+                                document.getElementById("calculateDistanceAndPriceButton").hidden = true; 
+                                document.getElementById("bookPriceDiv").hidden = false;
+                                
+                                document.getElementById("carryDate").value = document.getElementById("bookedDate").value;
+                                document.getElementById("carryTime").value = document.getElementById("bookingTime").value;
+                                document.getElementById("carryLocation").value = document.getElementById("bookingCurrentLocation").value;
+                                document.getElementById("carryDestination").value = document.getElementById("bookingDestination").value;
+                                document.getElementById("carryVehicle").value = document.getElementById("typeVehicle").value;
+                        
+                                document.getElementById("bookedDate").disabled = true;
+                                document.getElementById("bookingTime").disabled = true;
+                                document.getElementById("bookingCurrentLocation").disabled = true;
+                                document.getElementById("bookingDestination").disabled = true;
+                                document.getElementById("typeVehicle").disabled = true;
+                                
+                                calculatePrice();
+                                
                             }
                         }
                     }
@@ -545,26 +627,69 @@
             //bookRide();
         }
         
-        function bookRide(){
-            if ((document.getElementById("bookedDate").value!=="") && (document.getElementById("bookingTime").value!=="")){
-                document.getElementById("placedOrder").removeAttribute("hidden");
-                var bookDate = document.getElementById("bookedDate").value;
-                var bookTime = document.getElementById("bookingTime").value;
-                var currentLocation = document.getElementById("bookingCurrentLocation").value;
-                var destinationLocation = document.getElementById("bookingDestination").value;
-                var vehicleType = document.getElementById("typeVehicle").value;
-                document.cookie = "bookDate = "+encodeURIComponent(bookDate);
-                document.cookie = "bookTime = "+encodeURIComponent(bookTime);
-                document.cookie = "bookLocation = "+encodeURIComponent(currentLocation);
-                document.cookie = "bookDestination = "+encodeURIComponent(destinationLocation);
-                document.cookie = "vehicleType = "+encodeURIComponent(vehicleType);
-
-                document.forms[0].action="../bookRide";
-                document.forms[0].submit();
-            } else {
-                alert("Please enter valid Date & Time");
+        function calculatePrice(){
+            var price = 0.00;
+            var vehicle = document.getElementById("typeVehicle").value;
+            
+            switch(vehicle){
+                case "Cycle":
+                    price += 10.00;
+                    break;
+                case "Car":
+                    price += 25.00;
+                    break;
+                case "Pickup":
+                    price += 40.00;
+                    break;
             }
-        }  
+            
+            var distance = document.getElementById("inputDistance").value.replace("%20km","");
+            
+            switch (vehicle) {
+                case "Cycle":
+                    if (distance<=10.0){
+                        price += 0.00;
+                    } else if ((distance>10.0)&&(distance<=15.0)){
+                        price += 0.00+((distance-10.0)*1);
+                    } else if ((distance>15.0)&&(distance<=20.0)){
+                        price += 0.00+((15.0-10.0)*1)+((distance-15)*2);
+                    } else if ((distance>20.0)){
+                        price += 0.00+((15.0-10.0)*1)+((20.0-15.0)*2)+((distance-20)*3);
+                    } else {
+                        price = 0.00;
+                    }
+                    break;
+
+                case "Car":
+                    if (distance<=10.0){
+                        price += 0.00;
+                    } else if ((distance>10.0)&&(distance<=15.0)){
+                        price += 0.00+((distance-10.0)*2);
+                    } else if ((distance>15.0)&&(distance<=20.0)){
+                        price += 0.00+((15.0-10.0)*2)+((distance-15)*3);
+                    } else if ((distance>20.0)){
+                        price += 0.00+((15.0-10.0)*2)+((20.0-15.0)*3)+((distance-20)*4);
+                    } else {
+                        price += 0.00;
+                    }
+                    break;
+                case "Pickup":
+                    if (distance<=10.0){
+                        price += 0.00;
+                    } else if ((distance>10.0)&&(distance<=15.0)){
+                        price += 0.00+((distance-10.0)*3);
+                    } else if ((distance>15.0)&&(distance<=20.0)){
+                        price += 0.00+((15.0-10.0)*3)+((distance-15)*4);
+                    } else if ((distance>20.0)){
+                        price += 0.00+((15.0-10.0)*3)+((20.0-15.0)*4)+((distance-20)*5);
+                    } else {
+                        price += 0.00;
+                    }
+                    break;
+            }
+            
+            document.getElementById("bookPriceLabel").value = "MVR "+price.toFixed(2).toString();
+        }
     </script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKfAnJIEIM6tjK_lA0g-zgMyKrjr2sf0&libraries=places&callback=initGoogle"></script>
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBzKfAnJIEIM6tjK_lA0g-zgMyKrjr2sf0"></script>

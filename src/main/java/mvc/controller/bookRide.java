@@ -5,7 +5,6 @@ package mvc.controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +22,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.SimpleDateFormat;  
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date; 
+import javax.imageio.ImageIO;
 
 
 /**
@@ -44,85 +46,31 @@ public class bookRide extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String date = null;
-            String time = null;
-            String location = null;
-            String destination = null;
-            String pickupLatitude = null;
-            String pickupLongitude = null;
-            String destinationLatitude = null;
-            String destinationLongitude = null;
-            String vehicleType = null;
-            String distance = null;
-            String duration = null;
+            
+            
+            String date = request.getParameter("carryDate");
+            String time = request.getParameter("carryTime");
+            String location = request.getParameter("carryLocation").replace("%20", " ");
+            String destination = request.getParameter("carryDestination").replace("%20", " ");
+            String pickupLatitude = request.getParameter("locationLat");
+            String pickupLongitude = request.getParameter("locationLng");
+            String destinationLatitude = request.getParameter("destLat");
+            String destinationLongitude = request.getParameter("destLng");
+            String vehicleType = request.getParameter("carryVehicle");
+            String distance = request.getParameter("inputDistance").replace("%20", " ");
+            String duration = request.getParameter("inputDuration").replace("%20", " ");
             
             String firstName = null;
             
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie: cookies) {
                 switch (cookie.getName()){
-                    case "bookDate":
-                        date = cookie.getValue();
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookTime":
-                        time = cookie.getValue().replace("%3A", ":");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookLocation":
-                        location = cookie.getValue().replace("%20", " ").replace("%2C", ",").replace("%C3%A9","é").replace("%2B", "+");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookDestination":
-                        destination = cookie.getValue().replace("%20", " ").replace("%2C", ",").replace("%C3%A9","é").replace("%2B", "+");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookPickupLatitude":
-                        pickupLatitude = cookie.getValue();
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookPickupLongitude":
-                        pickupLongitude = cookie.getValue();
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookDestinationLatitude":
-                        destinationLatitude = cookie.getValue();
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "bookDestinationLongitude":
-                        destinationLongitude = cookie.getValue();
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "vehicleType":
-                        vehicleType = cookie.getValue();
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;  
-                    case "distance":
-                        distance = cookie.getValue().replace("%20", " ");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break;
-                    case "duration":
-                        duration = cookie.getValue().replace("%20", " ");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                        break; 
                     case "firstName":
                         firstName = cookie.getValue();
                         break;
                 }
-                //insertData(mail, date, time, location, pickupLatitude, pickupLongitude, destination, destinationLatitude, destinationLongitude, vehicleType);
-                //response.sendRedirect("Loading.html");
             }
+            
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             
@@ -131,79 +79,27 @@ public class bookRide extends HttpServlet {
             Date currentDate = new Date(); 
             String currentDateTime = formatterDate.format(currentDate);
             String currentTime = formatterTime.format(currentDate);
+            String totalPrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)+vehiclePrice(vehicleType)));
+            String vehiclePrice = String.format("%.2f",vehiclePrice(vehicleType));
+            String extraDistancePrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)));
             
-        
             populateBookingsDatabase(mail, date, time, location, pickupLatitude, pickupLongitude, destination, 
-                    destinationLatitude, destinationLongitude, vehicleType, distance, duration, currentTime, currentDateTime);
-            int invoiceNum = getLastRow();
+                    destinationLatitude, destinationLongitude, vehicleType, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice);            
             
-            //Values needed for receipt
-            String receiptOrderDate = currentDateTime;
-            String receiptOrderTIme = currentTime;
-            String receiptMail = mail;
-            String receiptDate = date;
-            String receiptTime = time;
-            String receiptLocation = location;
-            String receiptDestination = destination;
-            String receiptVehicleType = vehicleType;
-            String receiptDistance = distance;
-            String receiptDuration = duration;
-            String receiptFullName = null;
-            String receiptPhoneNumber = null;
             
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT EMAIL, LAST_NAME, PHONE_NUMBER FROM USERDATA");
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
 
-            while (resultSet.next()){
-                for (int i = 1; i <= numberOfColumns; i++) {
-                    String resultEmail = (String) resultSet.getObject(i);
-                    String resultLastName = (String) resultSet.getObject(i+1);
-                    int resultPhone = (int) resultSet.getObject(i+2);
-                    
-                    if (resultEmail.equals(mail)){
-                        receiptFullName = firstName+" "+resultLastName;
-                        receiptPhoneNumber = resultPhone+"";
-                    }
-                    i=i+3;
-                }
+            response.sendRedirect("showInvoice");
             }
-            
-            
-            
-            //Send values for invoice
-            request.setAttribute("invoiceNum", invoiceNum);
-            request.setAttribute("receiptOrderDate", receiptOrderDate);
-            request.setAttribute("receiptOrderTIme", receiptOrderTIme);
-            request.setAttribute("receiptMail", receiptMail);
-            request.setAttribute("receiptDate", receiptDate);
-            request.setAttribute("receiptTime", receiptTime);
-            request.setAttribute("receiptLocation", receiptLocation);
-            request.setAttribute("receiptDestination", receiptDestination);
-            request.setAttribute("receiptVehicleType", receiptVehicleType);
-            request.setAttribute("receiptDistance", receiptDistance);
-            request.setAttribute("receiptDuration", receiptDuration);
-            request.setAttribute("receiptFullName", receiptFullName);
-            request.setAttribute("receiptPhoneNumber", receiptPhoneNumber);
-            request.setAttribute("vehiclePrice", String.format("%.2f",(vehiclePrice(vehicleType))));
-            request.setAttribute("extraDistancePrice", String.format("%.2f",(extraDistancePrice(vehicleType,distance))));
-            request.setAttribute("totalPrice", String.format("%.2f",(extraDistancePrice(vehicleType,distance)+vehiclePrice(vehicleType))));
-            
-            RequestDispatcher rd = request.getRequestDispatcher("./jsp/invoice.jsp");
-            rd.forward(request, response);
-        }
     }
     
     public void populateBookingsDatabase(String mail, String date, String time, String location, String pickupLat, String pickupLng,
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
-            String duration, String currentTime, String currentDate) throws SQLException{
+            String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price) throws SQLException{
             
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
         Statement statement = connection.createStatement();
         statement.executeUpdate("INSERT INTO BOOKINGSDATA VALUES ('"+mail+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
-                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"')");
+                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"')");
     }
     
     public int getLastRow() throws SQLException{
@@ -289,9 +185,9 @@ public class bookRide extends HttpServlet {
     
     private double extraDistancePrice(String vehicleType, String distance){
         double price = 0.00;
-        System.out.println("Distance is "+distance.substring(0,4).trim());
+        //System.out.println("Distance is "+distance.substring(0,4).trim());
         double distanceDouble = Double.parseDouble(distance.substring(0,4).trim());
-        System.out.println(distanceDouble+"Is double value");
+        //System.out.println(distanceDouble+"Is double value");
         switch (vehicleType) {
             case "Cycle":
                 if (distanceDouble<=10.0){

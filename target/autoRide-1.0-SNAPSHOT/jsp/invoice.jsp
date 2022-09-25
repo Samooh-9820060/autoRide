@@ -8,6 +8,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type = "text/javascript">
+            function disableBackButton() {
+                window.history.forward();
+            }
+        //setTimeout("disableBackButton()", 0);
+        </script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -120,7 +126,24 @@
         </style>
     </head>
 
+    
     <body>
+        
+        <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma","no-cache");
+        response.setHeader("Expires","0");
+        
+        /*if(session.getAttribute("session")==null){
+            response.sendRedirect("./signIn.jsp");
+        }*/
+        %>
+        <script>
+         /*alert("You will be redirected in 5 seconds. You can view invoice from My Bookings.");
+         setTimeout(function(){
+            window.location.href = './jsp/homePage.jsp';
+         }, 5000);*/
+        </script>
         <div class="invoice-box">
             <table>
                 <tr class="top">
@@ -128,12 +151,21 @@
                         <table>
                             <tr>
                                 <td class="title">
-                                    <img src="../assets/images/logo.png" alt="Company logo" style="width: 100%; max-width: 300px" />
+                                    <img src="./assets/images/logo.png" alt="Company logo" style="width: 100%; max-width: 300px" />
+                                </td>
+                                <td>
+                                    <button style="height:30px;width:150px;margin:30px 0px" onclick="goHome()">Back</button>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
+                <script>
+                    function goHome(){
+                        window.location.href = "./jsp/homePage.jsp";
+                    }
+                    
+                </script>
 
                 <tr class="information">
                     <td colspan="2">
