@@ -186,9 +186,9 @@
                     href=""
                     aria-expanded="true"
                     ><span
-                      class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn"
+                      class="mobi-mbri mobi-mbri-calendar mbr-iconfont mbr-iconfont-btn"
                     ></span
-                    >My Profile</a
+                    >Reports</a
                   >
                 </li>
               </ul>

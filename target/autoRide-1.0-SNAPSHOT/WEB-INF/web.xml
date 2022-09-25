@@ -64,6 +64,14 @@
         <servlet-name>deleteUser</servlet-name>
         <servlet-class>mvc.controller.deleteUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>filterBookingsDatePassenger</servlet-name>
+        <servlet-class>mvc.controller.filterBookingsDatePassenger</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterPassengerBookings</servlet-name>
+        <servlet-class>mvc.controller.filterPassengerBookings</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>deleteUser</servlet-name>
         <url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterBookingsDatePassenger</servlet-name>
+        <url-pattern>/filterBookingsDatePassenger</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterPassengerBookings</servlet-name>
+        <url-pattern>/filterPassengerBookings</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -46,7 +46,7 @@
                 <option value="Status">Status</option>
             </select>
             <input size="25px;" style="margin-left: 0px;" id="filterMailInput">
-            <a onclick="loadUser()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
+            <a onclick="loadFilter()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -199,7 +199,7 @@
           var form = document.getElementById("filterDate");
           form.submit();
       }
-      function loadUser(){
+      function loadFilter(){
           document.getElementById("filterType").value = document.getElementById("filterBy").value;
           document.getElementById("filterMail").value = document.getElementById("filterMailInput").value;
           var form = document.getElementById("filterUser");
