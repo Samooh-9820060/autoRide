@@ -40,6 +40,7 @@
             <select style="border: none; margin-left: 10px;" id="filterBy">
                 <option value="Vehicle">Vehicle</option>
                 <option value="Status">Status</option>
+                <option value="Driver">Driver Mail</option>
             </select>
             <input size="25px;" style="margin-left: 0px;" id="filterMailInput">
             <a onclick="loadFilter()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>

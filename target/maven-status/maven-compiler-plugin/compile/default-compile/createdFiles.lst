@@ -1,8 +1,8 @@
 com\mycompany\autoride\resources\JakartaEE9Resource.class
-mvc\controller\adminLogIn.class
-mvc\controller\bookRide.class
 mvc\controller\signUp.class
 com\mycompany\autoride\JakartaRestConfiguration.class
 mvc\controller\logIn.class
+mvc\controller\adminLogIn.class
+mvc\controller\bookRide.class
 mvc\controller\showInvoice.class
 mvc\controller\logOut.class

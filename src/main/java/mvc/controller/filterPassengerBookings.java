@@ -65,26 +65,28 @@ public class filterPassengerBookings extends HttpServlet {
                 String mailValue = resultSet.getObject(1).toString();
                 String vehicle = vehicleType(resultSet.getObject(8).toString().trim());
                 String status = (String) resultSet.getObject(13);
+                String driverMail = resultSet.getObject(12).toString();
                 
                 if (mail.equals(mailValue)){
-                if (type.equalsIgnoreCase("Vehicle")){
-                    if (vehicle.equalsIgnoreCase(filterValue)){
-                        tempList.invoiceNum = i+"";
-                        tempList.bookDate = (String) resultSet.getObject(2);
-                        tempList.bookTime = (String) resultSet.getObject(3);
-                        tempList.orderDate = (String) resultSet.getObject(4);
-                        tempList.orderTime = (String) resultSet.getObject(5);
-                        tempList.location = (String) resultSet.getObject(6);
-                        tempList.destination = (String) resultSet.getObject(7);
-                        tempList.vehicle = vehicleType(resultSet.getObject(8).toString().trim());
-                        tempList.distance = (String) resultSet.getObject(9);
-                        tempList.duration = (String) resultSet.getObject(10);
-                        tempList.price = (String) resultSet.getObject(11);
-                        tempList.driver = (String) resultSet.getObject(12);
-                        tempList.status = (String) resultSet.getObject(13);
-                        myBookingsList.add(tempList); 
+                    if (type.equalsIgnoreCase("Vehicle")){
+                        if (vehicle.equalsIgnoreCase(filterValue)){
+                            tempList.invoiceNum = i+"";
+                            tempList.bookDate = (String) resultSet.getObject(2);
+                            tempList.bookTime = (String) resultSet.getObject(3);
+                            tempList.orderDate = (String) resultSet.getObject(4);
+                            tempList.orderTime = (String) resultSet.getObject(5);
+                            tempList.location = (String) resultSet.getObject(6);
+                            tempList.destination = (String) resultSet.getObject(7);
+                            tempList.vehicle = vehicleType(resultSet.getObject(8).toString().trim());
+                            tempList.distance = (String) resultSet.getObject(9);
+                            tempList.duration = (String) resultSet.getObject(10);
+                            tempList.price = (String) resultSet.getObject(11);
+                            tempList.driver = (String) resultSet.getObject(12);
+                            tempList.status = (String) resultSet.getObject(13);
+                            myBookingsList.add(tempList); 
+                        }
                     }
-                }else if (type.equalsIgnoreCase("Status")){
+                    else if (type.equalsIgnoreCase("Status")){
                         if (status.equalsIgnoreCase(filterValue)){
                             tempList.invoiceNum = i+"";
                             tempList.bookDate = (String) resultSet.getObject(2);
@@ -101,7 +103,25 @@ public class filterPassengerBookings extends HttpServlet {
                             tempList.status = (String) resultSet.getObject(13);
                             myBookingsList.add(tempList); 
                         }
-                    }    
+                    } 
+                    else if (type.equalsIgnoreCase("Driver")){
+                        if (driverMail.equalsIgnoreCase(filterValue)){
+                            tempList.invoiceNum = i+"";
+                            tempList.bookDate = (String) resultSet.getObject(2);
+                            tempList.bookTime = (String) resultSet.getObject(3);
+                            tempList.orderDate = (String) resultSet.getObject(4);
+                            tempList.orderTime = (String) resultSet.getObject(5);
+                            tempList.location = (String) resultSet.getObject(6);
+                            tempList.destination = (String) resultSet.getObject(7);
+                            tempList.vehicle = vehicleType(resultSet.getObject(8).toString().trim());
+                            tempList.distance = (String) resultSet.getObject(9);
+                            tempList.duration = (String) resultSet.getObject(10);
+                            tempList.price = (String) resultSet.getObject(11);
+                            tempList.driver = (String) resultSet.getObject(12);
+                            tempList.status = (String) resultSet.getObject(13);
+                            myBookingsList.add(tempList); 
+                        }
+                    }
                 }
                     
                 i++;
