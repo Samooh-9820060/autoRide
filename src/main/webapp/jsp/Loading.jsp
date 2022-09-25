@@ -36,7 +36,7 @@
             document.getElementById("meta").content="2; url='../jsp/errorPage.jsp'";                                          
         } else if (getCookie("status") === "RepeatedDriver") {
             document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";
-        } else if (getCookie("status") === "RepeatedPassengerUpdate") {
+        } else if (getCookie("statusUpdate") === "RepeatedPassengerUpdate") {
             document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";
         } else if (getCookie("page") === "homePage"){
             document.getElementById("meta").content="0.5; url='../jsp/homePage.jsp'"; 
@@ -53,8 +53,8 @@
                 document.getElementById("meta").content="2; url='../jsp/adminPage.jsp'"; 
             } else if (getCookie("type") === "Passenger"){
                 document.getElementById("meta").content="2; url='../jsp/homePage.jsp'";                              
-            } else if (getCookie("type") === "driver"){
-                document.getElementById("meta").content="2; url='../jsp/driverPage.jsp'"; 
+            } else if (getCookie("type") === "Driver"){
+                document.getElementById("meta").content="2; url='../driverHomePage'"; 
             }
         } 
         

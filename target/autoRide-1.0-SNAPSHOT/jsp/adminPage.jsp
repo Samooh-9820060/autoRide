@@ -26,49 +26,30 @@
         type="image/x-icon"
       />
       <meta name="description" content="" />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
-      />
-      <script
-        src="https://kit.fontawesome.com/42d5adcbca.js"
-        crossorigin="anonymous"
-      ></script>
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
       <!-- Material Icons -->
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
-        rel="stylesheet"
-      />
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
       <!-- CSS Files -->
-      <link
-        id="pagestyle"
-        href="./assets/css/material-dashboard.css?v=3.0.4"
-        rel="stylesheet"
-      />
+      <link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet"/>
 
       <title>Home</title>
-      <link
-        rel="stylesheet"
-        href="./assets/web/assets/mobirise-icons2/mobirise2.css"
+            <link
+        rel="preload"
+        as="style"
+        href="./assets/mobirise/css/mbr-additional.css"
       />
       <link
         rel="stylesheet"
-        href="./assets/web/assets/mobirise-icons/mobirise-icons.css"
+        href="./assets/mobirise/css/mbr-additional.css"
+        type="text/css"
       />
-      <link
-        rel="stylesheet"
-        href="./assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css"
-      />
+      <link rel="stylesheet" href="./assets/web/assets/mobirise-icons2/mobirise2.css"/>
+      <link rel="stylesheet" href="./assets/web/assets/mobirise-icons/mobirise-icons.css"/>
+      <link rel="stylesheet" href="./assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css"/>
       <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
-      <link
-        rel="stylesheet"
-        href="./assets/bootstrap/css/bootstrap-grid.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="./assets/bootstrap/css/bootstrap-reboot.min.css"
-      />
+      <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-grid.min.css"/>
+      <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-reboot.min.css"/>
       <link rel="stylesheet" href="./assets/dropdown/css/style.css" />
       <link rel="stylesheet" href="./assets/socicon/css/styles.css" />
       <link rel="stylesheet" href="./assets/theme/css/style.css" />
@@ -83,16 +64,7 @@
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
       /></noscript>
-      <link
-        rel="preload"
-        as="style"
-        href="./assets/mobirise/css/mbr-additional.css"
-      />
-      <link
-        rel="stylesheet"
-        href="./assets/mobirise/css/mbr-additional.css"
-        type="text/css"
-      />
+
     </head>
     <script type = "text/javascript">
         function disableBackButton() {

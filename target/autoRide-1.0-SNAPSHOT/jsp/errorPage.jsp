@@ -55,22 +55,31 @@
         }
         return "";
     }
+    
+    function eraseCookie(name) {
+        document.cookie = name + '=; Max-Age=0'
+    }
+    
     if (getCookie("status") === "IncorrectLoginDetails"){
         document.getElementById("meta").content="5; url='../jsp/signIn.jsp'";
         document.getElementById("heading").innerHTML = "The username or password you entered was incorrect";
         document.getElementById("details").innerHTML = "Please provide the correct Username and Password. You will be redirected to the login page in a few seconds.";
+        eraseCookie("status");
     } else if (getCookie("status") === "Repeated") {
         document.getElementById("heading").innerHTML = "The email or phone number your provided has already been registered";
         document.getElementById("details").innerHTML = "Please login using the email you provided. You will be redirected in a few seconds.";
-        document.getElementById("meta").content="5; url='../jsp/signIn.jsp'";                                          
+        document.getElementById("meta").content="5; url='../jsp/signIn.jsp'";   
+        eraseCookie("status");
     }  else if (getCookie("status") === "RepeatedDriver") {
         document.getElementById("heading").innerHTML = "The email or phone number your provided has already been registered";
         document.getElementById("details").innerHTML = "Please retry registering the driver with different details. You will be redirected in a few seconds.";
-        document.getElementById("meta").content="5; url='../jsp/createDriver.jsp'";                                          
-    }  else if (getCookie("status") === "RepeatedPassengerUpdate") {
+        document.getElementById("meta").content="5; url='../jsp/createDriver.jsp'"; 
+        eraseCookie("status");
+    }  else if (getCookie("statusUpdate") === "RepeatedPassengerUpdate") {
         document.getElementById("heading").innerHTML = "The email or phone number your provided has already been registered";
-        document.getElementById("details").innerHTML = "Please retry registering the driver with different details. You will be redirected in a few seconds.";
-        document.getElementById("meta").content="5; url='../jsp/passengerMyProfile.jsp'";                                          
+        document.getElementById("details").innerHTML = "Please retry udpating data with different details. You will be redirected in a few seconds.";
+        document.getElementById("meta").content="5; url='../passengerEditProfile'";  
+        eraseCookie("statusUpdate");
     }
 </script>
 <!-- 404 text -->

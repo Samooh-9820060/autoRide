@@ -69,14 +69,14 @@ public class passengerEditProfile extends HttpServlet {
                     firstName = (resultSet.getObject(2)+"").trim();
                     lastName = (resultSet.getObject(3)+"").trim();
                     phoneNumber = (resultSet.getObject(4)+"").trim();
-                    idnumber = (resultSet.getObject(5)+"").replace("null", "");
-                    address = (resultSet.getObject(6)+"").replace("null", "");
-                    postalcode = (resultSet.getObject(7)+"").replace("null", "");
-                    district = (resultSet.getObject(8)+"").replace("null", "");
-                    island = (resultSet.getObject(9)+"").replace("null", "");
+                    idnumber = (resultSet.getObject(5)+"").replace("null", "").replace("-", "");
+                    address = (resultSet.getObject(6)+"").replace("null", "").replace("-", "");
+                    postalcode = (resultSet.getObject(7)+"").replace("null", "").replace("-", "");
+                    district = (resultSet.getObject(8)+"").replace("null", "").replace("-", "");
+                    island = (resultSet.getObject(9)+"").replace("null", "").replace("-", "");
                     email = (resultSet.getObject(10)+"").trim();
-                    emergencyContactName = (resultSet.getObject(11)+"").replace("null", "");
-                    emergencyContactNumber = (resultSet.getObject(12)+"").replace("null", "");
+                    emergencyContactName = (resultSet.getObject(11)+"").replace("null", "").replace("-", "");
+                    emergencyContactNumber = (resultSet.getObject(12)+"").replace("null", "").replace("-", "");
                 }
             }
             

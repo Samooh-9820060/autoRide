@@ -85,9 +85,9 @@
         response.setHeader("Pragma","no-cache");
         response.setHeader("Expires","0");
         
-        /*if(session.getAttribute("session")==null){
+        if(session.getAttribute("session")==null){
             response.sendRedirect("../jsp/signIn.jsp");
-        }*/
+        }
     %>
     <div class="container rounded bg-white mt-2 mb-2">
             <div class="row">
@@ -146,7 +146,7 @@
                                 <label class="labels">Email*</label>
                                 <label id="emailError" style="color: red; font-size: 12px;" hidden>Email can't be empty</label>
                                 <label id="emailValidationError" style="color: red; font-size: 12px;" hidden>Please enter valid email</label>
-                                <input type="email" id="email" class="form-control" placeholder="Enter Email Address" value="${email}">
+                                <input type="email" id="emailValue" class="form-control" placeholder="Enter Email Address" value="${email}">
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Emergency Contact Name</label>
@@ -196,6 +196,8 @@
         myLink.addEventListener('click', function(e) {
             e.preventDefault();
         });
+        
+        
         
         function startsWith(str, word) {
             return str.lastIndexOf(word, 0) === 0;
@@ -250,13 +252,13 @@
             }
             
             //check email
-            if (document.getElementById("email").value===""){
+            if (document.getElementById("emailValue").value===""){
                 i = 0;
                 document.getElementById("emailError").hidden=false;
             } else {
                 document.getElementById("emailError").hidden=true;                
             }
-            if (validateEmail(document.getElementById("email").value)===true){
+            if (validateEmail(document.getElementById("emailValue").value)===true){
                 document.getElementById("emailValidationError").hidden = true;
             } else {
                 i = 0;
@@ -295,7 +297,7 @@
                 document.getElementById("postCodeInput").value = document.getElementById("postCode").value;
                 document.getElementById("districtInput").value = document.getElementById("district").value;
                 document.getElementById("islandInput").value = document.getElementById("island").value;
-                document.getElementById("emailInput").value = document.getElementById("email").value;
+                document.getElementById("emailInput").value = document.getElementById("emailValue").value;
                 document.getElementById("emergencyContactNameInput").value = document.getElementById("emergencyContactName").value;
                 document.getElementById("emergencyContactNumberInput").value = document.getElementById("emergencyContactNumber").value;
                 var form = document.getElementById("updatePassengerDetails");

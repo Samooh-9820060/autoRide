@@ -37,9 +37,18 @@
         }
         //setTimeout("disableBackButton()", 0);
     </script>
+    <script type="text/javascript">
+        function GetLoginUser() {
+            var sessionValue = PageMethods.GetSessionValue('session');
+            //alert(sessionValue);
+            if (sessionValue===null){
+                alert("Please login again");        
+            }
+        }
+    </script>
         
 <body>
-    <%
+        <%
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma","no-cache");
         response.setHeader("Expires","0");
@@ -47,10 +56,9 @@
         if(session.getAttribute("session")==null){
             response.sendRedirect("../jsp/signIn.jsp");
         }
-    %>
+        %>
   
-    <section data-bs-version="5.1" class="menu cid-s48OLK6784" once="menu" id="menu1-h">
-    
+    <section data-bs-version="5.1" class="menu cid-s48OLK6784" once="menu" id="menu1-h">  
         <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
             <div class="container">
                 <div class="navbar-brand">

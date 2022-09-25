@@ -56,7 +56,7 @@ public class updatePassenger extends HttpServlet {
             String emailNew = request.getParameter("emailInput");
             String emergencyContactNameNew = request.getParameter("emergencyContactNameInput");
             String emergencyContactNumberNew = request.getParameter("emergencyContactNumberInput");
-            
+                        
             String blankValue = "-";
             if (idCardNumberNew.isBlank()){
                 idCardNumberNew = blankValue;
@@ -87,22 +87,62 @@ public class updatePassenger extends HttpServlet {
             String userType = getUserType(mail);
             String vehicleType = "0";
             
-            Cookie cookie = new Cookie ("sztatus", "NA");
+            Cookie cookie = new Cookie ("statusUpdate", "NA");
             
             if ((currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
-                
+                //works correctlys
+                System.out.println("all equal running");
                 deleteUser(currentUserID);
                 populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
                 cookie.setValue("Registered");
+                session.setAttribute("session", emailNew);
+                Cookie firstName = new Cookie ("firstName", firstNameNew);
+                response.addCookie(firstName);
                 response.addCookie(cookie);
                 response.sendRedirect("./jsp/Loading.jsp");
-            } else {
-                if (checkRepeat(mail, Integer.parseInt(mobileNumberNew))==0){
-                    populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
+            } else if ((currentMobile.equals(mobileNumberNew))&&(!currentEmail.equals(emailNew))){
+                int repeatValue = checkMailRepeat(emailNew);
+                if (repeatValue==0){
                     deleteUser(currentUserID);
+                    populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
                     cookie.setValue("Registered");
+                    session.setAttribute("session", emailNew);
+                    Cookie firstName = new Cookie ("firstName", firstNameNew);
+                    response.addCookie(firstName);
+                    response.addCookie(cookie);
+                    response.sendRedirect("./jsp/Loading.jsp");                    
+                } else {
+                    cookie.setValue("RepeatedPassengerUpdate");
                     response.addCookie(cookie);
                     response.sendRedirect("./jsp/Loading.jsp");
+                }
+            } else if ((!currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
+                int repeatValue = checkPhoneRepeat(mobileNumberNew);
+                if (repeatValue==0){
+                    deleteUser(currentUserID);
+                    populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
+                    cookie.setValue("Registered");
+                    session.setAttribute("session", emailNew);
+                    Cookie firstName = new Cookie ("firstName", firstNameNew);
+                    response.addCookie(firstName);
+                    response.addCookie(cookie);
+                    response.sendRedirect("./jsp/Loading.jsp");                    
+                } else {
+                    cookie.setValue("RepeatedPassengerUpdate");
+                    response.addCookie(cookie);
+                    response.sendRedirect("./jsp/Loading.jsp");
+                }
+            } else {
+                int repeatValue = checkRepeat(emailNew, Integer.parseInt(mobileNumberNew));
+                if (repeatValue==0){
+                    deleteUser(currentUserID);
+                    populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
+                    cookie.setValue("Registered");
+                    session.setAttribute("session", emailNew);
+                    Cookie firstName = new Cookie ("firstName", firstNameNew);
+                    response.addCookie(firstName);
+                    response.addCookie(cookie);
+                    response.sendRedirect("./jsp/Loading.jsp");                    
                 } else {
                     cookie.setValue("RepeatedPassengerUpdate");
                     response.addCookie(cookie);
@@ -113,11 +153,11 @@ public class updatePassenger extends HttpServlet {
             
         }
     }
-    private void populateDatabase(String userId, String firstName, String lastName, String password, int phoneNumber, String idNumber, String address, String postalCode, String district, String island, String email, String emergencyContactName, String emergencyContactNumber, String userType, String vehicleType) throws SQLException{
+    private void populateDatabase(String userId, String firstName, String lastName, String password, int phoneNumber, String idNumber, String address, String postalCode, String district, String island, String emailValue, String emergencyContactName, String emergencyContactNumber, String userType, String vehicleType) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,IDNUMBER,ADDRESS,POSTALCODE,DISTRICT,ISLAND,EMAIL,EMERGENCYCONTACTNAME,EMERGENCYCONTACTNUMBER,USERTYPE,VEHICLETYPE) VALUES ('"+userId+"', '"+firstName+"', '"+lastName+"', '"+password+"', "+phoneNumber+", '"+idNumber+"', '"+address+"', '"+postalCode+"', '"+district+"', '"+island+"', '"+email+"', '"+emergencyContactName+"', "+emergencyContactNumber+", '"+userType+"', '"+vehicleType+"')");
+        statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,IDNUMBER,ADDRESS,POSTALCODE,DISTRICT,ISLAND,EMAIL,EMERGENCYCONTACTNAME,EMERGENCYCONTACTNUMBER,USERTYPE,VEHICLETYPE) VALUES ('"+userId+"', '"+firstName+"', '"+lastName+"', '"+password+"', "+phoneNumber+", '"+idNumber+"', '"+address+"', '"+postalCode+"', '"+district+"', '"+island+"', '"+emailValue+"', '"+emergencyContactName+"', "+emergencyContactNumber+", '"+userType+"', '"+vehicleType+"')");
                         
     }
     
@@ -126,7 +166,6 @@ public class updatePassenger extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM USERDETAILS");
             
         String deleteQueryString = "DELETE FROM USERDETAILS WHERE USERID = '"+userId+"'";
         statement.executeUpdate(deleteQueryString);
@@ -230,6 +269,46 @@ public class updatePassenger extends HttpServlet {
             }
         }        
         return 0;
+    }
+    
+    private int checkMailRepeat(String mail) throws SQLException{
+        int value = 0;
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL FROM USERDETAILS");
+        
+        //loop through the selected data in the database
+        while (resultSet.next()){
+            String email = resultSet.getObject(1).toString();
+            
+            if (email.equalsIgnoreCase(mail)){
+                value = 1;
+            }
+        }
+        
+        return value;
+    }
+    
+    private int checkPhoneRepeat(String phoneNumber) throws SQLException{
+        int value = 0;
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT PHONENUMBER FROM USERDETAILS");
+        
+        //loop through the selected data in the database
+        while (resultSet.next()){
+            String phone = resultSet.getObject(1).toString();
+            
+            if (phone.equalsIgnoreCase(phoneNumber)){
+                value = 1;
+            }
+        }
+        
+        return value;
     }
     
     

@@ -122,6 +122,15 @@
 
     
     <body>
+        <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma","no-cache");
+        response.setHeader("Expires","0");
+        
+        if(session.getAttribute("session")==null){
+            response.sendRedirect("../jsp/signIn.jsp");
+        }
+        %>
         <form id="goHome" method="POST" action="./adminLogIn" hidden>
             <input type="text" id="adminUserNameField" name="adminUserNameField" value="">
             <input type="text" id="alreadyCreated" name="alreadyCreated" value="">
@@ -135,12 +144,6 @@
             response.sendRedirect("./signIn.jsp");
         }
         %>
-        <script>
-         /*alert("You will be redirected in 5 seconds. You can view invoice from My Bookings.");
-         setTimeout(function(){
-            window.location.href = './jsp/homePage.jsp';
-         }, 5000);*/
-        </script>
         <div class="invoice-box">
             <table>
                 <tr class="top">

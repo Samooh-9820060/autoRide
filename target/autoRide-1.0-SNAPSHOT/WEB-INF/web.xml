@@ -84,6 +84,14 @@
         <servlet-name>updatePassenger</servlet-name>
         <servlet-class>mvc.controller.updatePassenger</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>driverHomePage</servlet-name>
+        <servlet-class>mvc.controller.driverHomePage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>rideStatusUpdate</servlet-name>
+        <servlet-class>mvc.controller.rideStatusUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -168,9 +176,17 @@
         <servlet-name>updatePassenger</servlet-name>
         <url-pattern>/updatePassenger</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>driverHomePage</servlet-name>
+        <url-pattern>/driverHomePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>rideStatusUpdate</servlet-name>
+        <url-pattern>/rideStatusUpdate</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
 </web-app>

@@ -19,12 +19,14 @@
     <link rel="preload" as="style" href="../assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
   </head>
   <body>
-              <% 
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            response.setHeader("Pragma","no-cache"); response.setHeader("Expires","0");
-            if(session.getAttribute("session")==null){
-                response.sendRedirect("adminSignIn.jsp"); 
-            }
+        <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma","no-cache");
+        response.setHeader("Expires","0");
+        
+        if(session.getAttribute("session")==null){
+            response.sendRedirect("adminSignIn.jsp");
+        }
         %>
     <section class="ftco-section">
       <div class="container">
