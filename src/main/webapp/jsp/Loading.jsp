@@ -29,11 +29,11 @@
             return "";
         }        
         if (getCookie("status") === "IncorrectLoginDetails"){
-            document.getElementById("meta").content="2; url='../jsp/errorPage.jsp'";      
+            document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";      
         } else if (getCookie("status") === "Registered"){
-            document.getElementById("meta").content="2; url='../jsp/signIn.jsp'";                  
+            document.getElementById("meta").content="1; url='../jsp/signIn.jsp'";                  
         } else if (getCookie("status") === "Repeated") {
-            document.getElementById("meta").content="2; url='../jsp/errorPage.jsp'";                                          
+            document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";                                          
         } else if (getCookie("status") === "RepeatedDriver") {
             document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";
         } else if (getCookie("statusUpdate") === "RepeatedPassengerUpdate") {

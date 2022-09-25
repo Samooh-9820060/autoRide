@@ -95,11 +95,7 @@ public class filterBookingsDate extends HttpServlet {
 
             
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/allBookings.jsp");
-            rd.forward(request, response);
-            
-            
-            
-            
+            rd.forward(request, response);   
         }
     }
     

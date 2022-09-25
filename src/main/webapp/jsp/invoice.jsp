@@ -131,10 +131,6 @@
             response.sendRedirect("../jsp/signIn.jsp");
         }
         %>
-        <form id="goHome" method="POST" action="./adminLogIn" hidden>
-            <input type="text" id="adminUserNameField" name="adminUserNameField" value="">
-            <input type="text" id="alreadyCreated" name="alreadyCreated" value="">
-        </form>
         <%
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma","no-cache");
@@ -178,15 +174,13 @@
                     }
                     function goHome(){
                         var type = getCookie("type");
-                        var status = getCookie("status");
                         if (type==="admin"){
-                            document.getElementById("adminUserNameField").value=status;
-                            document.getElementById("alreadyCreated").value="1";
-                            var form = document.getElementById("goHome");
-                            form.submit();
+                            window.location.href = "./allBookings";
                         } else if (type==="Passenger"){
                             window.location.href = "./jsp/homePage.jsp";
-                        }                        
+                        } else if (type==="Driver"){
+                            window.location.href = "./myOrders";
+                        }                         
                     }
                     
                 </script>

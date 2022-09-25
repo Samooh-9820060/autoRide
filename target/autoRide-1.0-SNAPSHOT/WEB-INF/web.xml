@@ -116,6 +116,22 @@
         <servlet-name>editPassword</servlet-name>
         <servlet-class>mvc.controller.editPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>reportsData</servlet-name>
+        <servlet-class>mvc.controller.reportsData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterBookingsDateReport</servlet-name>
+        <servlet-class>mvc.controller.filterBookingsDateReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterUserReport</servlet-name>
+        <servlet-class>mvc.controller.filterUserReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>generateSummaryReport</servlet-name>
+        <servlet-class>mvc.controller.generateSummaryReport</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -231,6 +247,22 @@
     <servlet-mapping>
         <servlet-name>editPassword</servlet-name>
         <url-pattern>/editPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportsData</servlet-name>
+        <url-pattern>/reportsData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterBookingsDateReport</servlet-name>
+        <url-pattern>/filterBookingsDateReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterUserReport</servlet-name>
+        <url-pattern>/filterUserReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateSummaryReport</servlet-name>
+        <url-pattern>/generateSummaryReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -166,11 +166,14 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT TOTALPRICE FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT TOTALPRICE, STATUS FROM BOOKINGDETAILS");
         
         Double totalValue = 0.00;
         while (resultSet.next()){
-            totalValue += Double.parseDouble(resultSet.getObject(1).toString());
+            String status = resultSet.getObject(2).toString();
+            if (status.equals("Complete")){
+                totalValue += Double.parseDouble(resultSet.getObject(1).toString());                
+            }
         }
         total = roundTwoDecimals(totalValue)+"";
         
@@ -182,7 +185,7 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, TOTALPRICE FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, TOTALPRICE, STATUS FROM BOOKINGDETAILS");
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date();
@@ -192,9 +195,13 @@ public class adminLogIn extends HttpServlet {
         while (resultSet.next()){
             String date = resultSet.getObject(1).toString();
             String value = resultSet.getObject(2).toString();
-            if (formattedDate.equals(date)){
-                totalValue += Double.parseDouble(value);
+            String status = resultSet.getObject(3).toString();
+            if (status.equalsIgnoreCase("Complete")){
+                if (formattedDate.equals(date)){
+                    totalValue += Double.parseDouble(value);
+                }
             }
+
         }
         total = roundTwoDecimals(totalValue)+"";
         
@@ -206,11 +213,14 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, STATUS FROM BOOKINGDETAILS");
         
         int totalValue = 0;
         while (resultSet.next()){
-            totalValue++;
+            String status = resultSet.getObject(2).toString();
+            if (status.equalsIgnoreCase("Complete")){
+                totalValue++;    
+            }
         }
         total = totalValue+"";
         
@@ -222,7 +232,7 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, STATUS FROM BOOKINGDETAILS");
         
         int totalValue = 0;
         
@@ -232,8 +242,11 @@ public class adminLogIn extends HttpServlet {
         
         while (resultSet.next()){
             String date = resultSet.getObject(1).toString();
-            if (formattedDate.equals(date)){
-                totalValue ++;
+            String status = resultSet.getObject(2).toString();
+            if (status.equalsIgnoreCase("Complete")){
+                if (formattedDate.equals(date)){
+                    totalValue ++;
+                }    
             }
         }
         total = totalValue+"";
@@ -246,11 +259,14 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT DISTANCE FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT DISTANCE, STATUS FROM BOOKINGDETAILS");
         
         Double totalValue = 0.00;
         while (resultSet.next()){
-            totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" km", ""));
+            String status = resultSet.getObject(2).toString();
+            if (status.equalsIgnoreCase("Complete")){
+                totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" km", ""));
+            }
         }
         total = roundTwoDecimals(totalValue);
         
@@ -262,7 +278,7 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DISTANCE FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DISTANCE, STATUS FROM BOOKINGDETAILS");
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date();
@@ -270,10 +286,13 @@ public class adminLogIn extends HttpServlet {
         
         Double totalValue = 0.00;
         while (resultSet.next()){
+            String status = resultSet.getObject(3).toString();
             String date = resultSet.getObject(1).toString();
             String distance = resultSet.getObject(2).toString().replace(" km", "");
-            if (formattedDate.equals(date)){
-                totalValue += Double.parseDouble(distance);
+            if (status.equalsIgnoreCase("Complete")){
+                if (formattedDate.equals(date)){
+                    totalValue += Double.parseDouble(distance);
+                }
             }
         }
         total = roundTwoDecimals(totalValue);
@@ -286,11 +305,14 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT DURATION FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT DURATION, STATUS FROM BOOKINGDETAILS");
         
         int totalValue = 0;
         while (resultSet.next()){
-            totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" mins", ""));
+            String status = resultSet.getObject(2).toString();
+            if (status.equalsIgnoreCase("Complete")){
+                totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" mins", ""));                
+            }
         }
         total = totalValue+"";
         
@@ -302,7 +324,7 @@ public class adminLogIn extends HttpServlet {
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DURATION FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DURATION, STATUS FROM BOOKINGDETAILS");
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date();
@@ -310,10 +332,13 @@ public class adminLogIn extends HttpServlet {
         
         int totalValue = 0;
         while (resultSet.next()){
+            String status = resultSet.getObject(3).toString();
             String date = resultSet.getObject(1).toString();
             String duration = resultSet.getObject(2).toString().replace(" mins", "");
-            if (formattedDate.equals(date)){
-                totalValue += Double.parseDouble(duration);
+            if (status.equalsIgnoreCase("Complete")){
+                if (formattedDate.equals(date)){
+                    totalValue += Double.parseDouble(duration);
+                }
             }
         }
         total = totalValue+"";
