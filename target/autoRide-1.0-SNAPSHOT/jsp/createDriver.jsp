@@ -13,6 +13,23 @@
         function disableBackButton() {
             window.history.forward();
         }
+        function getCookie(cname) {
+                let name = cname + "=";
+                let ca = document.cookie.split(';');
+                for(let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) === 0) {
+                        return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+              }
+            if (getCookie("type")!=="admin"){
+                window.location.href = "../jsp/signIn.jsp";
+            }
         //setTimeout("disableBackButton()", 0);
     </script>
     <meta charset='utf-8'>
@@ -409,6 +426,7 @@
                 var form = document.getElementById("createDriverFunction");
                 form.submit();
             }
+            
         }
     </script>
 

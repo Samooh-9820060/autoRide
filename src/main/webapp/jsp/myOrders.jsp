@@ -179,6 +179,9 @@
             }
             return "";
       }
+      if (getCookie("type")!=="Driver"){
+          window.location.href = "../jsp/signIn.jsp";
+      }
       function goToHome(){
           var status = getCookie("status");
           document.getElementById("adminUserNameField").value=status;

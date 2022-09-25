@@ -121,6 +121,9 @@
             }
             return "";
         }
+            if (getCookie("type")!=="admin"){
+                window.location.href = "../jsp/adminSignIn.jsp";
+            }
       function changeStatus(queryNo){
             document.getElementById("submitQueryNo").value=queryNo;
             var form = document.getElementById("changeStatus");

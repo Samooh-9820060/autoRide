@@ -201,6 +201,12 @@
             }
             return "";
       }
+      let type = getCookie("type");
+      if (type!=="admin"){
+        document.forms[0].action="./logOut";
+        document.forms[0].submit();
+      }
+      
       function goToHome(){
           var status = getCookie("status");
           document.getElementById("adminUserNameField").value=status;

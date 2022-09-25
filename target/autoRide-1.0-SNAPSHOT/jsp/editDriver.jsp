@@ -13,13 +13,30 @@
         function disableBackButton() {
             window.history.forward();
         }
+                function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        } 
+            if (getCookie("type")!=="admin"){
+                window.location.href = "../jsp/adminSignIn.jsp";
+            }
         
-
+        
         //setTimeout("disableBackButton()", 0);
     </script>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Create Driver</title>
+    <title>Edit Driver Details</title>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='#' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

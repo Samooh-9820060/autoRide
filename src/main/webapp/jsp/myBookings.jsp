@@ -182,6 +182,9 @@
             }
             return "";
       }
+      if (getCookie("type")!=="Passenger"){
+          window.location.href = "../jsp/signIn.jsp";
+      }
       function goToHome(){
           var status = getCookie("status");
           document.getElementById("adminUserNameField").value=status;

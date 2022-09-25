@@ -133,15 +133,6 @@
         %>
         <form id="goBack" method="POST" action="./reportsData" hidden>
         </form>
-        <%
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Pragma","no-cache");
-        response.setHeader("Expires","0");
-        
-        if(session.getAttribute("session")==null){
-            response.sendRedirect("./signIn.jsp");
-        }
-        %>
         <div class="invoice-box">
             <table>
                 <tr class="top">
@@ -244,4 +235,23 @@
             </table>
         </div>
     </body>
+    <script>
+        function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+      }
+            if (getCookie("type")!=="admin"){
+                window.location.href = "../jsp/adminSignIn.jsp";
+            }
+    </script>
 </html>

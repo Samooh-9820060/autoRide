@@ -86,6 +86,7 @@
                     <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" href="jsp/help.jsp"><span class="mobi-mbri mobi-mbri-help mbr-iconfont mbr-iconfont-btn"></span>Help</a></li>
                         <li class="nav-item"><a class="nav-link link text-black display-4" href="jsp/about.jsp"><span class="mbrib-info mbr-iconfont mbr-iconfont-btn"></span>About</a></li>
                         <li class="nav-item"><a class="nav-link link text-black display-4" href="myOrders"><span class="mbri-browse mbr-iconfont mbr-iconfont-btn"></span>My Orders</a></li>
+                        <li class="nav-item"><a class="nav-link link text-black show display-4" href="driverProfile" aria-expanded="true"><span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn"></span>My Profile</a></li></ul>
                         <form id="logOutForm">                        
                             <div class="navbar-buttons mbr-section-btn">
                                 <a class="btn btn-primary display-4" id="logOut" href="logOut">Log Out</a>
@@ -457,12 +458,9 @@
             }
             return "";
         } 
-        
-        let type = getCookie("type");
-        if (type!=="Driver"){
-            document.forms[0].action="../logOut";
-            document.forms[0].submit();
-        }
+            if (getCookie("type")!=="Driver"){
+                window.location.href = "../jsp/signIn.jsp";
+            }
         
         let firstName = getCookie("firstName");
         document.getElementById("HiName").innerHTML = "Hi, "+firstName+"!";

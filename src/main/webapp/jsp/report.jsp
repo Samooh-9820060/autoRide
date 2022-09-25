@@ -31,7 +31,7 @@
         response.setHeader("Expires","0");
         
         if(session.getAttribute("session")==null){
-            //response.sendRedirect("../jsp/adminSignIn.jsp");
+            response.sendRedirect("../jsp/adminSignIn.jsp");
         }
       %>
       <section style="margin-top: 60px;">
@@ -150,6 +150,9 @@
             }
             return "";
       }
+            if (getCookie("type")!=="admin"){
+                window.location.href = "../jsp/adminSignIn.jsp";
+            }
       function goToHome(){
           var status = getCookie("status");
           document.getElementById("adminUserNameField").value=status;

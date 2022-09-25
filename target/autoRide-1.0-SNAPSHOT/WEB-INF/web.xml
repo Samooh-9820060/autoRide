@@ -132,6 +132,10 @@
         <servlet-name>generateSummaryReport</servlet-name>
         <servlet-class>mvc.controller.generateSummaryReport</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>driverProfile</servlet-name>
+        <servlet-class>mvc.controller.driverProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -263,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>generateSummaryReport</servlet-name>
         <url-pattern>/generateSummaryReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>driverProfile</servlet-name>
+        <url-pattern>/driverProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

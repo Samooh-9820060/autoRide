@@ -172,6 +172,7 @@
                         }
                         return "";
                     }
+                    
                     function goHome(){
                         var type = getCookie("type");
                         if (type==="admin"){
