@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
+    <servlet>
+        <servlet-name>logIn</servlet-name>
+        <servlet-class>mvc.controller.logIn</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logOut</servlet-name>
+        <servlet-class>mvc.controller.logOut</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>bookRide</servlet-name>
+        <servlet-class>mvc.controller.bookRide</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>signUp</servlet-name>
+        <servlet-class>mvc.controller.signUp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logIn</servlet-name>
+        <url-pattern>/logIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logOut</servlet-name>
+        <url-pattern>/logOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bookRide</servlet-name>
+        <url-pattern>/bookRide</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signUp</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
