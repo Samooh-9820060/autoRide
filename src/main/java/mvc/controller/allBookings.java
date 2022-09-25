@@ -49,7 +49,7 @@ public class allBookings extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
             
             List<allBookingsViewModel> allBookingsList = new ArrayList<>();
             int i = 1;
@@ -57,7 +57,7 @@ public class allBookings extends HttpServlet {
             while (resultSet.next()){
                 allBookingsViewModel tempList = new allBookingsViewModel();
                     tempList.invoiceNum = i+"";
-                    tempList.mail = (String) resultSet.getObject(1);
+                    tempList.passengerID = (String) resultSet.getObject(1);
                     tempList.bookDate = (String) resultSet.getObject(2);
                     tempList.bookTime = (String) resultSet.getObject(3);
                     tempList.orderDate = (String) resultSet.getObject(4);

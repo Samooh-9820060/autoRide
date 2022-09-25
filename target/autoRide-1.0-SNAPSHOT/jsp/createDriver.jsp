@@ -9,6 +9,12 @@
 <html>
 
 <head>
+    <script type = "text/javascript">
+        function disableBackButton() {
+            window.history.forward();
+        }
+        //setTimeout("disableBackButton()", 0);
+    </script>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Create Driver</title>
@@ -74,6 +80,15 @@
 </head>
 
 <body className='snippet-body'>
+    <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma","no-cache");
+        response.setHeader("Expires","0");
+        
+        if(session.getAttribute("session")==null){
+            response.sendRedirect("../jsp/adminSignIn.jsp");
+        }
+    %>
     <div class="container rounded bg-white mt-2 mb-2">
             <div class="row">
                 <div class="col-md-8 border-right">
@@ -155,6 +170,7 @@
 
                         </div>
                         <div class="mt-5 text-center">
+                            <a href="../allUsers" class="btn btn-danger">Back</a>
                             <button onclick="verifyForm()" class="btn btn-danger" type="button">Create</button>
                         </div>
                     </div>

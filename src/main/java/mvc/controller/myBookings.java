@@ -45,20 +45,22 @@ public class myBookings extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
+            String passengerIDString = getPassengerID(mail);
+            
             
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
             
             List<myBookingsViewModel> myBookingsList = new ArrayList<>();
             int i = 1;
             
             while (resultSet.next()){
                 myBookingsViewModel tempList = new myBookingsViewModel();
-                String resultEmail = (String) resultSet.getObject(1);
+                String passengerID = (String) resultSet.getObject(1);
                 
-                if (mail.equals(resultEmail)){
+                if (passengerIDString.equals(passengerID)){
                     tempList.invoiceNum = i+"";
                     tempList.bookDate = (String) resultSet.getObject(2);
                     tempList.bookTime = (String) resultSet.getObject(3);
@@ -102,6 +104,24 @@ public class myBookings extends HttpServlet {
         
         
         return vehicleName;
+    }
+    
+    private String getPassengerID(String mail) throws SQLException{
+        String passengerID = "PA1";
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = (String) resultSet.getObject(1);
+            String email = (String) resultSet.getObject(2);
+            
+            if (email.equals(mail)){
+                passengerID = userId;
+            }
+        }
+        
+        return passengerID;
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

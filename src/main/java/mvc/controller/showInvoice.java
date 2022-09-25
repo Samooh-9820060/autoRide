@@ -46,7 +46,7 @@ public class showInvoice extends HttpServlet {
             //Values needed for receipt
             String receiptOrderDate = null;
             String receiptOrderTIme = null;
-            String receiptMail = null;
+            String receiptPassengerID = null;
             String receiptDate = null;
             String receiptTime = null;
             String receiptLocation = null;
@@ -86,14 +86,14 @@ public class showInvoice extends HttpServlet {
             
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, CURRENTTIME, MAIL, DATE, TIME, LOCATION, DESTINATION, "
+            ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, CURRENTTIME, PASSENGERID, DATE, TIME, LOCATION, DESTINATION, "
                     + "VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE FROM BOOKINGDETAILS");
             int count = 1;
             while (resultSet.next()){
                 if (count==invoiceNum){
                     receiptOrderDate = (String) resultSet.getObject(1);
                     receiptOrderTIme = (String) resultSet.getObject(2);
-                    receiptMail = (String) resultSet.getObject(3);
+                    receiptPassengerID = (String) resultSet.getObject(3);
                     receiptDate = (String) resultSet.getObject(4);
                     receiptTime = (String) resultSet.getObject(5);
                     receiptLocation = (String) resultSet.getObject(6);
@@ -147,7 +147,7 @@ public class showInvoice extends HttpServlet {
             request.setAttribute("invoiceNum", invoiceNum);
             request.setAttribute("receiptOrderDate", receiptOrderDate);
             request.setAttribute("receiptOrderTIme", receiptOrderTIme);
-            request.setAttribute("receiptMail", receiptMail);
+            request.setAttribute("receiptMail", receiptPassengerID);
             request.setAttribute("receiptDate", receiptDate);
             request.setAttribute("receiptTime", receiptTime);
             request.setAttribute("receiptLocation", receiptLocation);
@@ -175,13 +175,12 @@ public class showInvoice extends HttpServlet {
         if (invoiceNumber.equals("BLANK")){
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID FROM BOOKINGDETAILS");
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             int count = 0;
             while (resultSet.next()){
                 for (int i = 1; i <= numberOfColumns; i++) {
-                    String resultEmail = (String) resultSet.getObject(i);
 
                     i++;
                 }

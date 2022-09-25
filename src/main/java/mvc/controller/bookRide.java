@@ -59,7 +59,7 @@ public class bookRide extends HttpServlet {
             String vehicleType = request.getParameter("carryVehicle");
             String distance = request.getParameter("inputDistance").replace("%20", " ");
             String duration = request.getParameter("inputDuration").replace("%20", " ");
-            String driver="Not_Assigned";
+            String driver= getFirstDriverID();
             
             String firstName = null;
             
@@ -89,6 +89,7 @@ public class bookRide extends HttpServlet {
             
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
+            String passengerID = getPassengerID(mail);
             
             SimpleDateFormat formatterDate = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
@@ -100,7 +101,7 @@ public class bookRide extends HttpServlet {
             String extraDistancePrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)));
             String status = "Waiting";
             
-            populateBookingsDatabase(mail, date, time, location, pickupLatitude, pickupLongitude, destination, 
+            populateBookingsDatabase(passengerID, date, time, location, pickupLatitude, pickupLongitude, destination, 
                     destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice, status, driver);            
             
             
@@ -109,20 +110,20 @@ public class bookRide extends HttpServlet {
             }
     }
     
-    public void populateBookingsDatabase(String mail, String date, String time, String location, String pickupLat, String pickupLng,
+    public void populateBookingsDatabase(String passengerID, String date, String time, String location, String pickupLat, String pickupLng,
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
             String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price, String status, String driver) throws SQLException{
             
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+mail+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
+        statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+passengerID+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
                 + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"', '"+driver+"')");
     }
     
     public int getLastRow() throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT MAIL FROM BOOKINGDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID FROM BOOKINGDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         int count = 0;
@@ -200,6 +201,24 @@ public class bookRide extends HttpServlet {
         return price;  
     }
     
+    private String getPassengerID(String mail) throws SQLException{
+        String passengerID = "PA1";
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = (String) resultSet.getObject(1);
+            String email = (String) resultSet.getObject(2);
+            
+            if (email.equals(mail)){
+                passengerID = userId;
+            }
+        }
+        
+        return passengerID;
+    }
+    
     private double extraDistancePrice(String vehicleType, String distance){
         double price = 0.00;
         //System.out.println("Distance is "+distance.substring(0,4).trim());
@@ -248,6 +267,25 @@ public class bookRide extends HttpServlet {
                 break;
         }
         return price; 
+    }
+    
+    private String getFirstDriverID() throws SQLException{
+        String firstDriverID = "DR1";
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, USERTYPE FROM USERDETAILS");
+        while (resultSet.next()){
+            String usertype = resultSet.getObject(2).toString().trim();
+            String userid = (String) resultSet.getObject(1);
+            
+            if (usertype.equals("2")){
+                firstDriverID = userid;
+                return firstDriverID;
+            }
+        }
+        
+        return firstDriverID;
     }
 
 }

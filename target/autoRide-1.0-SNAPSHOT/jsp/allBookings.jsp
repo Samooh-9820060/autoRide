@@ -40,8 +40,8 @@
             <a onclick="loadDate()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
             <label style="margin-left: 25px">Filter By</label>
             <select style="border: none; margin-left: 10px;" id="filterBy">
-                <option value="Passenger">Passenger Mail</option>
-                <option value="Driver">Driver mail</option>
+                <option value="Passenger">Passenger ID</option>
+                <option value="Driver">Driver ID</option>
                 <option value="Vehicle">Vehicle</option>
                 <option value="Status">Status</option>
             </select>
@@ -55,7 +55,7 @@
                   <thead>
                     <tr>
                         <th>Invoice#</th>
-                        <th>Mail</th>
+                        <th>Passenger_ID</th>
                         <th>Book_Date</th>
                         <th>Book_Time</th>
                         <th>Order_Date</th>
@@ -76,7 +76,7 @@
                   <c:forEach var="data" items="${requestScope.allBookingsList}">
                     <tr>
                         <td><c:out value="${data.invoiceNum}" /></td>
-                        <td><c:out value="${data.mail}" /></td>
+                        <td><c:out value="${data.passengerID}" /></td>
                         <td><c:out value="${data.bookDate}" /></td>
                         <td><c:out value="${data.bookTime}" /></td>
                         <td><c:out value="${data.orderDate}" /></td>

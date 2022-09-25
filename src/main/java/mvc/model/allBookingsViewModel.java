@@ -11,7 +11,7 @@ package mvc.model;
  */
 public class allBookingsViewModel {
     public String invoiceNum;
-    public String mail;
+    public String passengerID;
     public String bookDate;
     public String bookTime;
     public String orderDate;
@@ -35,12 +35,12 @@ public class allBookingsViewModel {
         this.invoiceNum = invoiceNum;
     }
 
-    public String getMail() {
-        return mail;
+    public String getPassengerID() {
+        return passengerID;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setPassengerID(String passengerID) {
+        this.passengerID = passengerID;
     }
 
     public String getBookDate() {

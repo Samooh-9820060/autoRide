@@ -50,7 +50,7 @@ public class filterPassengerOrDriver extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
             
             List<allBookingsViewModel> allBookingsList = new ArrayList<>();
             int i = 1;
@@ -58,15 +58,15 @@ public class filterPassengerOrDriver extends HttpServlet {
             while (resultSet.next()){
                 allBookingsViewModel tempList = new allBookingsViewModel();
                 
-                String passengerMail = resultSet.getObject(1).toString();
-                String driverMail = (String) resultSet.getObject(14);
+                String passengerID = resultSet.getObject(1).toString();
+                String driverID = (String) resultSet.getObject(14);
                 String vehicle = vehicleType(resultSet.getObject(8).toString().trim());
                 String status = (String) resultSet.getObject(15);
                 
                 if (type.equalsIgnoreCase("Passenger")){
-                    if (passengerMail.equalsIgnoreCase(filterValue)){
+                    if (passengerID.equalsIgnoreCase(filterValue)){
                         tempList.invoiceNum = i+"";
-                        tempList.mail = (String) resultSet.getObject(1);
+                        tempList.passengerID = (String) resultSet.getObject(1);
                         tempList.bookDate = (String) resultSet.getObject(2);
                         tempList.bookTime = (String) resultSet.getObject(3);
                         tempList.orderDate = (String) resultSet.getObject(4);
@@ -84,9 +84,9 @@ public class filterPassengerOrDriver extends HttpServlet {
                         allBookingsList.add(tempList); 
                     }
                 } else if (type.equalsIgnoreCase("Driver")){
-                    if (driverMail.equalsIgnoreCase(filterValue)){
+                    if (driverID.equalsIgnoreCase(filterValue)){
                         tempList.invoiceNum = i+"";
-                        tempList.mail = (String) resultSet.getObject(1);
+                        tempList.passengerID = (String) resultSet.getObject(1);
                         tempList.bookDate = (String) resultSet.getObject(2);
                         tempList.bookTime = (String) resultSet.getObject(3);
                         tempList.orderDate = (String) resultSet.getObject(4);
@@ -106,7 +106,7 @@ public class filterPassengerOrDriver extends HttpServlet {
                 } else if (type.equalsIgnoreCase("Vehicle")){
                     if (vehicle.equalsIgnoreCase(filterValue)){
                         tempList.invoiceNum = i+"";
-                        tempList.mail = (String) resultSet.getObject(1);
+                        tempList.passengerID = (String) resultSet.getObject(1);
                         tempList.bookDate = (String) resultSet.getObject(2);
                         tempList.bookTime = (String) resultSet.getObject(3);
                         tempList.orderDate = (String) resultSet.getObject(4);
@@ -126,7 +126,7 @@ public class filterPassengerOrDriver extends HttpServlet {
                 } else if (type.equalsIgnoreCase("Status")){
                     if (status.equalsIgnoreCase(filterValue)){
                         tempList.invoiceNum = i+"";
-                        tempList.mail = (String) resultSet.getObject(1);
+                        tempList.passengerID = (String) resultSet.getObject(1);
                         tempList.bookDate = (String) resultSet.getObject(2);
                         tempList.bookTime = (String) resultSet.getObject(3);
                         tempList.orderDate = (String) resultSet.getObject(4);

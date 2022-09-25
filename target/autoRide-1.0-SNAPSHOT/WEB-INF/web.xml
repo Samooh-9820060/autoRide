@@ -76,6 +76,14 @@
         <servlet-name>createDriver</servlet-name>
         <servlet-class>mvc.controller.createDriver</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>passengerEditProfile</servlet-name>
+        <servlet-class>mvc.controller.passengerEditProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updatePassenger</servlet-name>
+        <servlet-class>mvc.controller.updatePassenger</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -151,6 +159,14 @@
     <servlet-mapping>
         <servlet-name>createDriver</servlet-name>
         <url-pattern>/createDriver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>passengerEditProfile</servlet-name>
+        <url-pattern>/passengerEditProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatePassenger</servlet-name>
+        <url-pattern>/updatePassenger</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

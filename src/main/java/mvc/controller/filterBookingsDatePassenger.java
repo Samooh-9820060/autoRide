@@ -53,6 +53,8 @@ public class filterBookingsDatePassenger extends HttpServlet {
 
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
+            String passengerIDString = getPassengerID(mail);
+            
             
             Date startDate = dateFormatter.parse(request.getParameter("startDateField"));            
             Date endDate = dateFormatter.parse(request.getParameter("endDateField"));
@@ -60,7 +62,7 @@ public class filterBookingsDatePassenger extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
             
             List<myBookingsViewModel> myBookingsList = new ArrayList<>();
             int i = 1;
@@ -68,9 +70,9 @@ public class filterBookingsDatePassenger extends HttpServlet {
             while (resultSet.next()){
                 
                 myBookingsViewModel tempList = new myBookingsViewModel();
-                String mailResult = resultSet.getObject(1).toString();
+                String passengerID = resultSet.getObject(1).toString();
                 
-                if (mail.equals(mailResult)){
+                if (passengerIDString.equals(passengerID)){
                     Date orderDate = dateFormatterDatabase.parse(resultSet.getObject(4).toString());
                     if ((startDate.after(endDate))||(endDate.before(startDate))){
 
@@ -119,6 +121,24 @@ public class filterBookingsDatePassenger extends HttpServlet {
         
         
         return vehicleName;
+    }
+    
+    private String getPassengerID(String mail) throws SQLException{
+        String passengerID = "PA1";
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = (String) resultSet.getObject(1);
+            String email = (String) resultSet.getObject(2);
+            
+            if (email.equals(mail)){
+                passengerID = userId;
+            }
+        }
+        
+        return passengerID;
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
