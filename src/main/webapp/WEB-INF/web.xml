@@ -136,6 +136,10 @@
         <servlet-name>driverProfile</servlet-name>
         <servlet-class>mvc.controller.driverProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewUserQueries</servlet-name>
+        <servlet-class>mvc.controller.viewUserQueries</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>driverProfile</servlet-name>
         <url-pattern>/driverProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewUserQueries</servlet-name>
+        <url-pattern>/viewUserQueries</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

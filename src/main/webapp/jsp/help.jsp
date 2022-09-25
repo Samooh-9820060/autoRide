@@ -101,6 +101,9 @@
                         <div class="col-12 col-md-auto mbr-section-btn">
                             <button type="submit" class="btn btn-secondary display-4">Submit</button>
                         </div>
+                        <div class="col-12 col-md-auto mbr-section-btn">
+                            <a href="../viewUserQueries" class="btn btn-secondary display-3">Status</a>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -135,6 +138,7 @@
                 window.location.href = '../driverHomePage';
             }
         }
+        
       </script>
 </section>
 </body>

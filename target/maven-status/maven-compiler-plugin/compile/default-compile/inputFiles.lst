@@ -33,9 +33,11 @@ C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\allBookings.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\filterDriverOrders.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\updatePassenger.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\driverProfile.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\model\myOrdersListViewModel.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\model\driverRidesViewModel.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\passengerEditProfile.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\rideStatusUpdate.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\editUser.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\generateSummaryReport.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\model\reportDetailsViewModel.java
