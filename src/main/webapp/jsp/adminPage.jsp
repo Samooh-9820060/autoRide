@@ -14,7 +14,7 @@
       />
       <link
         rel="shortcut icon"
-        href="../assets/images/mbr-121x121.png"
+        href="./assets/images/mbr-121x121.png"
         type="image/x-icon"
       />
       <meta name="description" content="" />
@@ -35,35 +35,35 @@
       <!-- CSS Files -->
       <link
         id="pagestyle"
-        href="../assets/css/material-dashboard.css?v=3.0.4"
+        href="./assets/css/material-dashboard.css?v=3.0.4"
         rel="stylesheet"
       />
 
       <title>Home</title>
       <link
         rel="stylesheet"
-        href="../assets/web/assets/mobirise-icons2/mobirise2.css"
+        href="./assets/web/assets/mobirise-icons2/mobirise2.css"
       />
       <link
         rel="stylesheet"
-        href="../assets/web/assets/mobirise-icons/mobirise-icons.css"
+        href="./assets/web/assets/mobirise-icons/mobirise-icons.css"
       />
       <link
         rel="stylesheet"
-        href="../assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css"
+        href="./assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css"
       />
-      <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
       <link
         rel="stylesheet"
-        href="../assets/bootstrap/css/bootstrap-grid.min.css"
+        href="./assets/bootstrap/css/bootstrap-grid.min.css"
       />
       <link
         rel="stylesheet"
-        href="../assets/bootstrap/css/bootstrap-reboot.min.css"
+        href="./assets/bootstrap/css/bootstrap-reboot.min.css"
       />
-      <link rel="stylesheet" href="../assets/dropdown/css/style.css" />
-      <link rel="stylesheet" href="../assets/socicon/css/styles.css" />
-      <link rel="stylesheet" href="../assets/theme/css/style.css" />
+      <link rel="stylesheet" href="./assets/dropdown/css/style.css" />
+      <link rel="stylesheet" href="./assets/socicon/css/styles.css" />
+      <link rel="stylesheet" href="./assets/theme/css/style.css" />
       <link
         rel="preload"
         href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
@@ -78,11 +78,11 @@
       <link
         rel="preload"
         as="style"
-        href="../assets/mobirise/css/mbr-additional.css"
+        href="./assets/mobirise/css/mbr-additional.css"
       />
       <link
         rel="stylesheet"
-        href="../assets/mobirise/css/mbr-additional.css"
+        href="./assets/mobirise/css/mbr-additional.css"
         type="text/css"
       />
     </head>
@@ -98,7 +98,7 @@
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Pragma","no-cache"); response.setHeader("Expires","0");
             if(session.getAttribute("session")==null){
-                response.sendRedirect("../jsp/adminSignIn.jsp"); 
+                response.sendRedirect("adminSignIn.jsp"); 
             }
         %>
 
@@ -113,7 +113,7 @@
             <div class="navbar-brand">
               <span class="navbar-logo">
                 <img
-                  src="../assets/images/mbr-121x121.png"
+                  src="./assets/images/mbr-121x121.png"
                   alt="Auto Ride Logo"
                   style="height: 3.8rem;"
                 />
@@ -121,7 +121,7 @@
               <span class="navbar-caption-wrap"
                 ><a
                   class="navbar-caption text-black display-7"
-                  href="../jsp/homePage.jsp"
+                  href="./jsp/homePage.jsp"
                   >Auto Ride</a
                 ></span
               >
@@ -186,7 +186,7 @@
               </ul>
               <form id="logOutForm">
                 <div class="navbar-buttons mbr-section-btn">
-                  <a class="btn btn-primary display-4" id="logOut" href="../logOut"
+                  <a class="btn btn-primary display-4" id="logOut" href="./logOut"
                     >Log Out</a
                   >
                 </div>
@@ -234,14 +234,14 @@
                   </div>
                   <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Total Revenue</p>
-                    <h4 class="mb-0" id="totalRevenue">ok</h4>
+                    <h4 class="mb-0" id="totalRevenue">${totalRevenue}</h4>
                   </div>
                 </div>
                 <hr class="dark horizontal my-0" />
                 <div class="card-footer p-3">
                   <p class="mb-0">
                     <span class="text-success text-sm font-weight-bolder"
-                      id="todaysRevenue">0 </span
+                      id="todaysRevenue">${todaysRevenue}</span
                     > : Today's Revenue
                   </p>
                 </div>
@@ -257,13 +257,13 @@
                   </div>
                   <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Total Bookings</p>
-                    <h4 class="mb-0" id="totalBookings">0</h4>
+                    <h4 class="mb-0" id="totalBookings">${totalBookings}</h4>
                   </div>
                 </div>
                 <hr class="dark horizontal my-0" />
                 <div class="card-footer p-3">
                   <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder" id="todaysBookings">0 </span
+                      <span class="text-success text-sm font-weight-bolder" id="todaysBookings">${todaysBookings} </span
                     > : Today's Bookings
                   </p>
                 </div>
@@ -279,13 +279,13 @@
                   </div>
                   <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Total Distance</p>
-                    <h4 class="mb-0" id="totalDistance">0 km</h4>
+                    <h4 class="mb-0" id="totalDistance">${totalDistance} km</h4>
                   </div>
                 </div>
                 <hr class="dark horizontal my-0" />
                 <div class="card-footer p-3">
                   <p class="mb-0">
-                      <span class="text-danger text-sm font-weight-bolder" id="todaysDistance">0</span>
+                      <span class="text-danger text-sm font-weight-bolder" id="todaysDistance">${todaysDistance} km</span>
                      : Today's Distance
                   </p>
                 </div>
@@ -301,13 +301,13 @@
                   </div>
                   <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Total Duration</p>
-                    <h4 class="mb-0" id="totalDuration">0 mins</h4>
+                    <h4 class="mb-0" id="totalDuration">${totalDuration} mins</h4>
                   </div>
                 </div>
                 <hr class="dark horizontal my-0" />
                 <div class="card-footer p-3">
                   <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder" id="todaysDuration">0 mins </span
+                      <span class="text-success text-sm font-weight-bolder" id="todaysDuration">${todaysDuration} mins </span
                     > : Today's Duration
                   </p>
                 </div>
@@ -567,19 +567,19 @@
       </div>
 
       <-<!-- Scripts -->
-      <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="../assets/smoothscroll/smooth-scroll.js"></script>
-      <script src="../assets/ytplayer/index.js"></script>
-      <script src="../assets/vimeoplayer/player.js"></script>
-      <script src="../assets/embla/embla.min.js"></script>
-      <script src="../assets/embla/script.js"></script>
-      <script src="../assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
-      <script src="../assets/dropdown/js/navbar-dropdown.js"></script>
-      <script src="../assets/theme/js/script.js"></script>
-      <script src="../assets/formoid/formoid.min.js"></script>
+      <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="./assets/smoothscroll/smooth-scroll.js"></script>
+      <script src="./assets/ytplayer/index.js"></script>
+      <script src="./assets/vimeoplayer/player.js"></script>
+      <script src="./assets/embla/embla.min.js"></script>
+      <script src="./assets/embla/script.js"></script>
+      <script src="./assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
+      <script src="./assets/dropdown/js/navbar-dropdown.js"></script>
+      <script src="./assets/theme/js/script.js"></script>
+      <script src="./assets/formoid/formoid.min.js"></script>
 
       <script>
-        function getCookie(cname) {
+        /*function getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(';');
         for(let i = 0; i < ca.length; i++) {
@@ -617,7 +617,7 @@
         document.getElementById("totalDistance").innerHTML = totalDistance+" KM";   
         document.getElementById("todaysDistance").innerHTML = todaysDistance+" KM";   
         document.getElementById("totalDuration").innerHTML = totalDuration+" mins";   
-        document.getElementById("todaysDuration").innerHTML = todaysDuration+" mins";   
+        document.getElementById("todaysDuration").innerHTML = todaysDuration+" mins";  */ 
     </script>
     </body>
 </html>

@@ -51,7 +51,7 @@ public class showInvoice extends HttpServlet {
             String receiptTime = null;
             String receiptLocation = null;
             String receiptDestination = null;
-            String receiptVehicleType = null;
+            String receiptVehicleTypeID = null;
             String receiptDistance = null;
             String receiptDuration = null;
             String receiptFullName = null;
@@ -84,11 +84,10 @@ public class showInvoice extends HttpServlet {
             //get values from bookingsdata database
             int invoiceNum = getInvoiceNumber(invoiceNumber);
             
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT ORDERDATE, ORDERTIME, MAIL, DATE, TIME, LOCATION, DESTINATION, "
-                    + "VEHICLETYPE, DISTANCE, DURATION, VEHICLE_PRICE, EXTRADISTANCE_PRICE, TOTAL_PRICE FROM BOOKINGSDATA");
-            ResultSetMetaData metaData = resultSet.getMetaData();
+            ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, CURRENTTIME, MAIL, DATE, TIME, LOCATION, DESTINATION, "
+                    + "VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE FROM BOOKINGDETAILS");
             int count = 1;
             while (resultSet.next()){
                 if (count==invoiceNum){
@@ -99,7 +98,7 @@ public class showInvoice extends HttpServlet {
                     receiptTime = (String) resultSet.getObject(5);
                     receiptLocation = (String) resultSet.getObject(6);
                     receiptDestination = (String) resultSet.getObject(7);
-                    receiptVehicleType = (String) resultSet.getObject(8);
+                    receiptVehicleTypeID = resultSet.getObject(8).toString().trim();
                     receiptDistance = (String) resultSet.getObject(9);
                     receiptDuration = (String) resultSet.getObject(10);
                     receiptVehiclePrice = (String) resultSet.getObject(11);
@@ -112,9 +111,9 @@ public class showInvoice extends HttpServlet {
             
 
             //get values from userdata database
-            Connection connectionUserData = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+            Connection connectionUserData = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statementUserData = connectionUserData.createStatement();
-            ResultSet resultSetUserData = statementUserData.executeQuery("SELECT EMAIL, LAST_NAME, PHONE_NUMBER FROM USERDATA");
+            ResultSet resultSetUserData = statementUserData.executeQuery("SELECT EMAIL, LASTNAME, TELEPHONE FROM USERDETAILS");
             ResultSetMetaData metaDataUserData = resultSetUserData.getMetaData();
             int numberOfColumnsUserData = metaDataUserData.getColumnCount();
 
@@ -132,6 +131,21 @@ public class showInvoice extends HttpServlet {
                 }
             }
             
+            //get vehicle name from vehicle type
+            String receiptVehicleName = null;
+            Statement statementVehicles = connection.createStatement();
+            ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
+            System.out.println(receiptVehicleTypeID);
+            while (resultSetVehicles.next()){
+                String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
+                String resultVehicleName = resultSetVehicles.getObject(2).toString();
+                System.out.println(resultVehicleID);
+                if (receiptVehicleTypeID.equals(resultVehicleID)){
+                    System.out.println("ok");
+                    receiptVehicleName = resultVehicleName;
+                }
+            }
+            
             //Send values for invoice
             request.setAttribute("invoiceNum", invoiceNum);
             request.setAttribute("receiptOrderDate", receiptOrderDate);
@@ -141,7 +155,7 @@ public class showInvoice extends HttpServlet {
             request.setAttribute("receiptTime", receiptTime);
             request.setAttribute("receiptLocation", receiptLocation);
             request.setAttribute("receiptDestination", receiptDestination);
-            request.setAttribute("receiptVehicleType", receiptVehicleType);
+            request.setAttribute("receiptVehicleType", receiptVehicleName);
             request.setAttribute("receiptDistance", receiptDistance);
             request.setAttribute("receiptDuration", receiptDuration);
             request.setAttribute("receiptFullName", receiptFullName);
@@ -162,9 +176,9 @@ public class showInvoice extends HttpServlet {
     public int getInvoiceNumber(String invoiceNumber) throws SQLException{
         
         if (invoiceNumber.equals("BLANK")){
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL FROM BOOKINGSDATA");
+            ResultSet resultSet = statement.executeQuery("SELECT MAIL FROM BOOKINGDETAILS");
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             int count = 0;
@@ -180,9 +194,6 @@ public class showInvoice extends HttpServlet {
         } else {
             return Integer.parseInt(invoiceNumber);
         }
-        
-            
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

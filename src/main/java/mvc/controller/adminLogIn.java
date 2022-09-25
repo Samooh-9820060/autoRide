@@ -4,6 +4,7 @@
  */
 package mvc.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -61,10 +62,23 @@ public class adminLogIn extends HttpServlet {
                 //add type of user as cookie
                 Cookie type = new Cookie("type", "admin");
                 response.addCookie(type);
-
-                //add data for dashboard as cookies
+                HttpSession session = request.getSession();
+                session.setAttribute("session", usernameInput);
                 
-                Cookie totalRevenueCookie = new Cookie("totalRevenue", totalRevenue());
+                //add data for dashboard as cookies
+                request.setAttribute("totalRevenue", totalRevenue());
+                request.setAttribute("todaysRevenue", todaysRevenue());
+                request.setAttribute("totalBookings", totalBookings());
+                request.setAttribute("todaysBookings", todaysBookings());
+                request.setAttribute("totalDistance", totalDistance());
+                request.setAttribute("todaysDistance", todaysDistance());
+                request.setAttribute("totalDuration", totalTime());
+                request.setAttribute("todaysDuration", todaysTime());
+                
+                RequestDispatcher rd = request.getRequestDispatcher("./jsp/adminPage.jsp");
+                rd.forward(request, response);
+                
+                /*Cookie totalRevenueCookie = new Cookie("totalRevenue", totalRevenue());
                 Cookie todaysRevenueCookie = new Cookie("todaysRevenue", todaysRevenue());
                 Cookie totalBookingsCookie = new Cookie("totalBookings", totalBookings());
                 Cookie todaysBookingsCookie = new Cookie("todaysBookings", todaysBookings());
@@ -80,11 +94,9 @@ public class adminLogIn extends HttpServlet {
                 response.addCookie(totalDistanceCookie);
                 response.addCookie(todaysDistanceCookie);
                 response.addCookie(totalDurationCookie);
-                response.addCookie(todaysDurationCookie);
+                response.addCookie(todaysDurationCookie);*/
                 
-                
-                HttpSession session = request.getSession();
-                session.setAttribute("session", usernameInput);
+
                     
 
             } else {
@@ -92,7 +104,7 @@ public class adminLogIn extends HttpServlet {
                 cookie.setValue("IncorrectLoginDetails");
                 response.addCookie(cookie);
             }
-            response.sendRedirect("./jsp/Loading.jsp");
+            //response.sendRedirect("./jsp/Loading.jsp");
             
            
             
@@ -105,11 +117,10 @@ public class adminLogIn extends HttpServlet {
     
     //function to check if password and mail matches in database
     public boolean checkPassowrd(String username, String password) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT USERNAME, PASSWORD FROM ADMINDATA");
-        ResultSetMetaData metaData = resultSet.getMetaData();
+        ResultSet resultSet = statement.executeQuery("SELECT USERNAME, PASSWORD FROM ADMINDETAILS");
         
         //loop through the selected rows to see if any of them matches
         while (resultSet.next()){
@@ -141,47 +152,28 @@ public class adminLogIn extends HttpServlet {
         
     }
     
-    //get first name from the database to add it as cookie
-    public String getFirstName(String username) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
-        Statement statement;
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT USERNAME, NAME FROM ADMINDATA");
-        ResultSetMetaData metaData = resultSet.getMetaData();
-        
-        while (resultSet.next()){
-                String resultUserName = (String) resultSet.getObject(1);
-                String resultName = (String) resultSet.getObject(2);
-
-                if (resultUserName.equals(username)){
-                    return resultName;
-                }
-        }
-        return null;
-    }
-    
     public String totalRevenue() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT TOTAL_PRICE FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT TOTALPRICE FROM BOOKINGDETAILS");
         
         Double totalValue = 0.00;
         while (resultSet.next()){
             totalValue += Double.parseDouble(resultSet.getObject(1).toString());
         }
-        total = totalValue.toString();
+        total = roundTwoDecimals(totalValue)+"";
         
         return total;
     }
     
     public String todaysRevenue() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT ORDERDATE, TOTAL_PRICE FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, TOTALPRICE FROM BOOKINGDETAILS");
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date();
@@ -195,17 +187,17 @@ public class adminLogIn extends HttpServlet {
                 totalValue += Double.parseDouble(value);
             }
         }
-        total = totalValue.toString();
+        total = roundTwoDecimals(totalValue)+"";
         
         return total;
     }
 
     public String totalBookings() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT ORDERDATE FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE FROM BOOKINGDETAILS");
         
         int totalValue = 0;
         while (resultSet.next()){
@@ -218,10 +210,10 @@ public class adminLogIn extends HttpServlet {
     
     public String todaysBookings() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT ORDERDATE FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE FROM BOOKINGDETAILS");
         
         int totalValue = 0;
         
@@ -242,26 +234,26 @@ public class adminLogIn extends HttpServlet {
     
     public String totalDistance() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT DISTANCE FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT DISTANCE FROM BOOKINGDETAILS");
         
         Double totalValue = 0.00;
         while (resultSet.next()){
             totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" km", ""));
         }
-        total = roundTwoDecimals(totalValue)+"";
+        total = roundTwoDecimals(totalValue);
         
         return total;
     }
     
     public String todaysDistance() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT ORDERDATE, DISTANCE FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DISTANCE FROM BOOKINGDETAILS");
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date();
@@ -275,17 +267,17 @@ public class adminLogIn extends HttpServlet {
                 totalValue += Double.parseDouble(distance);
             }
         }
-        total = roundTwoDecimals(totalValue)+"";
+        total = roundTwoDecimals(totalValue);
         
         return total;
     }
     
     public String totalTime() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT DURATION FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT DURATION FROM BOOKINGDETAILS");
         
         int totalValue = 0;
         while (resultSet.next()){
@@ -298,10 +290,10 @@ public class adminLogIn extends HttpServlet {
     
     public String todaysTime() throws SQLException{
         String total = "0";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT ORDERDATE, DURATION FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DURATION FROM BOOKINGDETAILS");
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date();
@@ -320,9 +312,9 @@ public class adminLogIn extends HttpServlet {
         return total;
     }
     
-    public double roundTwoDecimals(double d) {
+    public String roundTwoDecimals(double d) {
         DecimalFormat twoDForm = new DecimalFormat("#.##");
-        return Double.valueOf(twoDForm.format(d));
+        return twoDForm.format(d);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

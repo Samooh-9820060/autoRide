@@ -71,6 +71,21 @@ public class bookRide extends HttpServlet {
                 }
             }
             
+            String dbVehicle = "0";
+            switch (vehicleType) {
+                case "Cycle":
+                    dbVehicle = "1";
+                    break;
+                case "Car":
+                    dbVehicle = "2";
+                    break;
+                case "Pickup":
+                    dbVehicle = "3";
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             
@@ -79,12 +94,12 @@ public class bookRide extends HttpServlet {
             Date currentDate = new Date(); 
             String currentDateTime = formatterDate.format(currentDate);
             String currentTime = formatterTime.format(currentDate);
-            String totalPrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)+vehiclePrice(vehicleType)));
-            String vehiclePrice = String.format("%.2f",vehiclePrice(vehicleType));
+            String totalPrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)+vehiclePrice(dbVehicle)));
+            String vehiclePrice = String.format("%.2f",vehiclePrice(dbVehicle));
             String extraDistancePrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)));
             
             populateBookingsDatabase(mail, date, time, location, pickupLatitude, pickupLongitude, destination, 
-                    destinationLatitude, destinationLongitude, vehicleType, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice);            
+                    destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice);            
             
             
 
@@ -96,16 +111,16 @@ public class bookRide extends HttpServlet {
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
             String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price) throws SQLException{
             
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO BOOKINGSDATA VALUES ('"+mail+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
+        statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+mail+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
                 + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"')");
     }
     
     public int getLastRow() throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT MAIL FROM BOOKINGSDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT MAIL FROM BOOKINGDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         int count = 0;
@@ -167,18 +182,18 @@ public class bookRide extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private double vehiclePrice(String vehicleType) {
+    private double vehiclePrice(String vehicleType) throws SQLException {
         double price = 0.00;
-        switch (vehicleType) {
-            case "Car":
-                price = 25.00;
-                break;
-            case "Cycle":
-                price = 10.00;
-                break;
-            case "Pickup":
-                price = 40.00;
-                break;
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT VEHICLEID, VEHICLEPRICE FROM VEHICLES");
+        while (resultSet.next()){
+            String vehicleID = (String) resultSet.getObject(1);
+            String vehiclePrice = (String) resultSet.getObject(2);
+            
+            if (vehicleID.equals(vehicleType)){
+                price = Double.parseDouble(vehiclePrice);
+            }
         }
         return price;  
     }

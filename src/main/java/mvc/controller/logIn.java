@@ -83,10 +83,10 @@ public class logIn extends HttpServlet {
     
     //function to check if password and mail matches in database
     public boolean checkPassowrd(String email, String password) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, PASSWORD FROM USERDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, PASSWORD FROM USERDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         
@@ -125,10 +125,10 @@ public class logIn extends HttpServlet {
     
     //get first name from the database to add it as cookie
     public String getFirstName(String email) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, FIRST_NAME FROM USERDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, FIRSTNAME FROM USERDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         
@@ -148,20 +148,31 @@ public class logIn extends HttpServlet {
     
     //get type of the user to add it as cookie
     public String getUserType(String email) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, TYPE FROM USERDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, USERTYPE FROM USERDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         
         while (resultSet.next()){
             for (int i = 1; i <= numberOfColumns; i++) {
-                String resultEmail = (String) resultSet.getObject(i);
-                String resultType = (String) resultSet.getObject(i+1);
-
+                String resultEmail = resultSet.getObject(i).toString().trim();
+                String resultType = resultSet.getObject(i+1).toString().trim();
                 if (resultEmail.equals(email)){
-                    return resultType;
+                    Statement statement1;
+                    statement1 = connection.createStatement();
+                    ResultSet resultSet1 = statement1.executeQuery("SELECT ID, NAME FROM USERTYPES");
+                    String userType = null;
+                    while (resultSet1.next()){
+                        String userTypeID = resultSet1.getObject(1).toString();
+                        String userTypeName = resultSet1.getObject(2).toString();
+                        if (resultType.equals(userTypeID)){
+                            userType = userTypeName;
+                        }
+                    }
+                    
+                    return userType;
                 }
                 i++;
             }

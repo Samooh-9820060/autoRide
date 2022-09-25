@@ -134,9 +134,9 @@
         response.setHeader("Pragma","no-cache");
         response.setHeader("Expires","0");
         
-        /*if(session.getAttribute("session")==null){
+        if(session.getAttribute("session")==null){
             response.sendRedirect("./signIn.jsp");
-        }*/
+        }
         %>
         <script>
          /*alert("You will be redirected in 5 seconds. You can view invoice from My Bookings.");

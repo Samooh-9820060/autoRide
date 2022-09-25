@@ -15,7 +15,22 @@
 
 
   </head>
+      <script type = "text/javascript">
+        function disableBackButton() {
+            window.history.forward();
+        }
+        //setTimeout("disableBackButton()", 0);
+    </script>
   <body>
+          <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma","no-cache");
+        response.setHeader("Expires","0");
+        
+        if(session.getAttribute("session")==null){
+            response.sendRedirect("../jsp/signIn.jsp");
+        }
+    %>
       <div class="about-section">
         <div class="inner-width">
           <h1>About Us</h1>

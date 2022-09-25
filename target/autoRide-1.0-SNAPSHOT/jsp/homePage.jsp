@@ -14,15 +14,15 @@
   
   
   <title>Home</title>
-  <link rel="stylesheet" href="../assets/web/assets/mobirise-icons2/mobirise2.css">
-  <link rel="stylesheet" href="../assets/web/assets/mobirise-icons/mobirise-icons.css">
-  <link rel="stylesheet" href="../assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
   <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="../assets/dropdown/css/style.css">
   <link rel="stylesheet" href="../assets/socicon/css/styles.css">
   <link rel="stylesheet" href="../assets/theme/css/style.css">
+  <link rel="stylesheet" href="../assets/web/assets/mobirise-icons2/mobirise2.css">
+  <link rel="stylesheet" href="../assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="../assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="../assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
@@ -44,9 +44,9 @@
         response.setHeader("Pragma","no-cache");
         response.setHeader("Expires","0");
         
-        /*if(session.getAttribute("session")==null){
+        if(session.getAttribute("session")==null){
             response.sendRedirect("../jsp/signIn.jsp");
-        }*/
+        }
     %>
   
     <section data-bs-version="5.1" class="menu cid-s48OLK6784" once="menu" id="menu1-h">
@@ -70,7 +70,7 @@
                     </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" href="https://mobirise.com"><span class="mobi-mbri mobi-mbri-help mbr-iconfont mbr-iconfont-btn"></span>Help</a></li>
+                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" onclick="goToHelp()"><span class="mobi-mbri mobi-mbri-help mbr-iconfont mbr-iconfont-btn"></span>Help</a></li>
                         <li class="nav-item"><a class="nav-link link text-black display-4" onclick="goToAbout()"><span class="mbrib-info mbr-iconfont mbr-iconfont-btn"></span>About</a></li>
                         <li class="nav-item"><a class="nav-link link text-black display-4" href="https://mobirise.com"><span class="mbri-browse mbr-iconfont mbr-iconfont-btn"></span>My Bookings</a></li>
                         <li class="nav-item"><a class="nav-link link text-black show display-4" href="" aria-expanded="true"><span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn"></span>My Profile</a></li></ul>
@@ -690,6 +690,10 @@
         }
         function goToAbout(){
             document.cookie = "page=about";
+            window.location.href = "../jsp/Loading.jsp";
+        }
+        function goToHelp(){
+            document.cookie = "page=help";
             window.location.href = "../jsp/Loading.jsp";
         }
         

@@ -53,18 +53,18 @@ public class signUp extends HttpServlet {
                 String signUpEmail = request.getParameter("signUpEmail");
                 int signUpTelephone = Integer.parseInt(request.getParameter("signUpTelephone"));
                 String signUpPassword = hashPass(request.getParameter("signUpPassword"));
-                String type = "Passenger";
-                String vehicle = null;
+                int type = 1;
+                int vehicleType = 0;
                 
                 Cookie cookie = new Cookie ("status", "NA");
                 
                 //check if the mail or number has been repeated and show error message if it is repeated else go to login page
                 switch (checkRepeat(signUpEmail, signUpTelephone)){
                     case 0:
-                        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+                        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
                         Statement statement;
                         statement = connection.createStatement();
-                        statement.executeUpdate("INSERT INTO USERDATA VALUES ('"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpEmail+"', "+signUpTelephone+",'"+signUpPassword+"', '"+type+"', '"+vehicle+"')");
+                        statement.executeUpdate("INSERT INTO USERDETAILS VALUES ('"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpEmail+"', "+signUpTelephone+",'"+signUpPassword+"', '"+type+"', '"+vehicleType+"')");
                         cookie.setValue("Registered");
                         response.addCookie(cookie);
                         response.sendRedirect("./jsp/Loading.jsp");
@@ -107,10 +107,10 @@ public class signUp extends HttpServlet {
     
     //check if the user entered email or phone numbers is repeated
     public int checkRepeat(String email, int phoneNumber) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/taxiAppUserData","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, PHONE_NUMBER FROM USERDATA");
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, TELEPHONE FROM USERDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         
@@ -118,7 +118,7 @@ public class signUp extends HttpServlet {
         while (resultSet.next()){
             for (int i = 1; i <= numberOfColumns; i++) {
                 String resultEmail = (String) resultSet.getObject(i);
-                int resultPhone = (int) resultSet.getObject(i+1);
+                int resultPhone = Integer.parseInt(resultSet.getObject(i+1).toString());
                 
                 if ((resultEmail.equalsIgnoreCase(email))&&(resultPhone == phoneNumber)){
                     return 3;
@@ -168,9 +168,7 @@ public class signUp extends HttpServlet {
 
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (SQLException | NoSuchAlgorithmException ex) {
             Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
