@@ -24,6 +24,10 @@
         <servlet-name>adminLogIn</servlet-name>
         <servlet-class>mvc.controller.adminLogIn</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>submitQuery</servlet-name>
+        <servlet-class>mvc.controller.submitQuery</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>adminLogIn</servlet-name>
         <url-pattern>/adminLogIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>submitQuery</servlet-name>
+        <url-pattern>/submitQuery</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -10,7 +10,7 @@
 <head>
   <!-- Site made with Mobirise Website Builder v5.6.11, https://mobirise.com -->
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta id="meta" http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v5.6.11, mobirise.com">
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:image:src" content="">
@@ -46,7 +46,7 @@
     <div class="container">
         <div class="row content-wrapper justify-content-center">
             <div class="col-lg-3 offset-lg-1 mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="YMn0rav1YwxVip+1nnsYJGRSIQ2hLdXJRU6c8Ebc7U5pnkDcPsFUtCsgxMo6IS9Y1oDnB7OyqxSf0cGti2sBfloRIZsvOYnDmLpyTR9q/hrTJw6VjrU8a+J3pOw+0r6k">
+                <form action="../submitQuery" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
                     <div class="row">
                         <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
                         <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
@@ -61,19 +61,34 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <p class="mbr-text mbr-fonts-style mb-4 display-7">
-                                Fill this form and we'll get back to you soon.</p>
+                                Fill this form and we'll look into the issue.</p>
                         </div>
-                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form4-t">
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="security">
+                            <select type="text" name="security" placeholder="Anonymous" data-form-field="name" class="form-control" value="" id="name-form4-t" required>
+                            <option value="share">Share User details</option>
+                            <option value="anonymous">Anonymous</option>
+                            </select>
                         </div>
-                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" value="" id="email-form4-t">
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="type">
+                            <label class="form-control-label">Choose type of Issue</label>                            
+                            <select type="text" name="typeOfIssue" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form4-t" required>
+                            <option value="Booking_Process">Booking Process</option>
+                            <option value="Profile_Edit">Profile Edit</option>
+                            <option value="Bookings_List">Bookings List</option>
+                            <option value="Pricing">Pricing</option>
+                            <option value="Pricing">Driver</option>
+                            <option value="Improvement_Idea">Improvement Idea</option>
+                            <option value="Other_Issue">Other Issue</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="explanation">
+                            <textarea style="height: 250px;" type="text" name="explanation" placeholder="Details" data-form-field="text" class="form-control" value="" id="name-form4-t" required></textarea>
+                        </div>
+                        <div class="col-12 col-md-auto mbr-section-btn">
+                            <a onclick="goToHome()" class="btn btn-secondary display-4">Back</a>
                         </div>
                         <div class="col-12 col-md-auto mbr-section-btn">
                             <button type="submit" class="btn btn-secondary display-4">Submit</button>
-                        </div>
-                        <div class="col-12 col-md-auto mbr-section-btn">
-                            <button onclick="return goToHomePage()" class="btn btn-secondary display-4">Back</button>
                         </div>
                     </div>
                 </form>
@@ -87,16 +102,12 @@
         </div>
         
     </div>
-      
-</section>
-    <script>
-        function goToHomePage(){
-            alert("test");
+      <script>
+        function goToHome(){
             document.cookie = "page=homePage";
-            window.location.href = "../jsp/Loading.jsp";
-            return null;
+            window.location.href = '../jsp/Loading.jsp';
         }
-    </script>
-  
+      </script>
+</section>
 </body>
 </html>

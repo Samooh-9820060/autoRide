@@ -14,6 +14,10 @@
 </head>
 <body>
     <script>
+        function deleteCookie(cname) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            alert("deleted");
+        }
         function getCookie(cname) {
             let name = cname + "=";
             let ca = document.cookie.split(';');
@@ -35,10 +39,13 @@
         } else if (getCookie("status") === "Repeated") {
             document.getElementById("meta").content="2; url='../jsp/errorPage.jsp'";                                          
         } else if (getCookie("page") === "homePage"){
+            deleteCookie("page");
             document.getElementById("meta").content="0.5; url='../jsp/homePage.jsp'"; 
         } else if (getCookie("page") === "about"){
+            deleteCookie("page");
             document.getElementById("meta").content="0.5; url='../jsp/about.jsp'"; 
         } else if (getCookie("page") === "help"){
+            deleteCookie("page");
             document.getElementById("meta").content="0.5; url='../jsp/help.jsp'"; 
         }
         

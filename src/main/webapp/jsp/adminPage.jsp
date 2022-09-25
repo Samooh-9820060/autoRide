@@ -234,14 +234,14 @@
                   </div>
                   <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Total Revenue</p>
-                    <h4 class="mb-0" id="totalRevenue">${totalRevenue}</h4>
+                    <h4 class="mb-0" id="totalRevenue">MVR ${totalRevenue}</h4>
                   </div>
                 </div>
                 <hr class="dark horizontal my-0" />
                 <div class="card-footer p-3">
                   <p class="mb-0">
                     <span class="text-success text-sm font-weight-bolder"
-                      id="todaysRevenue">${todaysRevenue}</span
+                      id="todaysRevenue">MVR ${todaysRevenue}</span
                     > : Today's Revenue
                   </p>
                 </div>
@@ -579,7 +579,7 @@
       <script src="./assets/formoid/formoid.min.js"></script>
 
       <script>
-        /*function getCookie(cname) {
+        function getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(';');
         for(let i = 0; i < ca.length; i++) {
@@ -599,25 +599,6 @@
             document.forms[0].action="../logOut";
             document.forms[0].submit();
         }
-        
-        let totalRevenue = getCookie("totalRevenue");
-        let todaysRevenue = getCookie("todaysRevenue");
-        let totalBookings = getCookie("totalBookings");
-        let todaysBookings = getCookie("todaysBookings");
-        let totalDistance = getCookie("totalDistance");
-        let todaysDistance = getCookie("todaysDistance");
-        let totalDuration = getCookie("totalDuration");
-        let todaysDuration = getCookie("todaysDuration");
-        
-        
-        document.getElementById("totalRevenue").innerHTML = "MVR "+totalRevenue;  
-        document.getElementById("todaysRevenue").innerHTML = "MVR "+todaysRevenue;   
-        document.getElementById("totalBookings").innerHTML = totalBookings;   
-        document.getElementById("todaysBookings").innerHTML = todaysBookings;   
-        document.getElementById("totalDistance").innerHTML = totalDistance+" KM";   
-        document.getElementById("todaysDistance").innerHTML = todaysDistance+" KM";   
-        document.getElementById("totalDuration").innerHTML = totalDuration+" mins";   
-        document.getElementById("todaysDuration").innerHTML = todaysDuration+" mins";  */ 
-    </script>
+        </script>
     </body>
 </html>
