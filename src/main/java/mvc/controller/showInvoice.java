@@ -59,7 +59,7 @@ public class showInvoice extends HttpServlet {
             String receiptVehiclePrice = null;
             String receiptExtraDistancePrice = null;
             String receiptTotalPrice = null;
-            
+                        
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             

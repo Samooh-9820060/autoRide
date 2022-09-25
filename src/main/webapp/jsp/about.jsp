@@ -42,7 +42,7 @@
 			AutoRide is a taxy booking company based in maldives. As of now we only operate in the greater male region. However, we are planning to take the next step and start
 			operation in the islands by 2023.
                 </p>
-                <a onclick="homePage()">Back</a>
+                <a href="../jsp/homePage.jsp">Back</a>
               </div>
             </div>
             <div class="about-section-col">

@@ -70,9 +70,9 @@
                     </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" onclick="goToHelp()"><span class="mobi-mbri mobi-mbri-help mbr-iconfont mbr-iconfont-btn"></span>Help</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black display-4" onclick="goToAbout()"><span class="mbrib-info mbr-iconfont mbr-iconfont-btn"></span>About</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black display-4" href="https://mobirise.com"><span class="mbri-browse mbr-iconfont mbr-iconfont-btn"></span>My Bookings</a></li>
+                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" href="../jsp/help.jsp"><span class="mobi-mbri mobi-mbri-help mbr-iconfont mbr-iconfont-btn"></span>Help</a></li>
+                        <li class="nav-item"><a class="nav-link link text-black display-4" href="../jsp/about.jsp"><span class="mbrib-info mbr-iconfont mbr-iconfont-btn"></span>About</a></li>
+                        <li class="nav-item"><a class="nav-link link text-black display-4" href="../myBookings"><span class="mbri-browse mbr-iconfont mbr-iconfont-btn"></span>My Bookings</a></li>
                         <li class="nav-item"><a class="nav-link link text-black show display-4" href="" aria-expanded="true"><span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn"></span>My Profile</a></li></ul>
                         <form id="logOutForm">                        
                             <div class="navbar-buttons mbr-section-btn">
@@ -690,6 +690,10 @@
         }
         function goToAbout(){
             document.cookie = "page=about";
+            window.location.href = "../jsp/Loading.jsp";
+        }
+        function goToMyBookings(){
+            document.cookie = "page=myBookings";
             window.location.href = "../jsp/Loading.jsp";
         }
         function goToHelp(){

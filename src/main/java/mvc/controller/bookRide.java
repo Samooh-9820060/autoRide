@@ -97,9 +97,10 @@ public class bookRide extends HttpServlet {
             String totalPrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)+vehiclePrice(dbVehicle)));
             String vehiclePrice = String.format("%.2f",vehiclePrice(dbVehicle));
             String extraDistancePrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)));
+            String status = "Waiting";
             
             populateBookingsDatabase(mail, date, time, location, pickupLatitude, pickupLongitude, destination, 
-                    destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice);            
+                    destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice, status);            
             
             
 
@@ -109,12 +110,12 @@ public class bookRide extends HttpServlet {
     
     public void populateBookingsDatabase(String mail, String date, String time, String location, String pickupLat, String pickupLng,
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
-            String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price) throws SQLException{
+            String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price, String status) throws SQLException{
             
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+mail+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
-                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"')");
+                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"')");
     }
     
     public int getLastRow() throws SQLException{

@@ -28,6 +28,10 @@
         <servlet-name>submitQuery</servlet-name>
         <servlet-class>mvc.controller.submitQuery</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>myBookings</servlet-name>
+        <servlet-class>mvc.controller.myBookings</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>submitQuery</servlet-name>
         <url-pattern>/submitQuery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>myBookings</servlet-name>
+        <url-pattern>/myBookings</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

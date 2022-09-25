@@ -85,7 +85,7 @@
                             <textarea style="height: 250px;" type="text" name="explanation" placeholder="Details" data-form-field="text" class="form-control" value="" id="name-form4-t" required></textarea>
                         </div>
                         <div class="col-12 col-md-auto mbr-section-btn">
-                            <a onclick="goToHome()" class="btn btn-secondary display-4">Back</a>
+                            <a href="../jsp/homePage.jsp" class="btn btn-secondary display-4">Back</a>
                         </div>
                         <div class="col-12 col-md-auto mbr-section-btn">
                             <button type="submit" class="btn btn-secondary display-4">Submit</button>
