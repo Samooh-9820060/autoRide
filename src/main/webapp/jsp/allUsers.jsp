@@ -39,7 +39,7 @@
                 <option value="Driver">Driver</option>
             </select>
             <a onclick="loadUser()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
-            <a onclick="createDriver()" href="#" class="btn btn-secondary display-1" style="margin-left: 710px; margin-bottom: 4px; background-color: #ff8080;">Create Driver</a>
+            <a href="./jsp/createDriver.jsp" class="btn btn-secondary display-1" style="margin-left: 710px; margin-bottom: 4px; background-color: #ff8080;">Create Driver</a>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -93,7 +93,7 @@
                                                 btn btn-danger
                                             </c:when>
                                             <c:when test="${data.userType=='Driver'}">
-                                                btn btn-warning
+                                                btn btn-danger
                                             </c:when>
                                             <c:otherwise>
                                                 btn btn-success

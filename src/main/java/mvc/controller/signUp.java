@@ -55,7 +55,6 @@ public class signUp extends HttpServlet {
                 String signUpPassword = hashPass(request.getParameter("signUpPassword"));
                 int type = 1;
                 int vehicleType = 0;
-                int emergencyContactNo = 0000000;
                 
                 Cookie cookie = new Cookie ("status", "NA");
                 

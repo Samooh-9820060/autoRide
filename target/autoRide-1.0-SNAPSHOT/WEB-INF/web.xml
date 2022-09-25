@@ -72,6 +72,10 @@
         <servlet-name>filterPassengerBookings</servlet-name>
         <servlet-class>mvc.controller.filterPassengerBookings</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createDriver</servlet-name>
+        <servlet-class>mvc.controller.createDriver</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>filterPassengerBookings</servlet-name>
         <url-pattern>/filterPassengerBookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createDriver</servlet-name>
+        <url-pattern>/createDriver</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

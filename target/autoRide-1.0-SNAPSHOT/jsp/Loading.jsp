@@ -34,6 +34,8 @@
             document.getElementById("meta").content="2; url='../jsp/signIn.jsp'";                  
         } else if (getCookie("status") === "Repeated") {
             document.getElementById("meta").content="2; url='../jsp/errorPage.jsp'";                                          
+        } else if (getCookie("status") === "RepeatedDriver") {
+            document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";
         } else if (getCookie("page") === "homePage"){
             document.getElementById("meta").content="0.5; url='../jsp/homePage.jsp'"; 
         } else if (getCookie("page") === "about"){

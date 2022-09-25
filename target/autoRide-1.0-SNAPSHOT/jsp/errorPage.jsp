@@ -63,6 +63,10 @@
         document.getElementById("heading").innerHTML = "The email or phone number your provided has already been registered";
         document.getElementById("details").innerHTML = "Please login using the email you provided. You will be redirected in a few seconds.";
         document.getElementById("meta").content="5; url='../jsp/signIn.jsp'";                                          
+    }  else if (getCookie("status") === "RepeatedDriver") {
+        document.getElementById("heading").innerHTML = "The email or phone number your provided has already been registered";
+        document.getElementById("details").innerHTML = "Please retry registering the driver with different details. You will be redirected in a few seconds.";
+        document.getElementById("meta").content="5; url='../jsp/createDriver.jsp'";                                          
     }
 </script>
 <!-- 404 text -->
