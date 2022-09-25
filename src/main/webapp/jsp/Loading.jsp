@@ -34,7 +34,15 @@
             document.getElementById("meta").content="2; url='../jsp/signIn.jsp'";                  
         } else if (getCookie("status") === "Repeated") {
             document.getElementById("meta").content="2; url='../jsp/errorPage.jsp'";                                          
-        } else {
+        } else if (getCookie("page") === "homePage"){
+            document.getElementById("meta").content="0.5; url='../jsp/homePage.jsp'"; 
+        } else if (getCookie("page") === "about"){
+            document.getElementById("meta").content="0.5; url='../jsp/about.jsp'"; 
+        } else if (getCookie("page") === "help"){
+            document.getElementById("meta").content="0.5; url='../jsp/help.jsp'"; 
+        }
+        
+        else {
             if (getCookie("type") === "admin"){
                 document.getElementById("meta").content="2; url='../jsp/adminPage.jsp'"; 
             } else if (getCookie("type") === "Passenger"){
