@@ -2,14 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mvc.view;
+package mvc.model;
+
 
 /**
  *
  * @author samoo
  */
-public class myBookingsViewModel {
+public class allBookingsViewModel {
     public String invoiceNum;
+    public String mail;
     public String bookDate;
     public String bookTime;
     public String orderDate;
@@ -19,7 +21,10 @@ public class myBookingsViewModel {
     public String vehicle;
     public String distance;
     public String duration;
-    public String price;
+    public String vehiclePrice;
+    public String extraDistancePrice;
+    public String totalPrice;
+    public String driver;
     public String status;
 
     public String getInvoiceNum() {
@@ -28,6 +33,14 @@ public class myBookingsViewModel {
 
     public void setInvoiceNum(String invoiceNum) {
         this.invoiceNum = invoiceNum;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getBookDate() {
@@ -90,6 +103,14 @@ public class myBookingsViewModel {
         return distance;
     }
 
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
     public void setDistance(String distance) {
         this.distance = distance;
     }
@@ -102,12 +123,28 @@ public class myBookingsViewModel {
         this.duration = duration;
     }
 
-    public String getPrice() {
-        return price;
+    public String getVehiclePrice() {
+        return vehiclePrice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setVehiclePrice(String vehiclePrice) {
+        this.vehiclePrice = vehiclePrice;
+    }
+
+    public String getExtraDistancePrice() {
+        return extraDistancePrice;
+    }
+
+    public void setExtraDistancePrice(String extraDistancePrice) {
+        this.extraDistancePrice = extraDistancePrice;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public String getStatus() {

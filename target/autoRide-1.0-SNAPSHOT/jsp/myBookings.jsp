@@ -22,11 +22,11 @@
   <body>
     <section class="ftco-section">
       <div class="container">
+        <div class="row">
           <div class="mbr-form form-with-styler">
-              <a href="./jsp/homePage.jsp" class="btn btn-secondary display-4" style="background-color: red">Back</a>
+              <a href="./jsp/homePage.jsp" class="btn btn-secondary display-1" style="background-color: red">Back</a>
           </div>
-        <div class="row justify-content-center">
-          <div class="col-md-6 text-center mb-5">
+          <div class="col-md-10 text-center mb-3">
             <h2 class="heading-section">My Bookings</h2>
           </div>
         </div>
@@ -47,6 +47,7 @@
                         <th>Distance</th>
                         <th>Duration</th>
                         <th>Price</th>
+                        <th>Driver</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -64,6 +65,7 @@
                         <td><c:out value="${data.distance}" /></td>
                         <td><c:out value="${data.duration}" /></td>
                         <td><c:out value="${data.price}" /></td>
+                        <td><c:out value="${data.driver}" /></td>
                         <td><a
                                 onclick="goToInvoice(${data.invoiceNum})"
                                 href="#"
@@ -72,7 +74,7 @@
                                                 btn btn-danger
                                             </c:when>
                                             <c:when test="${data.status=='Completed'}">
-                                                btn btn-success
+                                                btn btn-warning
                                             </c:when>
                                             <c:otherwise>
                                                 btn btn-success

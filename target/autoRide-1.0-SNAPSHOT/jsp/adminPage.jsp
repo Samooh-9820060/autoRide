@@ -1,3 +1,11 @@
+<%-- 
+    Document   : myBookings
+    Created on : Sep 16, 2022, 7:11:27 PM
+    Author     : samoo
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -149,7 +157,7 @@
                 <li class="nav-item">
                   <a
                     class="nav-link link text-black display-4"
-                    href="https://mobirise.com"
+                    href="./allUsers"
                     ><span
                       class="mobi-mbri mobi-mbri-browse mbr-iconfont mbr-iconfont-btn"
                     ></span
@@ -159,7 +167,7 @@
                 <li class="nav-item">
                   <a
                     class="nav-link link text-black display-4"
-                    href="https://mobirise.com"
+                    href="./allQueries"
                     ><span class="mbrib-info mbr-iconfont mbr-iconfont-btn"></span
                     >Queries</a
                   >
@@ -167,7 +175,7 @@
                 <li class="nav-item">
                   <a
                     class="nav-link link text-black display-4"
-                    href="https://mobirise.com"
+                    href="./allBookings"
                     ><span class="mbri-browse mbr-iconfont mbr-iconfont-btn"></span
                     >Bookings</a
                   >
@@ -316,7 +324,10 @@
           </div>
         </div>
       </section>
-
+      </<section>
+          
+          
+      </section>
       <section
         data-bs-version="5.1"
         class="content17 cid-tcYqGPaT9g"
@@ -532,7 +543,7 @@
           />
         </a>
         <p style="margin: 0;text-align: center;" class="display-7">
-          © Copyright 2022 Auto Ride. All Rights Reserved.
+          Â© Copyright 2022 Auto Ride. All Rights Reserved.
         </p>
         <a href="https://mobirise" onclick="return false;"></a>
       </section>
@@ -579,6 +590,9 @@
       <script src="./assets/formoid/formoid.min.js"></script>
 
       <script>
+        if(performance.navigation.type === 2){
+           location.reload(true);
+        }
         function getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(';');

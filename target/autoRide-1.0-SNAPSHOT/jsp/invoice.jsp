@@ -8,12 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type = "text/javascript">
-            function disableBackButton() {
-                window.history.forward();
-            }
-        //setTimeout("disableBackButton()", 0);
-        </script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -128,7 +122,10 @@
 
     
     <body>
-        
+        <form id="goHome" method="POST" action="./adminLogIn" hidden>
+            <input type="text" id="adminUserNameField" name="adminUserNameField" value="">
+            <input type="text" id="alreadyCreated" name="alreadyCreated" value="">
+        </form>
         <%
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma","no-cache");
@@ -160,9 +157,33 @@
                         </table>
                     </td>
                 </tr>
+
                 <script>
+                    function getCookie(cname) {
+                        let name = cname + "=";
+                        let ca = document.cookie.split(';');
+                        for(let i = 0; i < ca.length; i++) {
+                            let c = ca[i];
+                            while (c.charAt(0) === ' ') {
+                                c = c.substring(1);
+                            }
+                            if (c.indexOf(name) === 0) {
+                                return c.substring(name.length, c.length);
+                                }
+                        }
+                        return "";
+                    }
                     function goHome(){
-                        window.location.href = "./jsp/homePage.jsp";
+                        var type = getCookie("type");
+                        var status = getCookie("status");
+                        if (type==="admin"){
+                            document.getElementById("adminUserNameField").value=status;
+                            document.getElementById("alreadyCreated").value="1";
+                            var form = document.getElementById("goHome");
+                            form.submit();
+                        } else if (type==="Passenger"){
+                            window.location.href = "./jsp/homePage.jsp";
+                        }                        
                     }
                     
                 </script>

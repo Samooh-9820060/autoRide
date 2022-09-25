@@ -32,6 +32,38 @@
         <servlet-name>myBookings</servlet-name>
         <servlet-class>mvc.controller.myBookings</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>allQueries</servlet-name>
+        <servlet-class>mvc.controller.allQueries</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changeQueryStatus</servlet-name>
+        <servlet-class>mvc.controller.changeQueryStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>allBookings</servlet-name>
+        <servlet-class>mvc.controller.allBookings</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterBookingsDate</servlet-name>
+        <servlet-class>mvc.controller.filterBookingsDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterPassengerOrDriver</servlet-name>
+        <servlet-class>mvc.controller.filterPassengerOrDriver</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>allUsers</servlet-name>
+        <servlet-class>mvc.controller.allUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterUsers</servlet-name>
+        <servlet-class>mvc.controller.filterUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteUser</servlet-name>
+        <servlet-class>mvc.controller.deleteUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -63,6 +95,38 @@
     <servlet-mapping>
         <servlet-name>myBookings</servlet-name>
         <url-pattern>/myBookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>allQueries</servlet-name>
+        <url-pattern>/allQueries</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeQueryStatus</servlet-name>
+        <url-pattern>/changeQueryStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>allBookings</servlet-name>
+        <url-pattern>/allBookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterBookingsDate</servlet-name>
+        <url-pattern>/filterBookingsDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterPassengerOrDriver</servlet-name>
+        <url-pattern>/filterPassengerOrDriver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>allUsers</servlet-name>
+        <url-pattern>/allUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterUsers</servlet-name>
+        <url-pattern>/filterUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteUser</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

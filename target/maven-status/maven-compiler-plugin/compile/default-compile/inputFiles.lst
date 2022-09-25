@@ -1,10 +1,14 @@
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\adminLogIn.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\com\mycompany\autoride\resources\JakartaEE9Resource.java
-C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\com\mycompany\autoride\JakartaRestConfiguration.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\allQueries.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\bookRide.java
-C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\signUp.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\submitQuery.java
-C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\logOut.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\myBookings.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\showInvoice.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\view\queriesViewModel.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\changeQueryStatus.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\view\myBookingsViewModel.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\com\mycompany\autoride\JakartaRestConfiguration.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\signUp.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\logOut.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\logIn.java

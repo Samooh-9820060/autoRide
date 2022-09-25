@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="../assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="../assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
   <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">
+  <!--<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-reboot.min.css">-->
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="../assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
@@ -324,6 +324,19 @@
                                 </div>
                             </div>
                         </div>    
+                        <div class="card mb-3">
+                            <div class="card-header" role="tab" id="headingThree">
+                                <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse6_13" aria-expanded="false" aria-controls="collapse6">
+                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>Can i view my previous booking details / invoices?</strong></h6>
+                                    <span class="mbr-iconfont mobi-mbri-arrow-down mobi-mbri"></span>
+                                </a>
+                            </div>
+                            <div id="collapse6_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    <p class="mbr-fonts-style panel-text display-7">Yes you can. Go to My Bookings and click on the status of the booking to view that invoice.</p>
+                                </div>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>

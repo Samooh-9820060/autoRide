@@ -108,6 +108,19 @@
                           aria-describedby="username-addon"
                         />
                       </div>
+                      <div class="mb-3" hidden>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="alreadyCreated" 
+                          name="alreadyCreated"
+                          required data-validation-required-message="Please enter your username."
+                          placeholder="0"
+                          value="0"
+                          aria-label="Username"
+                          aria-describedby="username-addon"
+                        />
+                      </div>
                       <label>Password</label>
                       <div class="mb-3">
                         <input

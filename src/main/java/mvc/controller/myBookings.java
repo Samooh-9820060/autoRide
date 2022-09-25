@@ -17,13 +17,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mvc.view.myBookingsViewModel;
+import mvc.model.myBookingsViewModel;
 
 /**
  *
@@ -50,7 +49,7 @@ public class myBookings extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, STATUS FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT MAIL, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
             
             List<myBookingsViewModel> myBookingsList = new ArrayList<>();
             int i = 1;
@@ -71,14 +70,15 @@ public class myBookings extends HttpServlet {
                     tempList.distance = (String) resultSet.getObject(9);
                     tempList.duration = (String) resultSet.getObject(10);
                     tempList.price = (String) resultSet.getObject(11);
-                    tempList.status = (String) resultSet.getObject(12);
+                    tempList.driver = (String) resultSet.getObject(12);
+                    tempList.status = (String) resultSet.getObject(13);
                     myBookingsList.add(tempList);
                 }
                 i++;
             }
             
             
-            
+            Collections.reverse(myBookingsList);
             request.setAttribute("myBookingsList", myBookingsList);
             
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/myBookings.jsp");
@@ -96,7 +96,6 @@ public class myBookings extends HttpServlet {
             String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
             String resultVehicleName = resultSetVehicles.getObject(2).toString();
             if (receiptVehicleTypeID.equals(resultVehicleID)){
-                System.out.println("ok");
                 vehicleName = resultVehicleName;
             }
         }

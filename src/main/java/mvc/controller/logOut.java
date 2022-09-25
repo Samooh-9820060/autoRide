@@ -34,10 +34,7 @@ public class logOut extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             
             HttpSession session = request.getSession();
-            if (session!=null){
-                session.invalidate();
-                
-            }            
+            session.invalidate();
             
             response.sendRedirect("./jsp/signIn.jsp");
         }

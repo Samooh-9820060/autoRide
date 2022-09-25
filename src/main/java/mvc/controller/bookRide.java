@@ -59,6 +59,7 @@ public class bookRide extends HttpServlet {
             String vehicleType = request.getParameter("carryVehicle");
             String distance = request.getParameter("inputDistance").replace("%20", " ");
             String duration = request.getParameter("inputDuration").replace("%20", " ");
+            String driver="Not_Assigned";
             
             String firstName = null;
             
@@ -100,7 +101,7 @@ public class bookRide extends HttpServlet {
             String status = "Waiting";
             
             populateBookingsDatabase(mail, date, time, location, pickupLatitude, pickupLongitude, destination, 
-                    destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice, status);            
+                    destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice, status, driver);            
             
             
 
@@ -110,12 +111,12 @@ public class bookRide extends HttpServlet {
     
     public void populateBookingsDatabase(String mail, String date, String time, String location, String pickupLat, String pickupLng,
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
-            String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price, String status) throws SQLException{
+            String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price, String status, String driver) throws SQLException{
             
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+mail+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
-                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"')");
+                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"', '"+driver+"')");
     }
     
     public int getLastRow() throws SQLException{

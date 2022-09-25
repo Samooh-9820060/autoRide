@@ -47,72 +47,82 @@ public class adminLogIn extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String usernameInput = request.getParameter("adminUserNameField");
-            String passwordInput = request.getParameter("signInPassword");
+            HttpSession session = request.getSession(false);
             
-            //create cookie to store user mail and default it to NA with no mail
-            Cookie cookie = new Cookie ("status", "NA");
+            String usernameInput = null;
+            String passwordInput = null;
+            String alreadyCreated = "0";
             
-            if (checkPassowrd(usernameInput, hashPass(passwordInput))==true){
-                Thread.sleep(500);
-                cookie.setValue(usernameInput);
-                response.addCookie(cookie);
-                
-                //add type of user as cookie
-                Cookie type = new Cookie("type", "admin");
-                response.addCookie(type);
-                HttpSession session = request.getSession();
-                session.setAttribute("session", usernameInput);
-                
-                //add data for dashboard as cookies
-                request.setAttribute("totalRevenue", totalRevenue());
-                request.setAttribute("todaysRevenue", todaysRevenue());
-                request.setAttribute("totalBookings", totalBookings());
-                request.setAttribute("todaysBookings", todaysBookings());
-                request.setAttribute("totalDistance", totalDistance());
-                request.setAttribute("todaysDistance", todaysDistance());
-                request.setAttribute("totalDuration", totalTime());
-                request.setAttribute("todaysDuration", todaysTime());
-                
-                RequestDispatcher rd = request.getRequestDispatcher("./jsp/adminPage.jsp");
-                rd.forward(request, response);
-                
-                /*Cookie totalRevenueCookie = new Cookie("totalRevenue", totalRevenue());
-                Cookie todaysRevenueCookie = new Cookie("todaysRevenue", todaysRevenue());
-                Cookie totalBookingsCookie = new Cookie("totalBookings", totalBookings());
-                Cookie todaysBookingsCookie = new Cookie("todaysBookings", todaysBookings());
-                Cookie totalDistanceCookie = new Cookie("totalDistance", totalDistance());
-                Cookie todaysDistanceCookie = new Cookie("todaysDistance", todaysDistance());
-                Cookie totalDurationCookie = new Cookie("totalDuration", totalTime());
-                Cookie todaysDurationCookie = new Cookie("todaysDuration", todaysTime());
-
-                response.addCookie(totalRevenueCookie);
-                response.addCookie(todaysRevenueCookie);
-                response.addCookie(totalBookingsCookie);
-                response.addCookie(todaysBookingsCookie);
-                response.addCookie(totalDistanceCookie);
-                response.addCookie(todaysDistanceCookie);
-                response.addCookie(totalDurationCookie);
-                response.addCookie(todaysDurationCookie);*/
-                
-
-                    
-
-            } else {
-                Thread.sleep(500);
-                cookie.setValue("IncorrectLoginDetails");
-                response.addCookie(cookie);
+            if (session==null){
+                response.sendRedirect("./jsp/adminSignIn.jsp");
             }
-            //response.sendRedirect("./jsp/Loading.jsp");
+            
+            usernameInput = request.getParameter("adminUserNameField");
+            alreadyCreated = request.getParameter("alreadyCreated");
+            
+            if (alreadyCreated.equals("0")){
+                passwordInput = request.getParameter("signInPassword");
+                //create cookie to store user mail and default it to NA with no mail
+                Cookie cookie = new Cookie ("status", "NA");
+
+                if (checkPassowrd(usernameInput, hashPass(passwordInput))==true){
+                    Thread.sleep(500);
+                    cookie.setValue(usernameInput);
+                    response.addCookie(cookie);
+
+                    //add type of user as cookie
+                    Cookie type = new Cookie("type", "admin");
+                    response.addCookie(type);
+                    session.setAttribute("session", usernameInput);
+
+
+                    //add data for dash board
+                    request.setAttribute("totalRevenue", totalRevenue());
+                    request.setAttribute("todaysRevenue", todaysRevenue());
+                    request.setAttribute("totalBookings", totalBookings());
+                    request.setAttribute("todaysBookings", todaysBookings());
+                    request.setAttribute("totalDistance", totalDistance());
+                    request.setAttribute("todaysDistance", todaysDistance());
+                    request.setAttribute("totalDuration", totalTime());
+                    request.setAttribute("todaysDuration", todaysTime());
+
+
+
+                    RequestDispatcher rd = request.getRequestDispatcher("./jsp/adminPage.jsp");
+                    rd.forward(request, response);
+
+                } else {
+                    Thread.sleep(500);
+                    cookie.setValue("IncorrectLoginDetails");
+                    response.addCookie(cookie);
+                    response.sendRedirect("./jsp/Loading.jsp");
+                }   
+            } else if (alreadyCreated.equals("1")){
+                    //add data for dash board
+                    request.setAttribute("totalRevenue", totalRevenue());
+                    request.setAttribute("todaysRevenue", todaysRevenue());
+                    request.setAttribute("totalBookings", totalBookings());
+                    request.setAttribute("todaysBookings", todaysBookings());
+                    request.setAttribute("totalDistance", totalDistance());
+                    request.setAttribute("todaysDistance", todaysDistance());
+                    request.setAttribute("totalDuration", totalTime());
+                    request.setAttribute("todaysDuration", todaysTime());
+
+
+
+                    RequestDispatcher rd = request.getRequestDispatcher("./jsp/adminPage.jsp");
+                    rd.forward(request, response);
+            }
+            
             
            
             
-        } catch (SQLException | NoSuchAlgorithmException ex) {
+        } catch (SQLException | NoSuchAlgorithmException | InterruptedException ex) {
             Logger.getLogger(adminLogIn.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(adminLogIn.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }            
     }
+    
+    
     
     //function to check if password and mail matches in database
     public boolean checkPassowrd(String username, String password) throws SQLException{

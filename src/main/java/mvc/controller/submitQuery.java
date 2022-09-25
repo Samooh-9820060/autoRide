@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -63,7 +64,22 @@ public class submitQuery extends HttpServlet {
         Date currentDateTime = new Date(); 
         String currentDate = formatterDate.format(currentDateTime);
         String currentTime = formatterTime.format(currentDateTime);
-        statement.executeUpdate("INSERT INTO QUERIES VALUES ('"+userMail+"', '"+type+"', '"+details+"', '"+currentDate+"', '"+currentTime+"')");
+        String status = "Not_Fixed";
+        String rowNum = (Integer.parseInt(getLastRow().trim())+1)+"";
+        statement.executeUpdate("INSERT INTO QUERIES VALUES ('"+userMail+"', '"+type+"', '"+details+"', '"+currentDate+"', '"+currentTime+"', '"+status+"', '"+rowNum+"')");
+    }
+    
+    private String getLastRow() throws SQLException{
+        String rowNum = "0";
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT QUERYNO FROM QUERIES");
+        while (resultSet.next()){
+            rowNum = (String) resultSet.getObject(1);
+        }
+        
+        return rowNum;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
