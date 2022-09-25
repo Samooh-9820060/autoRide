@@ -45,8 +45,14 @@
           </div>
           <div class="col-md-10 text-center mb-3">
             <h2 class="heading-section">All Users</h2>
-          </div>
+            </div>
         </div>
+        <div id="changePassDiv" style="margin-bottom: 40px; margin-left: 780px" hidden>
+            <label id="changePassAcc">PA1</label>
+            <input id="changePassValue" type="password" >
+            <a onclick="changePass()" href="#" class="btn btn-secondary display-1" style="background-color: #ff8080;" >Change</a>
+        </div>
+          
         <div style="margin-left: 0px; margin-bottom: 20px" class="mbr-form form-with-styler">
             <label>Filter By</label>
             <select style="border: none; margin-left: 10px;" id="type">
@@ -79,12 +85,13 @@
                         <th>Vehicle_Reg</th>
                         <th>License_No</th>
                         <th>Edit</th>
+                        <th>Password</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                   <c:forEach var="data" items="${requestScope.allUsers}">
-                    <tr>
+                    <tr style="align-content: center">
                         <td><c:out value="${data.userType}" /></td>
                         <td><c:out value="${data.userID}" /></td>
                         <td><c:out value="${data.firstName}" /></td>
@@ -106,6 +113,13 @@
                                href="#"
                                class="btn btn-warning">
                                <c:out value="Edit" /> 
+                            </a>
+                        </td>
+                        <td>
+                            <a onclick="changePassField('${data.userID}')"
+                               href="#"
+                               class="btn btn-info">
+                               <c:out value="Change Password" /> 
                             </a>
                         </td>
                         <td><a
@@ -158,6 +172,10 @@
         <input type="text" id="editUserID" name="editUserID" value="">
         <input type="text" id="editUserType" name="editUserType" value="">
     </form>
+    <form id="changePassword" method="POST" action="./editPassword" hidden>
+        <input type="text" id="editPasswordID" name="editPasswordID" value="">
+        <input type="text" id="editPasswordValue" name="editPasswordValue" value="">
+    </form>    
     
   </body>
   <script>
@@ -165,6 +183,18 @@
           document.getElementById("deleteUserID").value = userID;
           var form = document.getElementById("deleteUser");
           form.submit();
+      }
+      
+      function changePass(){
+          document.getElementById("editPasswordID").value = document.getElementById("changePassAcc").innerHTML;
+          document.getElementById("editPasswordValue").value = document.getElementById("changePassValue").value;
+          var form = document.getElementById("changePassword");
+          form.submit();
+      }
+      
+      function changePassField(userID){
+          document.getElementById("changePassAcc").innerHTML = userID;
+          document.getElementById("changePassDiv").hidden = false;
       }
       
       function editUser(userID, userType) {

@@ -112,6 +112,10 @@
         <servlet-name>adminUpdateUser</servlet-name>
         <servlet-class>mvc.controller.adminUpdateUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editPassword</servlet-name>
+        <servlet-class>mvc.controller.editPassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>adminUpdateUser</servlet-name>
         <url-pattern>/adminUpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editPassword</servlet-name>
+        <url-pattern>/editPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
