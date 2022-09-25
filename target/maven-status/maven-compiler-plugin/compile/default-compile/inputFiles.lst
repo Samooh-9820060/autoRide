@@ -2,6 +2,7 @@ C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\createDriver.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\com\mycompany\autoride\resources\JakartaEE9Resource.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\allUsers.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\driverHomePage.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\bookRide.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\model\myBookingsViewModel.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\submitQuery.java
@@ -24,4 +25,6 @@ C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\model\queri
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\allQueries.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\allBookings.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\updatePassenger.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\model\driverRidesViewModel.java
 C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\passengerEditProfile.java
+C:\Users\samoo\Documents\NetBeansProjects\autoRide\src\main\java\mvc\controller\rideStatusUpdate.java

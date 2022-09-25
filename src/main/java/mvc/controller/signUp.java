@@ -65,7 +65,7 @@ public class signUp extends HttpServlet {
                         Statement statement;
                         statement = connection.createStatement();
                         String userID = "PA"+(getLastPassenger()+1);
-                        statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,EMAIL,USERTYPE,VEHICLETYPE) VALUES ('"+userID+"', '"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpPassword+"', "+signUpTelephone+", '"+signUpEmail+"', '"+type+"', '"+vehicleType+"')");
+                        statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,IDNUMBER, ADDRESS, POSTALCODE, DISTRICT, ISLAND, EMAIL, EMERGENCYCONTACTNAME, EMERGENCYCONTACTNUMBER, USERTYPE,VEHICLETYPE) VALUES ('"+userID+"', '"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpPassword+"', "+signUpTelephone+", '-', '-', '-', '-', '-', '"+signUpEmail+"', '-', 0, '"+type+"', '"+vehicleType+"')");
                         cookie.setValue("Registered");
                         response.addCookie(cookie);
                         response.sendRedirect("./jsp/Loading.jsp");

@@ -114,9 +114,10 @@ public class bookRide extends HttpServlet {
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
             String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price, String status, String driver) throws SQLException{
             
+        String nextRow = (getLastRow()+1)+"";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+passengerID+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
+        statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+nextRow+"', '"+passengerID+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
                 + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"', '"+driver+"')");
     }
     
@@ -127,13 +128,8 @@ public class bookRide extends HttpServlet {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         int count = 0;
-        while (resultSet.next()){
-            for (int i = 1; i <= numberOfColumns; i++) {
-                String resultEmail = (String) resultSet.getObject(i);
-                
-                i++;
-            }
-            count++;
+        while (resultSet.next()){  
+                count++;
         }
         return count;
     }

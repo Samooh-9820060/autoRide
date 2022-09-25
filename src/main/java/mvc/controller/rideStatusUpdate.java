@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -37,15 +38,27 @@ public class rideStatusUpdate extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            
+            HttpSession session = request.getSession();
+            String mail = (String) session.getAttribute("session");
+            String driverIDString = getDriverID(mail);
+            String driverVehicle = vehicleType(getDriverVehicle(driverIDString));
+            
             String updateType = request.getParameter("updateType");
             String updateBookingNumber = request.getParameter("bookingNumberRide");
+            
+            String nextDriver = getNextDriver(driverIDString, getDriverVehicle(driverIDString));
+            if (nextDriver.equals(driverIDString)){
+                nextDriver = getFirstDriver(driverIDString, getDriverVehicle(driverIDString));
+            }
+            
             
             switch (updateType) {
                 case "Accept":
                     acceptBooking(updateBookingNumber);
                     break;
                 case "Reject":
-                    rejectBooking(updateBookingNumber);
+                    rejectBooking(updateBookingNumber, nextDriver);
                     break;
                 case "Complete":
                     completeBooking(updateBookingNumber);
@@ -61,19 +74,125 @@ public class rideStatusUpdate extends HttpServlet {
     private void acceptBooking(String bookingNo) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        statement.executeUpdate("UPDATE BOOKING DETAILS SET STATUS = 'Driver_Assigned' WHERE # = "+bookingNo);
-        System.out.println("updated");
+        statement.executeUpdate("UPDATE BOOKINGDETAILS SET STATUS = 'Driver_Assigned' WHERE ID = '"+bookingNo+"'");
     }
     
-    private void rejectBooking(String bookingNo){
-        System.out.println("Reject "+bookingNo+".");
+    private void rejectBooking(String bookingNo, String nextDriver) throws SQLException{
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("UPDATE BOOKINGDETAILS SET DRIVER = '"+nextDriver+"' WHERE ID = '"+bookingNo+"'");
     }
     
-    private void completeBooking(String bookingNo){
-        System.out.println("complete "+bookingNo+".");
+    private void completeBooking(String bookingNo) throws SQLException{
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("UPDATE BOOKINGDETAILS SET STATUS = 'Complete' WHERE ID = '"+bookingNo+"'");
+    }
+    
+    private String getNextDriver(String currentDriver, String vehicleType) throws SQLException{
+        String nextDriver = currentDriver;
+        boolean passedCurrentDriver = false;
+        
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, USERTYPE, VEHICLETYPE FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = resultSet.getObject(1).toString().trim();
+            String userType = resultSet.getObject(2).toString().trim();
+           
+            if (passedCurrentDriver == true){
+                System.out.println(userType);
+                System.out.println(vehicleType);
+                String vehicle = resultSet.getObject(3).toString().trim();
+                System.out.println(vehicle);
+                System.out.println("--------");
+                if ((userType.equals("2"))&&(vehicleType.equals(vehicle))){
+                    System.out.println("ok");
+                    nextDriver = userId;
+                    return nextDriver;
+                }
+            }
+            
+            if (userId.equals(currentDriver)){
+                passedCurrentDriver = true;
+            } 
+        }
+        
+        return nextDriver;
+    }
+    
+    private String getFirstDriver(String currentDriver, String vehicleID) throws SQLException{
+        String firstDriver = currentDriver;
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, USERTYPE, VEHICLETYPE FROM USERDETAILS");
+        while (resultSet.next()){
+            String userType = resultSet.getObject(2).toString().trim();
+            String vehicleType = resultSet.getObject(3).toString().trim();
+            
+            if ((userType.equals("2"))&&((vehicleType.equals(vehicleID)))){
+                String userID = resultSet.getObject(1).toString().trim();
+                return userID;
+            }
+        }
+        return firstDriver;
     }
 
+    private String getDriverID(String mail) throws SQLException{
+        String driverID = "DR1";
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = (String) resultSet.getObject(1);
+            String email = (String) resultSet.getObject(2);
+            
+            if (email.equals(mail)){
+                driverID = userId;
+            }
+        }
+        
+        return driverID;
+    }
     
+    private String getDriverVehicle(String id) throws SQLException{
+        String vehicle = "0";
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, VEHICLETYPE FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = (String) resultSet.getObject(1);
+            String vehicleID = (String) resultSet.getObject(2);
+            
+            if (userId.equals(id)){
+                vehicle = vehicleID;
+            }
+        }
+        
+        return vehicle;
+    }
+    
+    private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+        String vehicleName = "";
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statementVehicles = connection.createStatement();
+        ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
+
+        while (resultSetVehicles.next()){
+            String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
+            String resultVehicleName = resultSetVehicles.getObject(2).toString();
+            if (receiptVehicleTypeID.equals(resultVehicleID)){
+                vehicleName = resultVehicleName;
+            }
+        }
+        
+        
+        return vehicleName;
+    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

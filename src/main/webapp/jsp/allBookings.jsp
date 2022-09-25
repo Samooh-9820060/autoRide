@@ -112,11 +112,11 @@
                                             <c:when test="${data.status=='Waiting'}">
                                                 btn btn-danger
                                             </c:when>
-                                            <c:when test="${data.status=='Completed'}">
-                                                btn btn-warning
+                                            <c:when test="${data.status=='Complete'}">
+                                                btn btn-success
                                             </c:when>
                                             <c:otherwise>
-                                                btn btn-success
+                                                btn btn-warning
                                             </c:otherwise>
                                       </c:choose>"
                                             >

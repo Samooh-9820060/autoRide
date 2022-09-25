@@ -96,6 +96,7 @@
                         <span class="font-weight-bold">${firstName} ${lastName}</span>
                         <span class="text-black-50">${email}</span>
                         <span>@${userId}</span>
+                        <button style="margin-top: 20px" onclick="deleteAccount()" class="btn btn-dark" type="button">Delete Account</button>
                     </div>
                 </div>
                 <div class="col-md-9 border-right">
@@ -168,19 +169,23 @@
                     </div>
                 </div>
             </div>
-        <form id="updatePassengerDetails" method="POST" action="./updatePassenger" hidden>
-            <input type="text" id="firstNameInput" name="firstNameInput" value="">
-            <input type="text" id="lastNameInput" name="lastNameInput" value="">
-            <input type="text" id="mobileNumberInput" name="mobileNumberInput" value="">
-            <input type="text" id="idCardNumberInput" name="idCardNumberInput" value="">
-            <input type="text" id="addressInput" name="addressInput" value="">
-            <input type="text" id="postCodeInput" name="postCodeInput" value="">
-            <input type="text" id="districtInput" name="districtInput" value="">
-            <input type="text" id="islandInput" name="islandInput" value="">
-            <input type="text" id="emailInput" name="emailInput" value="">
-            <input type="text" id="emergencyContactNameInput" name="emergencyContactNameInput" value="">
-            <input type="text" id="emergencyContactNumberInput" name="emergencyContactNumberInput" value="">
-        </form>
+            <form id="updatePassengerDetails" method="POST" action="./updatePassenger" hidden>
+                <input type="text" id="firstNameInput" name="firstNameInput" value="">
+                <input type="text" id="lastNameInput" name="lastNameInput" value="">
+                <input type="text" id="mobileNumberInput" name="mobileNumberInput" value="">
+                <input type="text" id="idCardNumberInput" name="idCardNumberInput" value="">
+                <input type="text" id="addressInput" name="addressInput" value="">
+                <input type="text" id="postCodeInput" name="postCodeInput" value="">
+                <input type="text" id="districtInput" name="districtInput" value="">
+                <input type="text" id="islandInput" name="islandInput" value="">
+                <input type="text" id="emailInput" name="emailInput" value="">
+                <input type="text" id="emergencyContactNameInput" name="emergencyContactNameInput" value="">
+                <input type="text" id="emergencyContactNumberInput" name="emergencyContactNumberInput" value="">
+            </form>
+            <form id="deleteAccount" method="POST" action="deleteUser" hidden>
+                <input type="text" id="deleteUserID" name="deleteUserID" value="${userId}">
+                <input type="text" id="type" name="type" value="Passenger">
+            </form>
     </div>
     </div>
     </div>
@@ -188,16 +193,17 @@
     <script type='text/javascript' src='#'></script>
     <script type='text/javascript' src='#'></script>
     <script type='text/javascript' src='#'></script>
-    <script type='text/javascript'>
-        #
-    </script>
+
     <script type='text/javascript'>
         var myLink = document.querySelector('a[href="#"]');
         myLink.addEventListener('click', function(e) {
             e.preventDefault();
         });
         
-        
+        function deleteAccount(){
+            var form = document.getElementById("deleteAccount");
+            form.submit();
+        }
         
         function startsWith(str, word) {
             return str.lastIndexOf(word, 0) === 0;

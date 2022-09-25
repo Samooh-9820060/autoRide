@@ -96,7 +96,7 @@
                             <textarea style="height: 250px;" type="text" name="explanation" placeholder="Details" data-form-field="text" class="form-control" value="" id="name-form4-t" required></textarea>
                         </div>
                         <div class="col-12 col-md-auto mbr-section-btn">
-                            <a href="../jsp/homePage.jsp" class="btn btn-secondary display-4">Back</a>
+                            <a onclick="goToHome()" class="btn btn-secondary display-4">Back</a>
                         </div>
                         <div class="col-12 col-md-auto mbr-section-btn">
                             <button type="submit" class="btn btn-secondary display-4">Submit</button>
@@ -114,9 +114,26 @@
         
     </div>
       <script>
+        function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
         function goToHome(){
-            document.cookie = "page=homePage";
-            window.location.href = '../jsp/Loading.jsp';
+            if (getCookie("type")==="Passenger"){
+                window.location.href = '../jsp/homePage.jsp';
+            } else if (getCookie("type")==="Driver"){
+                window.location.href = '../driverHomePage';
+            }
         }
       </script>
 </section>

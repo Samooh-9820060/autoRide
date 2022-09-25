@@ -46,6 +46,8 @@
             document.getElementById("meta").content="0.5; url='../jsp/help.jsp'"; 
         } else if (getCookie("page") === "myBookings"){
             document.getElementById("meta").content="0.5; url='../myBookings'"; 
+        } else if (getCookie("statusUpdateAdmin") === "RepeatedPassengerAdminUpdate"){
+            document.getElementById("meta").content="1; url='../jsp/errorPage.jsp'";
         }
         
         else {

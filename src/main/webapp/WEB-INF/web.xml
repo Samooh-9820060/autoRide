@@ -92,6 +92,26 @@
         <servlet-name>rideStatusUpdate</servlet-name>
         <servlet-class>mvc.controller.rideStatusUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>myOrders</servlet-name>
+        <servlet-class>mvc.controller.myOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterBookingsDateDriver</servlet-name>
+        <servlet-class>mvc.controller.filterBookingsDateDriver</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filterDriverOrders</servlet-name>
+        <servlet-class>mvc.controller.filterDriverOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editUser</servlet-name>
+        <servlet-class>mvc.controller.editUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminUpdateUser</servlet-name>
+        <servlet-class>mvc.controller.adminUpdateUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logIn</servlet-name>
         <url-pattern>/logIn</url-pattern>
@@ -183,6 +203,26 @@
     <servlet-mapping>
         <servlet-name>rideStatusUpdate</servlet-name>
         <url-pattern>/rideStatusUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>myOrders</servlet-name>
+        <url-pattern>/myOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterBookingsDateDriver</servlet-name>
+        <url-pattern>/filterBookingsDateDriver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filterDriverOrders</servlet-name>
+        <url-pattern>/filterDriverOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editUser</servlet-name>
+        <url-pattern>/editUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminUpdateUser</servlet-name>
+        <url-pattern>/adminUpdateUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

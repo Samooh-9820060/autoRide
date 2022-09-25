@@ -80,6 +80,11 @@
         document.getElementById("details").innerHTML = "Please retry udpating data with different details. You will be redirected in a few seconds.";
         document.getElementById("meta").content="5; url='../passengerEditProfile'";  
         eraseCookie("statusUpdate");
+    }  else if (getCookie("statusUpdateAdmin") === "RepeatedPassengerAdminUpdate") {
+        document.getElementById("heading").innerHTML = "The email or phone number your provided has already been registered";
+        document.getElementById("details").innerHTML = "Please retry udpating data with different details. You will be redirected in a few seconds.";
+        document.getElementById("meta").content="5; url='../allUsers'";  
+        eraseCookie("statusUpdate");
     }
 </script>
 <!-- 404 text -->

@@ -39,53 +39,21 @@ public class deleteUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String userId = request.getParameter("deleteUserID");
+            String type = request.getParameter("type");
             
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM USERDETAILS");
             
             String deleteQueryString = "DELETE FROM USERDETAILS WHERE USERID = '"+userId+"'";
             statement.executeUpdate(deleteQueryString);
             
-            response.sendRedirect("./allUsers");
-        }
-    }
-
-    private String vehicleType(String receiptVehicleTypeID) throws SQLException{
-        String vehicleName = "";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
-        Statement statementVehicles = connection.createStatement();
-        ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
-
-        while (resultSetVehicles.next()){
-            String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
-            String resultVehicleName = resultSetVehicles.getObject(2).toString();
-            if (receiptVehicleTypeID.equals(resultVehicleID)){
-                vehicleName = resultVehicleName;
+            if (type.equals("admin")){
+                response.sendRedirect("./allUsers");            
+            } else if (type.equals("Passenger")){
+                response.sendRedirect("logOut");
             }
         }
-        
-        
-        return vehicleName;
-    }
-    
-    private String userType(String userTypeID) throws SQLException{
-        String userType = "";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
-        Statement statementUsers = connection.createStatement();
-        ResultSet resultSetUsers = statementUsers.executeQuery("SELECT ID, NAME FROM USERTYPES");
-
-        while (resultSetUsers.next()){
-            String resultUserID = resultSetUsers.getObject(1).toString().trim();
-            String resultUserName = resultSetUsers.getObject(2).toString();
-            if (resultUserID.equals(userTypeID)){
-                userType = resultUserName;
-            }
-        }
-        
-        
-        return userType;
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -78,6 +78,7 @@
                         <th>Vehicle</th>
                         <th>Vehicle_Reg</th>
                         <th>License_No</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -100,6 +101,13 @@
                         <td><c:out value="${data.vehicleType}" /></td>
                         <td><c:out value="${data.vehicleRegNo}" /></td>
                         <td><c:out value="${data.licenseNo}" /></td>
+                        <td>
+                            <a onclick="editUser('${data.userID}','${data.userType}')"
+                               href="#"
+                               class="btn btn-warning">
+                               <c:out value="Edit" /> 
+                            </a>
+                        </td>
                         <td><a
                                 onclick="deleteUser('${data.userID}')"
                                 href="#"
@@ -144,12 +152,25 @@
     </form>
     <form id="deleteUser" method="GET" action="./deleteUser" hidden>
         <input type="text" id="deleteUserID" name="deleteUserID" value="">
+        <input type="text" id="type" name="type" value="admin">
     </form>
+    <form id="editUser" method="GET" action="./editUser" hidden>
+        <input type="text" id="editUserID" name="editUserID" value="">
+        <input type="text" id="editUserType" name="editUserType" value="">
+    </form>
+    
   </body>
   <script>
       function deleteUser(userID) {
           document.getElementById("deleteUserID").value = userID;
           var form = document.getElementById("deleteUser");
+          form.submit();
+      }
+      
+      function editUser(userID, userType) {
+          document.getElementById("editUserID").value = userID;
+          document.getElementById("editUserType").value = userType;
+          var form = document.getElementById("editUser");
           form.submit();
       }
       function get(name){

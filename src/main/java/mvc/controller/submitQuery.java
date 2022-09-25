@@ -51,7 +51,15 @@ public class submitQuery extends HttpServlet {
             
             addQuery(userMail, typeOfIssue, details);
             Thread.sleep(500);
-            response.sendRedirect("./jsp/homePage.jsp");
+            
+            String userType = getUserType(userMail).trim();
+            if (userType.equals("2")){
+                response.sendRedirect("driverHomePage");
+            } else if (userType.equals("1")){
+                response.sendRedirect("./jsp/homePage.jsp");
+            } else {
+                response.sendRedirect("./jsp/signIn.jsp");    
+            }
         }
     }
     
@@ -79,6 +87,23 @@ public class submitQuery extends HttpServlet {
         }
         
         return rowNum;
+    }
+    
+    private String getUserType(String mail) throws SQLException{
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, USERTYPE FROM USERDETAILS");
+        while (resultSet.next()){
+            String email = resultSet.getObject(1).toString().trim();
+            String userType = resultSet.getObject(2).toString().trim();
+            
+            if (email.equalsIgnoreCase(mail)){
+                return userType;
+            }
+        }
+        
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -42,7 +42,7 @@
 			AutoRide is a taxy booking company based in maldives. As of now we only operate in the greater male region. However, we are planning to take the next step and start
 			operation in the islands by 2023.
                 </p>
-                <a href="../jsp/homePage.jsp">Back</a>
+                <a onclick="goToHome()" class="btn btn-secondary display-4">Back</a>
               </div>
             </div>
             <div class="about-section-col">
@@ -74,10 +74,27 @@
       </div>
   </body>
   <script>
-      function homePage(){
-          document.cookie = "page=homePage";
-          window.location.href = "../jsp/Loading.jsp";
-      }
+      function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function goToHome(){
+            if (getCookie("type")==="Passenger"){
+                window.location.href = '../jsp/homePage.jsp';
+            } else if (getCookie("type")==="Driver"){
+                window.location.href = '../driverHomePage';
+            }
+        }
   </script>
 </html>
 

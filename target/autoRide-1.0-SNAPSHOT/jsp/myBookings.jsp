@@ -49,7 +49,7 @@
             <select style="border: none; margin-left: 10px;" id="filterBy">
                 <option value="Vehicle">Vehicle</option>
                 <option value="Status">Status</option>
-                <option value="Driver">Driver Mail</option>
+                <option value="Driver">Driver ID</option>
             </select>
             <input size="25px;" style="margin-left: 0px;" id="filterMailInput">
             <a onclick="loadFilter()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
@@ -97,11 +97,11 @@
                                             <c:when test="${data.status=='Waiting'}">
                                                 btn btn-danger
                                             </c:when>
-                                            <c:when test="${data.status=='Completed'}">
-                                                btn btn-warning
+                                            <c:when test="${data.status=='Complete'}">
+                                                btn btn-success
                                             </c:when>
                                             <c:otherwise>
-                                                btn btn-success
+                                                btn btn-warning
                                             </c:otherwise>
                                       </c:choose>"
                                             >

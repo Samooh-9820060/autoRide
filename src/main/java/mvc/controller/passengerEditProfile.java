@@ -76,7 +76,7 @@ public class passengerEditProfile extends HttpServlet {
                     island = (resultSet.getObject(9)+"").replace("null", "").replace("-", "");
                     email = (resultSet.getObject(10)+"").trim();
                     emergencyContactName = (resultSet.getObject(11)+"").replace("null", "").replace("-", "");
-                    emergencyContactNumber = (resultSet.getObject(12)+"").replace("null", "").replace("-", "");
+                    emergencyContactNumber = (resultSet.getObject(12)+"").replace("null", "").replace("0", "");
                 }
             }
             
