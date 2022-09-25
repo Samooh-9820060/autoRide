@@ -38,14 +38,14 @@ public class deleteUser extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String mail = request.getParameter("deleteMail");
+            String userId = request.getParameter("deleteUserID");
             
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM USERDETAILS");
             
-            String deleteQueryString = "DELETE FROM USERDETAILS WHERE EMAIL = '"+mail+"'";
+            String deleteQueryString = "DELETE FROM USERDETAILS WHERE USERID = '"+userId+"'";
             statement.executeUpdate(deleteQueryString);
             
             response.sendRedirect("./allUsers");

@@ -48,11 +48,21 @@
                   <thead>
                     <tr>
                         <th>Type</th>
+                        <th>User_ID</th>
                         <th>First_Name</th>
                         <th>Last_Name</th>
                         <th>Email</th>
-                        <th>Telephone</th>
+                        <th>Phone</th>
+                        <th>ID_Number</th>
+                        <th>Address</th>
+                        <th>Postal_Code</th>
+                        <th>District</th>
+                        <th>Island</th>
+                        <th>EC_Name</th>
+                        <th>EC_Number</th>
                         <th>Vehicle</th>
+                        <th>Vehicle_Reg</th>
+                        <th>License_No</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -60,13 +70,23 @@
                   <c:forEach var="data" items="${requestScope.allUsers}">
                     <tr>
                         <td><c:out value="${data.userType}" /></td>
+                        <td><c:out value="${data.userID}" /></td>
                         <td><c:out value="${data.firstName}" /></td>
                         <td><c:out value="${data.lastName}" /></td>
-                        <td><c:out value="${data.eMail}" /></td>
-                        <td><c:out value="${data.telephone}" /></td>
+                        <td><c:out value="${data.email}" /></td>
+                        <td><c:out value="${data.phoneNumber}" /></td>
+                        <td><c:out value="${data.IDNumber}" /></td>
+                        <td><c:out value="${data.address}" /></td>
+                        <td><c:out value="${data.postalCode}" /></td>
+                        <td><c:out value="${data.district}" /></td>
+                        <td><c:out value="${data.island}" /></td>
+                        <td><c:out value="${data.emergencyContactName}" /></td>
+                        <td><c:out value="${data.emergencyContactNo}" /></td>
                         <td><c:out value="${data.vehicleType}" /></td>
+                        <td><c:out value="${data.vehicleRegNo}" /></td>
+                        <td><c:out value="${data.licenseNo}" /></td>
                         <td><a
-                                onclick="deleteUser('${data.eMail}')"
+                                onclick="deleteUser('${data.userID}')"
                                 href="#"
                                 class="<c:choose>
                                             <c:when test="${data.userType=='Passenger'}">
@@ -108,12 +128,12 @@
         <input type="text" id="filterType" name="filterType" value="">
     </form>
     <form id="deleteUser" method="GET" action="./deleteUser" hidden>
-        <input type="text" id="deleteMail" name="deleteMail" value="">
+        <input type="text" id="deleteUserID" name="deleteUserID" value="">
     </form>
   </body>
   <script>
-      function deleteUser(eMail) {
-          document.getElementById("deleteMail").value = eMail;
+      function deleteUser(userID) {
+          document.getElementById("deleteUserID").value = userID;
           var form = document.getElementById("deleteUser");
           form.submit();
       }

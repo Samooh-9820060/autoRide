@@ -113,7 +113,7 @@ public class showInvoice extends HttpServlet {
             //get values from userdata database
             Connection connectionUserData = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statementUserData = connectionUserData.createStatement();
-            ResultSet resultSetUserData = statementUserData.executeQuery("SELECT EMAIL, LASTNAME, TELEPHONE FROM USERDETAILS");
+            ResultSet resultSetUserData = statementUserData.executeQuery("SELECT EMAIL, LASTNAME, PHONENUMBER FROM USERDETAILS");
             ResultSetMetaData metaDataUserData = resultSetUserData.getMetaData();
             int numberOfColumnsUserData = metaDataUserData.getColumnCount();
 
@@ -135,13 +135,10 @@ public class showInvoice extends HttpServlet {
             String receiptVehicleName = null;
             Statement statementVehicles = connection.createStatement();
             ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
-            System.out.println(receiptVehicleTypeID);
             while (resultSetVehicles.next()){
                 String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
                 String resultVehicleName = resultSetVehicles.getObject(2).toString();
-                System.out.println(resultVehicleID);
                 if (receiptVehicleTypeID.equals(resultVehicleID)){
-                    System.out.println("ok");
                     receiptVehicleName = resultVehicleName;
                 }
             }

@@ -48,22 +48,33 @@ public class filterUsers extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT FIRSTNAME, LASTNAME, EMAIL, TELEPHONE, USERTYPE, VEHICLETYPE FROM USERDETAILS");
+            ResultSet resultSet = statement.executeQuery("SELECT USERID, FIRSTNAME, LASTNAME, PHONENUMBER, IDNUMBER, ADDRESS, POSTALCODE, DISTRICT, ISLAND, EMAIL, EMERGENCYCONTACTNAME, EMERGENCYCONTACTNUMBER, USERTYPE, VEHICLETYPE, VEHICLEREGNO, LICENSENO FROM USERDETAILS");
 
             List<allUsersViewModel> allUsers = new ArrayList<>();
             
             while (resultSet.next()){
-                String userType = userType(resultSet.getObject(5).toString().trim());
+                String userType = userType(resultSet.getObject(13).toString().trim());
                 
                 if (userType.equalsIgnoreCase(type)){
                     allUsersViewModel user = new allUsersViewModel();
-                    user.firstName = (String) resultSet.getObject(1);
-                    user.lastName = (String) resultSet.getObject(2);
-                    user.eMail = (String) resultSet.getObject(3);
-                    user.telephone = resultSet.getObject(4)+"";
-                    user.userType = userType(resultSet.getObject(5).toString().trim());
-                    user.vehicleType = vehicleType(resultSet.getObject(6).toString().trim());
-                    allUsers.add(user);    
+                    user.userID = (resultSet.getObject(1)+"").replace("null", "-");
+                    user.firstName = (resultSet.getObject(2)+"").replace("null", "-");
+                    user.lastName = (resultSet.getObject(3)+"").replace("null", "-");
+                    user.phoneNumber = (resultSet.getObject(4)+"").replace("null", "-");
+                    user.IDNumber = (resultSet.getObject(5)+"").replace("null", "-");
+                    user.address = (resultSet.getObject(6)+"").replace("null", "-");
+                    user.postalCode = (resultSet.getObject(7)+"").replace("null", "-");
+                    user.district = (resultSet.getObject(8)+"").replace("null", "-");
+                    user.island = (resultSet.getObject(9)+"").replace("null", "-");
+                    user.email = (resultSet.getObject(10)+"").replace("null", "-");
+                    user.emergencyContactName = (resultSet.getObject(11)+"").replace("null", "-");
+                    user.emergencyContactNo = (resultSet.getObject(12)+"").replace("null", "-");
+                    user.userType = (userType(resultSet.getObject(13)+"").trim()).replace("null", "-");
+                    user.vehicleType = (vehicleType(resultSet.getObject(14)+"").trim()).replace("null", "-");
+                    user.vehicleRegNo = (resultSet.getObject(15)+"").replace("null", "-");
+                    user.licenseNo = (resultSet.getObject(16)+"").replace("null","-");
+
+                    allUsers.add(user);
                 }
             }
             
@@ -102,7 +113,7 @@ public class filterUsers extends HttpServlet {
         while (resultSetUsers.next()){
             String resultUserID = resultSetUsers.getObject(1).toString().trim();
             String resultUserName = resultSetUsers.getObject(2).toString();
-            if (resultUserID.equals(userTypeID)){
+            if (resultUserID.equals(userTypeID.trim())){
                 userType = resultUserName;
             }
         }

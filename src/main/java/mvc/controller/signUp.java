@@ -55,6 +55,7 @@ public class signUp extends HttpServlet {
                 String signUpPassword = hashPass(request.getParameter("signUpPassword"));
                 int type = 1;
                 int vehicleType = 0;
+                int emergencyContactNo = 0000000;
                 
                 Cookie cookie = new Cookie ("status", "NA");
                 
@@ -64,7 +65,8 @@ public class signUp extends HttpServlet {
                         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
                         Statement statement;
                         statement = connection.createStatement();
-                        statement.executeUpdate("INSERT INTO USERDETAILS VALUES ('"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpEmail+"', "+signUpTelephone+",'"+signUpPassword+"', '"+type+"', '"+vehicleType+"')");
+                        String userID = "PA"+(getLastPassenger()+1);
+                        statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,EMAIL,USERTYPE,VEHICLETYPE) VALUES ('"+userID+"', '"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpPassword+"', "+signUpTelephone+", '"+signUpEmail+"', '"+type+"', '"+vehicleType+"')");
                         cookie.setValue("Registered");
                         response.addCookie(cookie);
                         response.sendRedirect("./jsp/Loading.jsp");
@@ -105,12 +107,27 @@ public class signUp extends HttpServlet {
         
     }
     
+    public int getLastPassenger() throws SQLException{
+        int i = 0;
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERTYPE FROM USERDETAILS");
+        while (resultSet.next()){
+            String type = resultSet.getObject(1).toString().trim();
+            if (type.equals("1")){
+                i++;
+            }
+        }
+        return i;
+    }
+    
     //check if the user entered email or phone numbers is repeated
     public int checkRepeat(String email, int phoneNumber) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, TELEPHONE FROM USERDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT EMAIL, PHONENUMBER FROM USERDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
         
