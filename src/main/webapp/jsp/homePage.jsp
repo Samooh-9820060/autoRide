@@ -190,7 +190,7 @@
                                 </ul>
                             </div>
                             <div class="mbr-section-btn text-center">
-                                <a href="https://mobiri.se" class="btn btn-primary display-4">Get started</a>
+                                <a onclick="bookCycle()" class="btn btn-primary display-4">Get started</a>
                             </div>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                                 </ul>
                             </div>
                             <div class="mbr-section-btn text-center">
-                                <a href="https://mobiri.se" class="btn btn-primary display-4">Get started</a>
+                                <a onclick="bookCar()" class="btn btn-primary display-4">Get started</a>
                             </div>
                         </div>
                     </div>
@@ -240,12 +240,11 @@
                                 </ul>
                             </div>
                             <div class="mbr-section-btn text-center">
-                                <a href="https://mobiri.se" class="btn btn-primary display-4">Get started</a>
+                                <a onclick="bookPickup()" class="btn btn-primary display-4">Get started</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -258,7 +257,6 @@
                         <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2">
                             <strong>Toggle FAQ</strong>
                         </h3>
-
                     </div>
                     <div id="bootstrap-toggle" class="toggle-panel accordionStyles tab-content">
                         <div class="card mb-3">
@@ -317,7 +315,7 @@
                             <div class="card-header" role="tab" id="headingThree">
                                 <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse5_13" aria-expanded="false" aria-controls="collapse5">
                                     <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>How do i deactivate my account?</strong></h6>
-                                        <span class="mbr-iconfont mobi-mbri-arrow-down mobi-mbri"></span>
+                                    <span class="mbr-iconfont mobi-mbri-arrow-down mobi-mbri"></span>
                                 </a>
                             </div>
                             <div id="collapse5_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -456,7 +454,7 @@
                     title: place.name,
                     map:map 
                 });
-            });
+            }); 
             
             destination.addListener("place_changed",() => {
                 const place = destination.getPlace();
@@ -689,6 +687,19 @@
             }
             
             document.getElementById("bookPriceLabel").value = "MVR "+price.toFixed(2).toString();
+        }
+        
+        function bookCycle(){
+            document.getElementById("form4-l").scrollIntoView({behavior: 'smooth'});
+            document.getElementById("typeVehicle").value = "Cycle";
+        }
+        function bookCar(){
+            document.getElementById("form4-l").scrollIntoView({behavior: 'smooth'});
+            document.getElementById("typeVehicle").value = "Car";
+        }
+        function bookPickup(){
+            document.getElementById("form4-l").scrollIntoView({behavior: 'smooth'});
+            document.getElementById("typeVehicle").value = "Pickup";
         }
     </script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKfAnJIEIM6tjK_lA0g-zgMyKrjr2sf0&libraries=places&callback=initGoogle"></script>
