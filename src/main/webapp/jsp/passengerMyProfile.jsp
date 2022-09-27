@@ -38,6 +38,7 @@
     <title>Edit Profile</title>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='#' rel='stylesheet'>
+    
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
         ::-webkit-scrollbar {
@@ -94,6 +95,13 @@
             cursor: pointer;
             border: solid 1px #e3bc6d
         }
+        .btn-secondary,
+        .btn-secondary:active {
+            background-color: #ff6666 !important;
+            border-color: #ff6666 !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+         }
     </style>
 </head>
 
@@ -180,9 +188,9 @@
                         <div class="row mt-3">
 
                         </div>
-                        <div class="mt-5 text-center">
-                            <a href="./jsp/homePage.jsp" class="btn btn-danger">Back</a>
-                            <button onclick="verifyForm()" class="btn btn-danger" type="button">Update</button>
+                            <div class="mt-5 text-center">
+                            <a href="./jsp/homePage.jsp" class="btn btn-secondary">Back</a>
+                            <button onclick="verifyForm()" class="btn btn-secondary" type="button">Update</button>
                         </div>
                     </div>
                 </div>

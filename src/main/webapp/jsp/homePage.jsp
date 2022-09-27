@@ -82,9 +82,9 @@
                         <li class="nav-item"><a class="nav-link link text-black display-4" href="../jsp/about.jsp"><span class="mbrib-info mbr-iconfont mbr-iconfont-btn"></span>About</a></li>
                         <li class="nav-item"><a class="nav-link link text-black display-4" href="../myBookings"><span class="mbri-browse mbr-iconfont mbr-iconfont-btn"></span>My Bookings</a></li>
                         <li class="nav-item"><a class="nav-link link text-black show display-4" href="../passengerEditProfile" aria-expanded="true"><span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn"></span>My Profile</a></li></ul>
-                        <form id="logOutForm">                        
-                            <div class="navbar-buttons mbr-section-btn">
-                                <a class="btn btn-primary display-4" id="logOut" href="../logOut">Log Out</a>
+                        <form id="logOutForm">  
+                            <div class="col-12 col-md-auto mbr-section-btn">
+                                <a id="logOut" class="btn btn-secondary display-4" href="../logOut">Log out</a>
                             </div>
                         </form>
                 </div>
@@ -197,8 +197,8 @@
                                     <li class="list-group-item">Greater than 20 km - MVR 3+/km<br></li>
                                 </ul>
                             </div>
-                            <div class="mbr-section-btn text-center">
-                                <a onclick="bookCycle()" class="btn btn-primary display-4">Get started</a>
+                            <div class="col-12 col-md-auto mbr-section-btn">
+                                <a onclick="bookCycle()" class="btn btn-secondary display-4">Get Started</a>
                             </div>
                         </div>
                     </div>
@@ -222,8 +222,8 @@
                                     <li class="list-group-item">Greater than 20 km - MVR 4+/km<br></li> 
                                 </ul>
                             </div>
-                            <div class="mbr-section-btn text-center">
-                                <a onclick="bookCar()" class="btn btn-primary display-4">Get started</a>
+                            <div class="col-12 col-md-auto mbr-section-btn">
+                                <a onclick="bookCar()" class="btn btn-secondary display-4">Get Started</a>
                             </div>
                         </div>
                     </div>
@@ -247,9 +247,10 @@
                                     <li class="list-group-item">Greater than 20 km - MVR 5+/km<br></li> 
                                 </ul>
                             </div>
-                            <div class="mbr-section-btn text-center">
-                                <a onclick="bookPickup()" class="btn btn-primary display-4">Get started</a>
+                            <div class="col-12 col-md-auto mbr-section-btn">
+                                <a onclick="bookPickup()" class="btn btn-secondary display-4">Get Started</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
