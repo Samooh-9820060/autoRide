@@ -166,9 +166,7 @@
               </ul>
               <form id="logOutForm">
                 <div class="navbar-buttons mbr-section-btn">
-                  <a class="btn btn-primary display-4" id="logOut" href="./logOut"
-                    >Log Out</a
-                  >
+                  <a class="btn btn-secondary display-4" id="logOut" href="./logOut">Log Out</a>
                 </div>
               </form>
             </div>
@@ -193,9 +191,9 @@
                 class="mbr-section-title mbr-fonts-style mb-3 display-1"
                 id="HiName"
               >
-                <strong>Hi, Admin</strong>
+                  <strong style="color: #FF6666">Hi, Admin</strong>
               </h1>
-              <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok">
+              <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok" style="color: #FF6666">
                 Here are some stats
               </h2>
             </div>
@@ -309,7 +307,7 @@
           <div class="row justify-content-center">
             <div class="col-12 col-md-10">
               <div class="section-head align-center mb-4">
-                <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2">
+                <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2" style="color: #FF6666">
                   <strong>Toggle FAQ</strong>
                 </h3>
               </div>

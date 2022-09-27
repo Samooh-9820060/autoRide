@@ -44,7 +44,7 @@
               <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; background-color: #ff8080;">Back</a>
           </div>
           <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section">All Bookings</h2>
+            <h2 class="heading-section" style="color: #FF6666">All Bookings</h2>
           </div>
         </div>
         <div style="margin-left: 0px; margin-bottom: 20px" class="mbr-form form-with-styler">
@@ -69,22 +69,22 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th>Invoice#</th>
-                        <th>Passenger_ID</th>
-                        <th>Book_Date</th>
-                        <th>Book_Time</th>
-                        <th>Order_Date</th>
-                        <th>Order_Time</th>
-                        <th>Location</th>
-                        <th>Destination</th>
-                        <th>Vehicle</th>
-                        <th>Distance</th>
-                        <th>Duration</th>
-                        <th>Vehicle_Price</th>
-                        <th>ED_Price</th>
-                        <th>Total_Price</th>
-                        <th>Driver</th>
-                        <th>Status</th>
+                        <th style="color: #FF6666">Invoice#</th>
+                        <th style="color: #FF6666">Passenger_ID</th>
+                        <th style="color: #FF6666">Book_Date</th>
+                        <th style="color: #FF6666">Book_Time</th>
+                        <th style="color: #FF6666">Order_Date</th>
+                        <th style="color: #FF6666">Order_Time</th>
+                        <th style="color: #FF6666">Location</th>
+                        <th style="color: #FF6666">Destination</th>
+                        <th style="color: #FF6666">Vehicle</th>
+                        <th style="color: #FF6666">Distance</th>
+                        <th style="color: #FF6666">Duration</th>
+                        <th style="color: #FF6666">Vehicle_Price</th>
+                        <th style="color: #FF6666">ED_Price</th>
+                        <th style="color: #FF6666">Total_Price</th>
+                        <th style="color: #FF6666">Driver</th>
+                        <th style="color: #FF6666">Status</th>
                     </tr>
                 </thead>
                 <tbody>

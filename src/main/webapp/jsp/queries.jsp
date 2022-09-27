@@ -35,7 +35,7 @@
               <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="background-color: #ff8080">Back</a>
           </div>
           <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section">Queries</h2>
+            <h2 class="heading-section" style="color: #FF6666">Queries</h2>
           </div>
         </div>
         <div class="row">
@@ -44,13 +44,13 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th>Query_No</th>
-                        <th>Type</th>
-                        <th>Details</th>
-                        <th>Queried_By</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Status</th>
+                        <th style="color: #FF6666">Query_No</th>
+                        <th style="color: #FF6666">Type</th>
+                        <th style="color: #FF6666">Details</th>
+                        <th style="color: #FF6666">Queried_By</th>
+                        <th style="color: #FF6666">Date</th>
+                        <th style="color: #FF6666">Time</th>
+                        <th style="color: #FF6666">Status</th>
                     </tr>
                 </thead>
                 <tbody>

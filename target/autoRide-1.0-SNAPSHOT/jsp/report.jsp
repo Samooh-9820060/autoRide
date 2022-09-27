@@ -43,7 +43,7 @@
               <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; background-color: #ff8080;">Back</a>
           </div>
           <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section">${date}</h2>
+            <h2 class="heading-section" style="color: #FF6666">${date}</h2>
           </div>
         </div>
         <div style="margin-left: 0px; margin-bottom: 20px" class="mbr-form form-with-styler">
@@ -63,11 +63,11 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th>Driver ID</th>
-                        <th>Total_Bookings</th>
-                        <th>Total_Revenue</th>
-                        <th>Total_Distance</th>
-                        <th>Total_Time</th>
+                        <th style="color: #FF6666">Driver ID</th>
+                        <th style="color: #FF6666">Total_Bookings</th>
+                        <th style="color: #FF6666">Total_Revenue</th>
+                        <th style="color: #FF6666">Total_Distance</th>
+                        <th style="color: #FF6666">Total_Time</th>
                     </tr>
                 </thead>
                 <tbody>

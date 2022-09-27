@@ -44,7 +44,7 @@
               <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; background-color: #ff8080;">Back</a>
           </div>
           <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section">All Users</h2>
+            <h2 class="heading-section" style="color: #FF6666">All Users</h2>
             </div>
         </div>
         <div id="changePassDiv" style="margin-bottom: 40px; margin-left: 780px" hidden>
@@ -68,25 +68,25 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>User_ID</th>
-                        <th>First_Name</th>
-                        <th>Last_Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>ID_Number</th>
-                        <th>Address</th>
-                        <th>Postal_Code</th>
-                        <th>District</th>
-                        <th>Island</th>
-                        <th>EC_Name</th>
-                        <th>EC_Number</th>
-                        <th>Vehicle</th>
-                        <th>Vehicle_Reg</th>
-                        <th>License_No</th>
-                        <th>Edit</th>
-                        <th>Password</th>
-                        <th>Delete</th>
+                        <th style="color: #FF6666">Type</th>
+                        <th style="color: #FF6666">User_ID</th>
+                        <th style="color: #FF6666">First_Name</th>
+                        <th style="color: #FF6666">Last_Name</th>
+                        <th style="color: #FF6666">Email</th>
+                        <th style="color: #FF6666">Phone</th>
+                        <th style="color: #FF6666">ID_Number</th>
+                        <th style="color: #FF6666">Address</th>
+                        <th style="color: #FF6666">Postal_Code</th>
+                        <th style="color: #FF6666">District</th>
+                        <th style="color: #FF6666">Island</th>
+                        <th style="color: #FF6666">EC_Name</th>
+                        <th style="color: #FF6666">EC_Number</th>
+                        <th style="color: #FF6666">Vehicle</th>
+                        <th style="color: #FF6666">Vehicle_Reg</th>
+                        <th style="color: #FF6666">License_No</th>
+                        <th style="color: #FF6666">Edit</th>
+                        <th style="color: #FF6666">Password</th>
+                        <th style="color: #FF6666">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
