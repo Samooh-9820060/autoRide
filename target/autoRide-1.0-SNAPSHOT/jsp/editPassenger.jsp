@@ -59,7 +59,7 @@
             background: #555;
         }
         body {
-            background: #ff8080
+            background: #ff8080;
         }
         .form-control:focus {
             box-shadow: none;

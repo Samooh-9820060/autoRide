@@ -140,13 +140,13 @@
                                     <table id="myBookings" class="table table-striped" title="Incoming Bookings">
                                         <thead>
                                             <tr>
-                                                <th>Book_Date</th>
-                                                <th>Book_Time</th>
-                                                <th>Location</th>
-                                                <th>Destination</th>
-                                                <th>Price</th>
-                                                <th>Accept_Ride</th>
-                                                <th>Reject_Ride</th>
+                                                <th style="color: #FF6666">Book_Date</th>
+                                                <th style="color: #FF6666">Book_Time</th>
+                                                <th style="color: #FF6666">Location</th>
+                                                <th style="color: #FF6666">Destination</th>
+                                                <th style="color: #FF6666">Price</th>
+                                                <th style="color: #FF6666">Accept_Ride</th>
+                                                <th style="color: #FF6666">Reject_Ride</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -191,7 +191,7 @@
         </div>
     </section>
     
-    <section data-bs-version="5.1" class="form4 cid-tcYkO9d54D" id="form4-l">  
+    <section data-bs-version="5.1" class="form4 cid-tcYkO9d54D" id="form4-2">  
         <div class="container-fluid">
             <div class="row content-wrapper justify-content-center">
                 <div class="col-lg-12 offset-lg-0 mbr-form">
@@ -204,12 +204,12 @@
                                     <table id="myBookings" class="table table-striped" title="Incoming Bookings">
                                         <thead>
                                             <tr>
-                                                <th>Book_Date</th>
-                                                <th>Book_Time</th>
-                                                <th>Location</th>
-                                                <th>Destination</th>
-                                                <th>Price</th>
-                                                <th>Mark_As_Paid</th>
+                                                <th style="color: #FF6666">Book_Date</th>
+                                                <th style="color: #FF6666">Book_Time</th>
+                                                <th style="color: #FF6666">Location</th>
+                                                <th style="color: #FF6666">Destination</th>
+                                                <th style="color: #FF6666">Price</th>
+                                                <th style="color: #FF6666">Mark_As_Paid</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -449,6 +449,9 @@
         <input id="bookingNumberRide" name="bookingNumberRide" value="">
     </form>
     
+    <label id="pendingBookingsNumber" hidden>${pendingRidesNum}</label>
+    <label id="ongoingBookingsNumber" hidden>${ongoingRidesNum}</label>
+    
     <-<!-- Scripts -->
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  
     <script src="assets/smoothscroll/smooth-scroll.js"></script>  
@@ -482,6 +485,14 @@
         
         let firstName = getCookie("firstName");
         document.getElementById("HiName").innerHTML = "Hi, "+firstName+"!";
+       
+        if (document.getElementById("pendingBookingsNumber").innerHTML==="0"){
+            document.getElementById("form4-l").hidden = true;
+        }
+        
+        if (document.getElementById("ongoingBookingsNumber").innerHTML==="0"){
+            document.getElementById("form4-2").hidden = true;
+        }
         
         function updateRideStatus(number, type){
             document.getElementById("bookingNumberRide").value = number;

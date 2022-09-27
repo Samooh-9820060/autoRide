@@ -105,6 +105,9 @@ public class driverHomePage extends HttpServlet {
                 y++;
             }
             request.setAttribute("ongoingRides", ongoingRides);
+            //set pending and ongoing number
+            request.setAttribute("pendingRidesNum", pendingRides.size());
+            request.setAttribute("ongoingRidesNum", ongoingRides.size());
             
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/driverHomePage.jsp");
             rd.forward(request, response);

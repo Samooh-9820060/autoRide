@@ -66,7 +66,7 @@
                     </div>
                     <div class="dragArea row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h1 class="mbr-section-title mb-4 display-2">
+                            <h1 class="mbr-section-title mb-4 display-2" style="color: #FF6666">
                                 <strong>Contact Us</strong>
                             </h1>
                         </div>

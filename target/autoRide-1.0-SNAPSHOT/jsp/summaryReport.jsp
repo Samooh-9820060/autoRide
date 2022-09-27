@@ -117,6 +117,28 @@
                     text-align: center;
                 }
             }
+            .btn-secondary,
+            .btn-secondary:active {
+              background-color: #ff6666 !important;
+              border-color: #ff6666 !important;
+              color: #ffffff !important;
+              box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+            }
+            .btn-secondary:hover,
+            .btn-secondary:focus,
+            .btn-secondary.focus,
+            .btn-secondary.active {
+              color: #ffffff !important;
+              background-color: #ff0f0f !important;
+              border-color: #ff0f0f !important;
+              box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+            }
+            .btn-secondary.disabled,
+            .btn-secondary:disabled {
+              color: #ffffff !important;
+              background-color: #ff0f0f !important;
+              border-color: #ff0f0f !important;
+            }
         </style>
     </head>
 
@@ -143,7 +165,7 @@
                                     <img src="./assets/images/logo.png" alt="Company logo" style="width: 100%; max-width: 300px" />
                                 </td>
                                 <td>
-                                    <button style="height:30px;width:150px;margin:30px 0px" onclick="goBack()">Back</button>
+                                    <button style="height:30px;width:150px;margin:30px 0px"  class="btn btn-secondary display-4" onclick="goBack()">Back</button>
                                 </td>
                             </tr>
                         </table>

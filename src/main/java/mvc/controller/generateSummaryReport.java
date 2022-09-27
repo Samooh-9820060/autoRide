@@ -82,13 +82,13 @@ public class generateSummaryReport extends HttpServlet {
             }
             
             request.setAttribute("todayBookings", todayBookings);
-            request.setAttribute("todayRevenue", todayRevenue);
-            request.setAttribute("todayDistance", todayDistance);
+            request.setAttribute("todayRevenue", String.format("%.2f", todayRevenue));
+            request.setAttribute("todayDistance", String.format("%.2f", todayDistance));
             request.setAttribute("todayDuration", todayDuration);
             
             request.setAttribute("totalBookings", totalBookings);
-            request.setAttribute("totalRevenue", totalRevenue);
-            request.setAttribute("totalDistance", totalDistance);
+            request.setAttribute("totalRevenue", String.format("%.2f", totalRevenue));
+            request.setAttribute("totalDistance", String.format("%.2f", totalDistance));
             request.setAttribute("totalDuration", totalDuration);
             
             request.setAttribute("date", date);

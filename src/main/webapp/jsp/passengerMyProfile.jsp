@@ -60,7 +60,7 @@
             background: #555;
         }
         body {
-            background: #ff8080
+            background: black
         }
         .form-control:focus {
             box-shadow: none;
@@ -128,59 +128,59 @@
                 <div class="col-md-9 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-center">Edit Profile</h4>
+                            <h4 class="text-center" style="color: #FF6666">Edit Profile</h4>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label class="labels">First Name *</label>
+                                <label class="labels" style="color: #FF6666">First Name *</label>
                                 <label id="firstNameError" style="color: red; font-size: 12px;" hidden>First Name can't be empty</label>
                                 <input type="text" id="firstName" class="form-control" placeholder="First name" value="${firstName}">
                             </div>
                             <div class="col-md-6">
-                                <label class="labels">Last Name*</label>
+                                <label class="labels" style="color: #FF6666">Last Name*</label>
                                 <label id="lastNameError" style="color: red; font-size: 12px;" hidden>Last Name can't be empty</label>
                                 <input type="text" id="lastName" class="form-control" value="${lastName}" placeholder="Last name">
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <label class="labels">Mobile Number *</label>
+                                <label class="labels" style="color: #FF6666">Mobile Number *</label>
                                 <label id="mobileError" style="color: red; font-size: 12px;" hidden>Mobile Number can't be empty</label>
                                 <label id="mobileValidationError" style="color: red; font-size: 12px;" hidden>Please enter correct mobile number</label>
                                 <input type="tel" pattern = "[7-9]{1}[0-9]{6}" id="mobileNumber" class="form-control" placeholder="Enter phone number" value="${phoneNumber}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">ID Card Number</label>
+                                <label class="labels" style="color: #FF6666">ID Card Number</label>
                                 <input type="text" id="IDCardNumber" class="form-control" placeholder="Enter ID Number" value="${idNumber}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Address</label>
+                                <label class="labels" style="color: #FF6666">Address</label>
                                 <input type="text" id="address" class="form-control" placeholder="Enter Address" value="${address}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Postcode</label>
+                                <label class="labels" style="color: #FF6666">Postcode</label>
                                 <input type="text" id="postCode" class="form-control" placeholder="Enter Postal Code" value="${postalCode}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">District</label>
+                                <label class="labels" style="color: #FF6666">District</label>
                                 <input type="text" id="district" class="form-control" placeholder="Enter District (eg: Henveiru, Galolhu, Maafannu, etc.)" value="${district}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Island</label>
+                                <label class="labels" style="color: #FF6666">Island</label>
                                 <input type="text" id="island" class="form-control" placeholder="Enter Island (eg: Male', Hulhumale', Villimale')" value="${island}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Email*</label>
+                                <label class="labels" style="color: #FF6666">Email*</label>
                                 <label id="emailError" style="color: red; font-size: 12px;" hidden>Email can't be empty</label>
                                 <label id="emailValidationError" style="color: red; font-size: 12px;" hidden>Please enter valid email</label>
                                 <input type="email" id="emailValue" class="form-control" placeholder="Enter Email Address" value="${email}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Emergency Contact Name</label>
+                                <label class="labels" style="color: #FF6666">Emergency Contact Name</label>
                                 <input type="text" id="emergencyContactName" class="form-control" placeholder="Enter Emergency Contact Name" value="${emergencyContactName}">
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Emergency Contact Number</label>
+                                <label class="labels" style="color: #FF6666">Emergency Contact Number</label>
                                 <label id="emergencyNumberValidationError" style="color: red; font-size: 12px;" hidden>Please enter correct Number</label>
                                 <input type="tel" pattern = "[7-9]{1}[0-9]{6}" id="emergencyContactNumber" class="form-control" placeholder="Enter Emergency Contact Number" value="${emergencyContactNumber}">
                             </div>
