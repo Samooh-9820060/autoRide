@@ -97,8 +97,8 @@
         <div class="align-center container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
-                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName"><strong>Hi, {name}!</strong></h1>
-                    <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok">Book your Taxi Now</h2>
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName" style="color: #FF6666"><strong>Hi, {name}!</strong></h1>
+                    <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok" style="color: #FF6666">Book your Taxi Now</h2>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="dragArea row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <h1 class="mbr-section-title mb-4 display-2">
+                                <h1 class="mbr-section-title mb-4 display-2" style="color: #FF6666">
                                     <strong>Book Your Ride</strong></h1>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">

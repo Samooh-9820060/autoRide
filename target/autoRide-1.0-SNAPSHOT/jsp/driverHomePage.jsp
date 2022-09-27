@@ -49,6 +49,24 @@
         }
         //setTimeout("disableBackButton()", 0);
     </script>
+    <style>
+        .btn-accept,
+        .btn-accept:active {
+            background-color: #9be084 !important;
+            border-color: #9be084 !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+         }
+         
+         
+        .btn-reject,
+        .btn-reject:active {
+            background-color: #ed7a6b !important;
+            border-color: #ed7a6b !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+         }
+    </style>
 
         
 <body>
@@ -89,7 +107,7 @@
                         <li class="nav-item"><a class="nav-link link text-black show display-4" href="driverProfile" aria-expanded="true"><span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn"></span>My Profile</a></li></ul>
                         <form id="logOutForm">                        
                             <div class="navbar-buttons mbr-section-btn">
-                                <a class="btn btn-primary display-4" id="logOut" href="logOut">Log Out</a>
+                                <a class="btn btn-secondary display-4" id="logOut" href="logOut">Log Out</a>
                             </div>
                         </form>
                 </div>
@@ -102,7 +120,7 @@
         <div class="align-center container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
-                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName"><strong>Hi, {name}!</strong></h1>
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName" style="color: #FF6666"><strong>Hi, {name}!</strong></h1>
                 </div>
             </div>
         </div>
@@ -117,7 +135,7 @@
                     <div class="container">
                         <div class="row">
                             <div>
-                                <h1 class="align-center">Pending Bookings</h1>
+                                <h1 class="align-center" style="color: #FF6666">Pending Bookings</h1>
                                 <div class="table-bordered">
                                     <table id="myBookings" class="table table-striped" title="Incoming Bookings">
                                         <thead>
@@ -142,7 +160,7 @@
                                                     <td><a style="font-size: 10px;"
                                                             onclick="updateRideStatus(${data.id},'Accept')"
                                                             href="#"
-                                                            class="btn btn-success"
+                                                            class="btn btn-accept"
                                                                         >
                                                             <c:out value="Accept" />
                                                         </a>
@@ -150,7 +168,7 @@
                                                     <td><a style="font-size: 10px;"
                                                             onclick="updateRideStatus(${data.id},'Reject')"
                                                             href="#"
-                                                            class="btn btn-danger"
+                                                            class="btn btn-reject"
                                                                         >
                                                             <c:out value="Reject" />
                                                         </a>
@@ -181,7 +199,7 @@
                     <div class="container">
                         <div class="row">
                             <div>
-                                <h1 class="align-center">Ongoing Bookings</h1>
+                                <h1 class="align-center" style="color: #FF6666">Ongoing Bookings</h1>
                                 <div class="table-bordered">
                                     <table id="myBookings" class="table table-striped" title="Incoming Bookings">
                                         <thead>
@@ -205,7 +223,7 @@
                                                     <td><a style="font-size: 13px;"
                                                             onclick="updateRideStatus(${data.id},'Complete')"
                                                             href="#"
-                                                            class="btn btn-success"
+                                                            class="btn btn-accept"
                                                                         >
                                                             <c:out value="Complete" />
                                                         </a>
@@ -306,7 +324,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10">
                     <div class="section-head align-center mb-4">
-                        <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2">
+                        <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2" style="color: #FF6666">
                             <strong>Toggle FAQ</strong>
                         </h3>
                     </div>

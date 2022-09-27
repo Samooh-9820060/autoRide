@@ -107,7 +107,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-7 offset-lg-1 col-12">
+            <div class="col-lg-7 offset-lg-1 col-10" style="margin-top: 100px">
                 <div class="image-wrapper">
                     <img class="w-100" src="../assets/img/tesla-model-s.png" alt="Auto Ride">
                 </div>

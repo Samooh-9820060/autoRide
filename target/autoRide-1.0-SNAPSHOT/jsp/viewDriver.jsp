@@ -60,7 +60,7 @@
             background: #555;
         }
         body {
-            background: #ff8080
+            background: black
         }
         .form-control:focus {
             box-shadow: none;
@@ -95,6 +95,13 @@
             cursor: pointer;
             border: solid 1px #e3bc6d
         }
+        .btn-secondary,
+        .btn-secondary:active {
+            background-color: #ff6666 !important;
+            border-color: #ff6666 !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+         }
     </style>
 </head>
 
@@ -113,54 +120,54 @@
                 <div class="col-md-8 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-center">Driver Details</h4>
+                            <h4 class="text-center" style="color: red">Driver Details</h4>
                             <p style="color: red">To update anything here contact admin</p>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label class="labels">First Name</label>
+                                <label class="labels" style="color: red">First Name</label>
                                 <input type="text" id="firstName" class="form-control" value="${firstName}" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label class="labels">Last Name</label>
+                                <label class="labels" style="color: red">Last Name</label>
                                 <input type="text" id="lastName" class="form-control" value="${lastName}" disabled>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <label class="labels">Mobile Number</label>
+                                <label class="labels" style="color: red">Mobile Number</label>
                                 <input type="tel" pattern = "[7-9]{1}[0-9]{6}" id="mobileNumber" class="form-control" value="${phoneNumber}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">ID Card Number</label>
+                                <label class="labels" style="color: red">ID Card Number</label>
                                 <input type="text" id="IDCardNumber" class="form-control" placeholder="Enter ID Number" value="${idNumber}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Address</label>
+                                <label class="labels" style="color: red">Address</label>
                                 <input type="text" id="address" class="form-control" value="${address}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Postcode</label>
+                                <label class="labels" style="color: red">Postcode</label>
                                 <input type="text" id="postCode" class="form-control" placeholder="Enter Postal Code" value="${postalCode}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">District</label>
+                                <label class="labels" style="color: red">District</label>
                                 <input type="text" id="district" class="form-control" value="${district}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Island</label>
+                                <label class="labels" style="color: red">Island</label>
                                 <input type="text" id="island" class="form-control" value="${island}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Email</label>
+                                <label class="labels" style="color: red">Email</label>
                                 <input type="email" id="email" class="form-control" value="${email}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Emergency Contact Name</label>
+                                <label class="labels" style="color: red">Emergency Contact Name</label>
                                 <input type="text" id="emergencyContactName" class="form-control" value="${emergencyContactName}" disabled>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Emergency Contact Number</label>
+                                <label class="labels" style="color: red">Emergency Contact Number</label>
                                 <input type="tel" pattern = "[7-9]{1}[0-9]{6}" id="emergencyContactNumber" class="form-control" value="${emergencyContactNumber}" disabled>
                             </div>
                         </div>
@@ -168,26 +175,26 @@
 
                         </div>
                         <div class="mt-5 text-center">
-                            <a href="./driverHomePage" class="btn btn-danger">Back</a>
+                            <a href="./driverHomePage" class="btn btn-secondary">Back</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center experience"><span>Vehicle & License Details</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Vehicles</span>
+                        <div class="d-flex justify-content-between align-items-center experience"><span style="color: red">Vehicle & License Details</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Vehicles</span>
                         </div>
                         <br>
                         <div class="col-md-12">
-                            <label class="labels">Type</label>
+                            <label class="labels" style="color: red">Type</label>
                             <input type="text" id="vehicleType" class="form-control" value="${vehicle}" disabled>
                         </div>
                         <br>
                         <div class="col-md-12">
-                            <label class="labels">Vehicle Reg No</label>
+                            <label class="labels" style="color: red">Vehicle Reg No</label>
                             <input type="text" id="vehicleRegNo" class="form-control" value="${vehicleRegNo}" disabled>
                         </div>
                         <div class="col-md-12">
-                            <label class="labels">License No</label>
+                            <label class="labels" style="color: red">License No</label>
                             <input type="text" id="licenseNo" class="form-control" value="${licenseNo}" disabled>
                         </div>
                     </div>

@@ -17,8 +17,8 @@ background:#F4F4F4;
   margin-top: 170px;
 box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 border-radius: 30px;
-border-left: 50px solid #FFA500;
-border-right: 50px solid #FFA500;
+border-left: 50px solid #FF8400;
+border-right: 50px solid #FF8400;
 
 
 }
@@ -81,11 +81,24 @@ border-right: 50px solid #FFA500;
   background: #ddd;
   border-radius: 12px;
 }
-.progress-bar{
+.progress-barSpeed{
   height: 15px;
-  background: #FFA500;
+  background: #80c2ed;
   border-radius: 12px;
 }
+
+.progress-barSafety{
+  height: 15px;
+  background: #9be084;
+  border-radius: 12px;
+}
+
+.progress-barPrice{
+  height: 15px;
+  background: #ed7a6b;
+  border-radius: 12px;
+}
+
 .p1{
   width: 100%;
 }
@@ -95,13 +108,31 @@ border-right: 50px solid #FFA500;
 .p3{
   width: 100%;
 }
-.progress-bar span{
+.progress-barSpeed span{
   float: right;
   margin-right: 6px;
   line-height: 13px;
-  color: #F4F4F4;
+  color: #80c2ed;
   font-size: 12px;
 }
+
+.progress-barSafety span{
+  float: right;
+  margin-right: 6px;
+  line-height: 13px;
+  color: #9be084;
+  font-size: 12px;
+}
+
+.progress-barPrice span{
+  float: right;
+  margin-right: 6px;
+  line-height: 13px;
+  color: #ed7a6b;
+  font-size: 12px;
+}
+
+
 @media screen and (max-width:700px) {
   .about-section-col{
     flex: 100%;

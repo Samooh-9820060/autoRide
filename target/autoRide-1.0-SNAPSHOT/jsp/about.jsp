@@ -15,13 +15,18 @@
 
 
   </head>
+  <style>
+      .bg-gradient-info {
+        background-image: linear-gradient(310deg, #ffb200 0%, #ff2700 100%);
+      }
+  </style>
       <script type = "text/javascript">
         function disableBackButton() {
             window.history.forward();
         }
         //setTimeout("disableBackButton()", 0);
     </script>
-  <body>
+    <body style="background: white">
           <%
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma","no-cache");
@@ -50,21 +55,21 @@
                 <div class="skill">
                   <div class="title">Speed</div>
                   <div class="progress">
-                    <div class="progress-bar p1"><span>100%</span></div>
+                    <div class="progress-barSpeed p1"><span style="color: #ffffff">100%</span></div>
                   </div>
                 </div>
 
                 <div class="skill">
                   <div class="title">Safety</div>
                   <div class="progress">
-                    <div class="progress-bar p2"><span>100%</span></div>
+                      <div class="progress-barSafety p2"><span style="color: #ffffff">100%</span></div>
                   </div>
                 </div>
 
                 <div class="skill">
                   <div class="title">Price</div>
                   <div class="progress">
-                    <div class="progress-bar p3"><span>100%</span></div>
+                    <div class="progress-barPrice p3"><span style="color: #ffffff">100%</span></div>
                   </div>
                 </div>
               </div>
