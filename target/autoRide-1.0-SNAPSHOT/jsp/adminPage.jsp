@@ -191,9 +191,9 @@
                 class="mbr-section-title mbr-fonts-style mb-3 display-1"
                 id="HiName"
               >
-                  <strong style="color: #FF6666">Hi, Admin</strong>
+                  <strong style="color: black">Hi, Admin</strong>
               </h1>
-              <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok" style="color: #FF6666">
+              <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok" style="color: black">
                 Here are some stats
               </h2>
             </div>
@@ -218,8 +218,8 @@
                 <hr class="dark horizontal my-0" />
                 <div class="card-footer p-3">
                   <p class="mb-0">
-                    <span class="text-success text-sm font-weight-bolder"
-                      id="todaysRevenue">MVR ${todaysRevenue}</span
+                    <span class="text-success text-sm font-weight-bolder "
+                          id="todaysRevenue">MVR ${todaysRevenue}</span
                     > : Today's Revenue
                   </p>
                 </div>
@@ -307,7 +307,7 @@
           <div class="row justify-content-center">
             <div class="col-12 col-md-10">
               <div class="section-head align-center mb-4">
-                <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2" style="color: #FF6666">
+                <h3 class="mbr-section-title mb-0 mbr-fonts-style display-2" style="color: #6a5acd">
                   <strong>Toggle FAQ</strong>
                 </h3>
               </div>

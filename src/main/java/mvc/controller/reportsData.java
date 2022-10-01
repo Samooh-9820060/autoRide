@@ -52,6 +52,9 @@ public class reportsData extends HttpServlet {
             LocalDateTime now = LocalDateTime.now();  
             String date = (dtf.format(now));
             
+            DateTimeFormatter dtfLong = DateTimeFormatter.ofPattern("dd MMMM yyyy");  
+            String newDate = dtfLong.format(now);
+            
             List<reportDetailsViewModel> reportDetails = new ArrayList<>();
 
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -78,7 +81,7 @@ public class reportsData extends HttpServlet {
             }
             
             request.setAttribute("reportDetailsList", reportDetails);
-            request.setAttribute("date", date);
+            request.setAttribute("date", newDate);
             
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/report.jsp");
             rd.forward(request, response);

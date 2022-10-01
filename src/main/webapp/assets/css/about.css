@@ -17,8 +17,8 @@ background:#F4F4F4;
   margin-top: 170px;
 box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 border-radius: 30px;
-border-left: 50px solid #FF6666;
-border-right: 50px solid #FF6666;
+border-left: 50px solid #6a5acd;
+border-right: 50px solid #6a5acd;
 
 
 }
@@ -34,7 +34,7 @@ border-right: 50px solid #FF6666;
 .border{
   width: 100px;
   height: 3px;
-  background: #FF6666;
+  background: #6a5acd;
   margin: 40px auto;
 }
 .about-section-row{
@@ -57,14 +57,14 @@ border-right: 50px solid #FF6666;
   display: inline-block;
   color: #7E7C7A;
   text-decoration: none;
-  border: 2px solid #FF6666;
+  border: 2px solid #6a5acd;
   border-radius: 24px;
   padding: 8px 40px;
   transition: 0.4s linear;
 }
 .about a:hover{
   color: black;
-  background: #ffd4d4;
+  background: #6a5acd;
 }
 .skills{
   padding-left: 30px;

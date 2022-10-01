@@ -4,7 +4,6 @@
  */
 package mvc.controller;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -45,6 +44,7 @@ public class filterUserReport extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             String userID = request.getParameter("filterID");
             String date = request.getParameter("filterDate");
+            
             
             List<reportDetailsViewModel> reportDetails = new ArrayList<>();
             

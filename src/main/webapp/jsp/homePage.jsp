@@ -28,7 +28,15 @@
   <link rel="preload" as="style" href="../assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
   
   
-  
+  <style>
+        .btn-getstarted,
+        .btn-getstarted:active {
+            background-color: #6a5acd !important;
+            border-color: #6a5acd !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+         }
+  </style>
   
 </head>
     <script type = "text/javascript">
@@ -97,8 +105,8 @@
         <div class="align-center container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
-                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName" style="color: #FF6666"><strong>Hi, {name}!</strong></h1>
-                    <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok" style="color: #FF6666">Book your Taxi Now</h2>
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName" style="color: black"><strong>Hi, {name}!</strong></h1>
+                    <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5" id="ok" style="color: black">Book your Taxi Now</h2>
                 </div>
             </div>
         </div>
@@ -114,7 +122,7 @@
                         </div>
                         <div class="dragArea row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <h1 class="mbr-section-title mb-4 display-2" style="color: #FF6666">
+                                <h1 class="mbr-section-title mb-4 display-2" style="color: #FF6666; font-size: 44px;">
                                     <strong>Book Your Ride</strong></h1>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -184,7 +192,7 @@
                             <h6 class="plan-title mbr-fonts-style mb-3 display-1">
                                 <strong>Cycle</strong></h6>
                             <div class="plan-price">
-                                <p class="price mbr-fonts-style m-0 display-2"><strong>MVR 10+</strong></p>
+                                <p class="price mbr-fonts-style m-0 display-2" style="color: #6a5acd"><strong>MVR 10+</strong></p>
                                 <p class="price-term mbr-fonts-style mb-3 display-7"><strong><br></strong><strong>Per Ride</strong></p>
                             </div>
                         </div>
@@ -198,7 +206,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-auto mbr-section-btn">
-                                <a onclick="bookCycle()" class="btn btn-secondary display-4">Get Started</a>
+                                <a onclick="bookCycle()" class="btn btn-getstarted display-4">Get Started</a>
                             </div>
                         </div>
                     </div>
@@ -209,7 +217,7 @@
                             <h6 class="plan-title mbr-fonts-style mb-3 display-1">
                                 <strong>Car</strong></h6>
                             <div class="plan-price">
-                                <p class="price mbr-fonts-style m-0 display-2"><strong>MVR 25+</strong><br></p>
+                                <p class="price mbr-fonts-style m-0 display-2" style="color: #6a5acd"><strong>MVR 25+</strong><br></p>
                                 <p class="price-term mbr-fonts-style mb-3 display-7"><strong><br></strong><strong>Per Ride</strong></p>
                             </div>
                         </div>
@@ -223,7 +231,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-auto mbr-section-btn">
-                                <a onclick="bookCar()" class="btn btn-secondary display-4">Get Started</a>
+                                <a onclick="bookCar()" class="btn btn-getstarted display-4">Get Started</a>
                             </div>
                         </div>
                     </div>
@@ -234,7 +242,7 @@
                             <h6 class="plan-title mbr-fonts-style mb-3 display-1">
                                 <strong>Pickup</strong></h6>
                             <div class="plan-price">
-                                <p class="price mbr-fonts-style m-0 display-2"><strong>MVR 40+</strong></p>
+                                <p class="price mbr-fonts-style m-0 display-2" style="color: #6a5acd"><strong>MVR 40+</strong></p>
                                 <p class="price-term mbr-fonts-style mb-3 display-7"><strong><br></strong><strong>Per Ride</strong></p>
                             </div>
                         </div>
@@ -248,7 +256,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-auto mbr-section-btn">
-                                <a onclick="bookPickup()" class="btn btn-secondary display-4">Get Started</a>
+                                <a onclick="bookPickup()" class="btn btn-getstarted display-4">Get Started</a>
                             </div>
 
                         </div>

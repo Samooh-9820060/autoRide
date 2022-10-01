@@ -32,10 +32,10 @@
       <div class="container">
           <div class="row" style="padding-top: 80px;">
           <div class="mbr-form form-with-styler">
-              <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="background-color: #ff8080">Back</a>
+              <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="background-color: grey">Back</a>
           </div>
           <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section" style="color: #FF6666">Queries</h2>
+            <h2 class="heading-section" style="color: grey">Queries</h2>
           </div>
         </div>
         <div class="row">
@@ -44,13 +44,13 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th style="color: #FF6666">Query_No</th>
-                        <th style="color: #FF6666">Type</th>
-                        <th style="color: #FF6666">Details</th>
-                        <th style="color: #FF6666">Queried_By</th>
-                        <th style="color: #FF6666">Date</th>
-                        <th style="color: #FF6666">Time</th>
-                        <th style="color: #FF6666">Status</th>
+                        <th style="color: grey">Query_No</th>
+                        <th style="color: grey">Type</th>
+                        <th style="color: grey">Details</th>
+                        <th style="color: grey">Queried_By</th>
+                        <th style="color: grey">Date</th>
+                        <th style="color: grey">Time</th>
+                        <th style="color: grey">Status</th>
                     </tr>
                 </thead>
                 <tbody>

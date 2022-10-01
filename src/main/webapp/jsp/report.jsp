@@ -40,22 +40,22 @@
       <div class="container">
         <div class="row">
           <div class="mbr-form form-with-styler">
-              <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; background-color: #ff8080;">Back</a>
+              <a onclick="goToHome()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; background-color: #6a5acd;">Back</a>
           </div>
           <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section" style="color: #FF6666">${date}</h2>
+            <h2 class="heading-section" style="color: #6a5acd">${date}</h2>
           </div>
         </div>
         <div style="margin-left: 0px; margin-bottom: 20px" class="mbr-form form-with-styler">
             <label>Select Date</label>
             <input type="date" id="selectDate">
-            <a onclick="loadDate()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
+            <a onclick="loadDate()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #6a5acd;">Search</a>
             
-            <a onclick="generateSummaryReport()" href="#" class="btn btn-secondary display-1" style="margin-left: 130px; margin-bottom: 4px; background-color: #ff8080;">Generate Summary</a>
+            <a onclick="generateSummaryReport()" href="#" class="btn btn-secondary display-1" style="margin-left: 130px; margin-bottom: 4px; background-color: #6a5acd;">Generate Summary</a>
             
             <label style="margin-left: 70px">Driver ID: </label>
             <input size="25px;" style="margin-left: 0px;" id="filterIDInput">
-            <a onclick="loadFilter()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
+            <a onclick="loadFilter()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #6a5acd;">Search</a>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -63,11 +63,11 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th style="color: #FF6666">Driver ID</th>
-                        <th style="color: #FF6666">Total_Bookings</th>
-                        <th style="color: #FF6666">Total_Revenue</th>
-                        <th style="color: #FF6666">Total_Distance</th>
-                        <th style="color: #FF6666">Total_Time</th>
+                        <th style="color: #6a5acd">Driver ID</th>
+                        <th style="color: #6a5acd">Total_Bookings</th>
+                        <th style="color: #6a5acd">Total_Revenue</th>
+                        <th style="color: #6a5acd">Total_Distance</th>
+                        <th style="color: #6a5acd">Total_Time</th>
                     </tr>
                 </thead>
                 <tbody>

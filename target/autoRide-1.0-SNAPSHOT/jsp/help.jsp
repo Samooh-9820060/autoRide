@@ -87,7 +87,7 @@
                             <option value="Profile_Edit">Profile Edit</option>
                             <option value="Bookings_List">Bookings List</option>
                             <option value="Pricing">Pricing</option>
-                            <option value="Pricing">Driver</option>
+                            <option value="Driver">Driver</option>
                             <option value="Improvement_Idea">Improvement Idea</option>
                             <option value="Other_Issue">Other Issue</option>
                             </select>

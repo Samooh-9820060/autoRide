@@ -120,7 +120,7 @@
         <div class="align-center container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
-                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName" style="color: #FF6666"><strong>Hi, {name}!</strong></h1>
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1" id="HiName" style="color: black"><strong>Hi, {name}!</strong></h1>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
                     <div class="container">
                         <div class="row">
                             <div>
-                                <h1 class="align-center" style="color: #FF6666">Pending Bookings</h1>
+                                <h1 class="align-center" style="color: black">Pending Bookings</h1>
                                 <div class="table-bordered">
                                     <table id="myBookings" class="table table-striped" title="Incoming Bookings">
                                         <thead>
@@ -199,17 +199,17 @@
                     <div class="container">
                         <div class="row">
                             <div>
-                                <h1 class="align-center" style="color: #FF6666">Ongoing Bookings</h1>
+                                <h1 class="align-center" style="color: black">Ongoing Bookings</h1>
                                 <div class="table-bordered">
                                     <table id="myBookings" class="table table-striped" title="Incoming Bookings">
                                         <thead>
                                             <tr>
-                                                <th style="color: #FF6666">Book_Date</th>
-                                                <th style="color: #FF6666">Book_Time</th>
-                                                <th style="color: #FF6666">Location</th>
-                                                <th style="color: #FF6666">Destination</th>
-                                                <th style="color: #FF6666">Price</th>
-                                                <th style="color: #FF6666">Mark_As_Paid</th>
+                                                <th style="color: #6a5acd">Book_Date</th>
+                                                <th style="color: #6a5acd">Book_Time</th>
+                                                <th style="color: #6a5acd">Location</th>
+                                                <th style="color: #6a5acd">Destination</th>
+                                                <th style="color: #6a5acd">Price</th>
+                                                <th style="color: #6a5acd">Mark_As_Paid</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -255,7 +255,7 @@
                             <h6 class="plan-title mbr-fonts-style mb-3 display-1">
                                 <strong>Cycle</strong></h6>
                             <div class="plan-price">
-                                <p class="price mbr-fonts-style m-0 display-2"><strong>MVR 10+</strong></p>
+                                <p class="price mbr-fonts-style m-0 display-2" style="color: #6a5acd"><strong>MVR 10+</strong></p>
                                 <p class="price-term mbr-fonts-style mb-3 display-7"><strong><br></strong><strong>Per Ride</strong></p>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                             <h6 class="plan-title mbr-fonts-style mb-3 display-1">
                                 <strong>Car</strong></h6>
                             <div class="plan-price">
-                                <p class="price mbr-fonts-style m-0 display-2"><strong>MVR 25+</strong><br></p>
+                                <p class="price mbr-fonts-style m-0 display-2" style="color: #6a5acd"><strong>MVR 25+</strong><br></p>
                                 <p class="price-term mbr-fonts-style mb-3 display-7"><strong><br></strong><strong>Per Ride</strong></p>
                             </div>
                         </div>
@@ -299,7 +299,7 @@
                             <h6 class="plan-title mbr-fonts-style mb-3 display-1">
                                 <strong>Pickup</strong></h6>
                             <div class="plan-price">
-                                <p class="price mbr-fonts-style m-0 display-2"><strong>MVR 40+</strong></p>
+                                <p class="price mbr-fonts-style m-0 display-2" style="color: #6a5acd"><strong>MVR 40+</strong></p>
                                 <p class="price-term mbr-fonts-style mb-3 display-7"><strong><br></strong><strong>Per Ride</strong></p>
                             </div>
                         </div>
@@ -332,46 +332,46 @@
                         <div class="card mb-3">
                             <div class="card-header" role="tab" id="headingOne">
                                 <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse1_13" aria-expanded="false" aria-controls="collapse1">
-                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>What does Auto Ride do?</strong></h6>
+                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>How can i update my personal details?</strong></h6>
                                     <span class="sign mbr-iconfont mbri-arrow-down"></span>
                                 </a>
                             </div>
                             <div id="collapse1_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
-                                    <p class="mbr-fonts-style panel-text display-7">We provide the best taxi booking services in Maldives.&nbsp;</p>
+                                    <p class="mbr-fonts-style panel-text display-7">Contact Admin through the help page.&nbsp;</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card mb-3">
                             <div class="card-header" role="tab" id="headingTwo">
                                 <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse2_13" aria-expanded="false" aria-controls="collapse2">
-                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>In which areas do Auto Ride operate?</strong></h6>
+                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>What happens if i reject a booking?</strong></h6>
                                     <span class="sign mbr-iconfont mbri-arrow-down"></span>
                                 </a>
                             </div>
                             <div id="collapse2_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
-                                    <p class="mbr-fonts-style panel-text display-7">We currently operate in the Greater Male Region. We are working on expanding our services to other islands within the upcoming years.</p>
+                                    <p class="mbr-fonts-style panel-text display-7">It will move on to the next driver in line.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card mb-3">
                             <div class="card-header" role="tab" id="headingThree">
                                 <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse3_13" aria-expanded="false" aria-controls="collapse3">
-                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>How to generate payment and booking history?&nbsp;</strong></h6>
+                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>How do i mark a ride as paid?&nbsp;</strong></h6>
                                     <span class="sign mbr-iconfont mbri-arrow-down"></span>
                                 </a>
                             </div>
                             <div id="collapse3_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel-body">
-                                    <p class="mbr-fonts-style panel-text display-7">You can generate your booking history by clicking on My Bookings.</p>
+                                    <p class="mbr-fonts-style panel-text display-7">Click the complete button from ongoing bookings.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card mb-3">
                             <div class="card-header" role="tab" id="headingThree">
                                 <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse4_13" aria-expanded="false" aria-controls="collapse4">
-                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>How to contact us?</strong></h6>
+                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>What if i find an issue with the application?</strong></h6>
                                     <span class="sign mbr-iconfont mbri-arrow-down"></span>
                                 </a>
                             </div>
@@ -390,20 +390,20 @@
                             </div>
                             <div id="collapse5_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel-body">
-                                    <p class="mbr-fonts-style panel-text display-7">Go to my profile and click on deactivate account.</p>
+                                    <p class="mbr-fonts-style panel-text display-7">Contact admin through the help page.</p>
                                 </div>
                             </div>
                         </div>    
                         <div class="card mb-3">
                             <div class="card-header" role="tab" id="headingThree">
                                 <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-bs-toggle="collapse" data-core="" href="#collapse6_13" aria-expanded="false" aria-controls="collapse6">
-                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>Can i view my previous booking details / invoices?</strong></h6>
+                                    <h6 class="panel-title-edit mbr-fonts-style mb-0 display-7"><strong>What can i do if a customer accidentally left an item in my vehicle?</strong></h6>
                                     <span class="mbr-iconfont mobi-mbri-arrow-down mobi-mbri"></span>
                                 </a>
                             </div>
                             <div id="collapse6_13" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel-body">
-                                    <p class="mbr-fonts-style panel-text display-7">Yes you can. Go to My Bookings and click on the status of the booking to view that invoice.</p>
+                                    <p class="mbr-fonts-style panel-text display-7">Find passenger id from order details, and quote passenger id when creating a query from help page.</p>
                                 </div>
                             </div>
                         </div>  

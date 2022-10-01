@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="assets/css/myBookings.css">
     <link rel="preload" as="style" href="../assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
   </head>
+    <style>
+        .btn-purple,
+        .btn-purple:active {
+            background-color: #6a5acd !important;
+            border-color: #6a5acd !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+         }
+  </style>
   <body>
       <%
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -33,10 +42,10 @@
       <div class="container">
         <div class="row">
           <div class="mbr-form form-with-styler">
-              <a href="./jsp/homePage.jsp" class="btn btn-secondary display-1" style="margin-left: 15px; background-color: #ff8080;">Back</a>
+              <a href="./jsp/homePage.jsp" class="btn btn-purple display-1" style="margin-left: 15px; background-color: #ff8080;">Back</a>
           </div>
             <div class="col-md-10 text-center mb-3">
-            <h2 class="heading-section" style="color: #FF6666">My Bookings</h2>
+            <h2 class="heading-section" style="color: #6a5acd">My Bookings</h2>
           </div>
         </div>
         <div style="margin-left: 0px; margin-bottom: 20px" class="mbr-form form-with-styler">
@@ -44,7 +53,7 @@
             <input type="date" id="startDate">
             <label style="margin-left: 10px">End Date</label>
             <input type="date" id="endDate">
-            <a onclick="loadDate()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
+            <a onclick="loadDate()" href="#" class="btn btn-purple display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
             <label style="margin-left: 25px">Filter By</label>
             <select style="border: none; margin-left: 10px;" id="filterBy">
                 <option value="Vehicle">Vehicle</option>
@@ -52,7 +61,7 @@
                 <option value="Driver">Driver ID</option>
             </select>
             <input size="25px;" style="margin-left: 0px;" id="filterMailInput">
-            <a onclick="loadFilter()" href="#" class="btn btn-secondary display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
+            <a onclick="loadFilter()" href="#" class="btn btn-purple display-1" style="margin-left: 15px; margin-bottom: 4px; background-color: #ff8080;">Search</a>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -60,19 +69,19 @@
               <table id="myBookings" class="table table-striped">
                   <thead>
                     <tr>
-                        <th style="color: #FF6666">Invoice#</th>
-                        <th style="color: #FF6666">Book_Date</th>
-                        <th style="color: #FF6666">Book_Time</th>
-                        <th style="color: #FF6666">Order_Date</th>
-                        <th style="color: #FF6666">Order_Time</th>
-                        <th style="color: #FF6666">Location</th>
-                        <th style="color: #FF6666">Destination</th>
-                        <th style="color: #FF6666">Vehicle</th>
-                        <th style="color: #FF6666">Distance</th>
-                        <th style="color: #FF6666">Duration</th>
-                        <th style="color: #FF6666">Price</th>
-                        <th style="color: #FF6666">Driver</th>
-                        <th style="color: #FF6666">Status</th>
+                        <th style="color: #6a5acd">Invoice#</th>
+                        <th style="color: #6a5acd">Book_Date</th>
+                        <th style="color: #6a5acd">Book_Time</th>
+                        <th style="color: #6a5acd">Order_Date</th>
+                        <th style="color: #6a5acd">Order_Time</th>
+                        <th style="color: #6a5acd">Location</th>
+                        <th style="color: #6a5acd">Destination</th>
+                        <th style="color: #6a5acd">Vehicle</th>
+                        <th style="color: #6a5acd">Distance</th>
+                        <th style="color: #6a5acd">Duration</th>
+                        <th style="color: #6a5acd">Price</th>
+                        <th style="color: #6a5acd">Driver</th>
+                        <th style="color: #6a5acd">Status</th>
                     </tr>
                 </thead>
                 <tbody>
