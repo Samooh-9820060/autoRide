@@ -55,7 +55,7 @@ public class filterBookingsDateDriver extends HttpServlet {
             String mail = (String) session.getAttribute("session");
             String driverIDString = getDriverID(mail);
             
-            
+            //get start date field and end date field from web page
             Date startDate = dateFormatter.parse(request.getParameter("startDateField"));            
             Date endDate = dateFormatter.parse(request.getParameter("endDateField"));
             
@@ -66,7 +66,7 @@ public class filterBookingsDateDriver extends HttpServlet {
             
             List<myOrdersListViewModel> myOrdersList = new ArrayList<>();
             int i = 1;
-            
+            //add all bookings that fall into this range to a list
             while (resultSet.next()){
                 
                 myOrdersListViewModel tempList = new myOrdersListViewModel();
@@ -98,12 +98,13 @@ public class filterBookingsDateDriver extends HttpServlet {
             
             Collections.reverse(myOrdersList);
             request.setAttribute("myOrdersList", myOrdersList);
-            
+            //add the list to  response
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/myOrders.jsp");
             rd.forward(request, response);
         }
     }
 
+    //get vehicle name from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -122,6 +123,7 @@ public class filterBookingsDateDriver extends HttpServlet {
         return vehicleName;
     }
     
+    //get driver id from mail
     private String getDriverID(String mail) throws SQLException{
         String driverID = "DR1";
         

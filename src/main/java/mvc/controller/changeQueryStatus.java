@@ -56,13 +56,14 @@ public class changeQueryStatus extends HttpServlet {
                 }
                 i++;
             }
-            
+            //change the status to the opposite of what currently is
             if (currentStatus.equals("Not_Fixed")){
                 newStatus = "Fixed";
             } else if (currentStatus.equals("Fixed")){
                 newStatus = "Not_Fixed";
             }
             
+            //update updated status in database
             String updateQueryString = "update queries set Status='"+newStatus+"' where QueryNo='"+queryNo+"'";
             statement.executeUpdate(updateQueryString);
             

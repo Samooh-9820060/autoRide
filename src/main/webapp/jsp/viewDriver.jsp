@@ -14,6 +14,7 @@
             window.history.forward();
         }
         function getCookie(cname) {
+            //function to get cookie value by name
         let name = cname + "=";
         let ca = document.cookie.split(';');
         for(let i = 0; i < ca.length; i++) {
@@ -107,6 +108,7 @@
 
 <body className='snippet-body'>
     <%
+        //if no session redirect to sign in page
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma","no-cache");
         response.setHeader("Expires","0");

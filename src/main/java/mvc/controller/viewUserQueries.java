@@ -51,7 +51,7 @@ public class viewUserQueries extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
-            
+            //add all queries to a list
             ResultSet resultSet = statement.executeQuery("SELECT MAIL, TYPE, DETAILS, CURRENTDATE, CURRENTTIME, STATUS, QUERYNO FROM QUERIES");
             while (resultSet.next()){
                 String mailValue = resultSet.getObject(1)+"".trim();
@@ -67,6 +67,7 @@ public class viewUserQueries extends HttpServlet {
                 }
             }
             
+            //redirect to the qeuery page
             request.setAttribute("queriesList", queries);
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/viewMyQueries.jsp");
             rd.forward(request, response);

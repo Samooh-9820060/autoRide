@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mvc.model.allBookingsViewModel;
 import mvc.model.myBookingsViewModel;
 
 
@@ -60,7 +59,7 @@ public class filterPassengerBookings extends HttpServlet {
             
             List<myBookingsViewModel> myBookingsList = new ArrayList<>();
             int i = 1;
-            
+            //add all bookings that fall into the filter value given to a list
             while (resultSet.next()){
                 myBookingsViewModel tempList = new myBookingsViewModel();
                 String passengerID = resultSet.getObject(1).toString();
@@ -136,7 +135,7 @@ public class filterPassengerBookings extends HttpServlet {
             rd.forward(request, response);            
         }
     }
-
+    //get vehicle name from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -154,7 +153,7 @@ public class filterPassengerBookings extends HttpServlet {
         
         return vehicleName;
     }
-    
+    //get passenger id from mail
     private String getPassengerID(String mail) throws SQLException{
         String passengerID = "PA1";
         

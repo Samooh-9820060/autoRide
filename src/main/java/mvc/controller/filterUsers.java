@@ -51,7 +51,7 @@ public class filterUsers extends HttpServlet {
             ResultSet resultSet = statement.executeQuery("SELECT USERID, FIRSTNAME, LASTNAME, PHONENUMBER, IDNUMBER, ADDRESS, POSTALCODE, DISTRICT, ISLAND, EMAIL, EMERGENCYCONTACTNAME, EMERGENCYCONTACTNUMBER, USERTYPE, VEHICLETYPE, VEHICLEREGNO, LICENSENO FROM USERDETAILS");
 
             List<allUsersViewModel> allUsers = new ArrayList<>();
-            
+            //add all users that fits into the selected group to a list
             while (resultSet.next()){
                 String userType = userType(resultSet.getObject(13).toString().trim());
                 
@@ -85,7 +85,7 @@ public class filterUsers extends HttpServlet {
              
         }
     }
-
+    //get vehicle name from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -103,7 +103,7 @@ public class filterUsers extends HttpServlet {
         
         return vehicleName;
     }
-    
+    //get user type from user id
     private String userType(String userTypeID) throws SQLException{
         String userType = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");

@@ -58,7 +58,7 @@ public class filterDriverOrders extends HttpServlet {
             
             List<myOrdersListViewModel> myOrdersList = new ArrayList<>();
             int i = 1;
-            
+            //add all items that fits into the filter value given to a list
             while (resultSet.next()){
                 myOrdersListViewModel tempList = new myOrdersListViewModel();
                 String passengerID = resultSet.getObject(1).toString();
@@ -114,7 +114,7 @@ public class filterDriverOrders extends HttpServlet {
             rd.forward(request, response);   
         }
     }
-    
+    //get vehicle type from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -132,7 +132,7 @@ public class filterDriverOrders extends HttpServlet {
         
         return vehicleName;
     }
-    
+    //get driver id from mail
     private String getDriverID(String mail) throws SQLException{
         String driverID = "DR1";
         

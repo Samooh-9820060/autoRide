@@ -62,7 +62,7 @@ public class submitQuery extends HttpServlet {
             }
         }
     }
-    
+    //add the query to the database
     private void addQuery(String userMail, String type, String details) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
@@ -75,7 +75,7 @@ public class submitQuery extends HttpServlet {
         String rowNum = (Integer.parseInt(getLastRow().trim())+1)+"";
         statement.executeUpdate("INSERT INTO QUERIES VALUES ('"+userMail+"', '"+type+"', '"+details+"', '"+currentDate+"', '"+currentTime+"', '"+status+"', '"+rowNum+"')");
     }
-    
+    //get the last entered query number
     private String getLastRow() throws SQLException{
         String rowNum = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -88,7 +88,7 @@ public class submitQuery extends HttpServlet {
         
         return rowNum;
     }
-    
+    //get the user type from mail
     private String getUserType(String mail) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;

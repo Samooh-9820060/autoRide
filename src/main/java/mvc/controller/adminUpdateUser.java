@@ -43,6 +43,8 @@ public class adminUpdateUser extends HttpServlet {
             String userType = request.getParameter("userType").trim();
             if (userType.equals("1")){
                 //Passenger    
+                
+                //get data from the form
                 String firstNameNew = request.getParameter("firstNameInput");
                 String lastNameNew = request.getParameter("lastNameInput");
                 String mobileNumberNew = request.getParameter("mobileNumberInput");
@@ -56,6 +58,7 @@ public class adminUpdateUser extends HttpServlet {
                 String emergencyContactNumberNew = request.getParameter("emergencyContactNumberInput");
                 String userID = request.getParameter("userID").trim();
                 
+                //separate blank values and values that needs to change
                 String blankValue = "-";
                 if (idCardNumberNew.isBlank()){
                     idCardNumberNew = blankValue;
@@ -86,6 +89,7 @@ public class adminUpdateUser extends HttpServlet {
 
                 Cookie cookie = new Cookie ("statusUpdateAdmin", "NA");
                 
+                //verify if there is repeats and udpate
                 if ((currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
                     populateDatabase(currentUserID, firstNameNew, lastNameNew, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew);
                     response.sendRedirect("./allUsers");
@@ -121,6 +125,7 @@ public class adminUpdateUser extends HttpServlet {
                     }
                 }
             } else if (userType.equals("2")){
+                //get details from form (Driver)
                 String firstNameNew = request.getParameter("firstNameInput");
                 String lastNameNew = request.getParameter("lastNameInput");
                 String mobileNumberNew = request.getParameter("mobileNumberInput");
@@ -154,7 +159,7 @@ public class adminUpdateUser extends HttpServlet {
                 String currentEmail = mail;
                 
                 Cookie cookie = new Cookie ("statusUpdateAdmin", "NA");
-                
+                //verify repeats and udpate data
                 if ((currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
                     populateDriverDatabase(currentUserID, firstNameNew, lastNameNew, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, vehicleTypeNew, vehicleRegNoNew, licenseNoNew);
                     response.sendRedirect("./allUsers");
@@ -193,16 +198,16 @@ public class adminUpdateUser extends HttpServlet {
         }
     }
     
+    //funcction to add all data to database for passengers
     private void populateDatabase(String userId, String firstName, String lastName, int phoneNumber, String idNumber, String address, String postalCode, String district, String island, String emailValue, String emergencyContactName, String emergencyContactNumber) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
         String updateString = "UPDATE USERDETAILS SET FIRSTNAME='"+firstName+"', LASTNAME='"+lastName+"', PHONENUMBER="+phoneNumber+", IDNUMBER='"+idNumber+"', ADDRESS='"+address+"', POSTALCODE='"+postalCode+"', DISTRICT='"+district+"', ISLAND='"+island+"', EMAIL='"+emailValue+"', EMERGENCYCONTACTNAME='"+emergencyContactName+"', EMERGENCYCONTACTNUMBER="+emergencyContactNumber+"  where USERID='"+userId+"'";
-        statement.executeUpdate(updateString);
-        //statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,IDNUMBER,ADDRESS,POSTALCODE,DISTRICT,ISLAND,EMAIL,EMERGENCYCONTACTNAME,EMERGENCYCONTACTNUMBER,USERTYPE,VEHICLETYPE) VALUES ('"+userId+"', '"+firstName+"', '"+lastName+"', '"+password+"', "+phoneNumber+", '"+idNumber+"', '"+address+"', '"+postalCode+"', '"+district+"', '"+island+"', '"+emailValue+"', '"+emergencyContactName+"', "+emergencyContactNumber+", '"+userType+"', '"+vehicleType+"')");
-                        
+        statement.executeUpdate(updateString);                        
     }
     
+    //function to add data to database for drivers
     private void populateDriverDatabase(String userId, String firstName, String lastName, int phoneNumber, String idNumber, String address, String postalCode, String district, String island, String emailValue, String emergencyContactName, String emergencyContactNumber, String vehicleType, String vehicleRegNo, String licenseNo) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -213,6 +218,7 @@ public class adminUpdateUser extends HttpServlet {
                         
     }
     
+    //function to get mobile number of user by searching with mail
     private String getUserMobile(String mail) throws SQLException{
         String phoneNumberValue = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -229,6 +235,8 @@ public class adminUpdateUser extends HttpServlet {
         return phoneNumberValue;
     }
     
+    
+    //function to get user email by id
     private String getUserMail(String id) throws SQLException{
         String emailValue = "PA1";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -246,6 +254,8 @@ public class adminUpdateUser extends HttpServlet {
         return emailValue;
     }
       
+    
+    //function to get vehicle id by name
     private String getVehicleID (String name) throws SQLException{
         String idValue = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -262,6 +272,7 @@ public class adminUpdateUser extends HttpServlet {
         
         return idValue;
     }
+    
     //check if the user entered email or phone numbers is repeated
     public int checkRepeat(String email, int phoneNumber) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -290,6 +301,7 @@ public class adminUpdateUser extends HttpServlet {
         return 0;
     }
     
+    //check if the mail has been repeated in database
     private int checkMailRepeat(String mail) throws SQLException{
         int value = 0;
         
@@ -310,6 +322,7 @@ public class adminUpdateUser extends HttpServlet {
         return value;
     }
     
+    //check if the phone number has been repeated in the database
     private int checkPhoneRepeat(String phoneNumber) throws SQLException{
         int value = 0;
         

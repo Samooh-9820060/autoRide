@@ -47,7 +47,7 @@ public class bookRide extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             
-            
+            //get all required details from user input
             String date = request.getParameter("carryDate");
             String time = request.getParameter("carryTime");
             String location = request.getParameter("carryLocation").replace("%20", " ");
@@ -90,7 +90,7 @@ public class bookRide extends HttpServlet {
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             String passengerID = getPassengerID(mail);
-            
+            //get current date and time
             SimpleDateFormat formatterDate = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
             Date currentDate = new Date(); 
@@ -101,6 +101,7 @@ public class bookRide extends HttpServlet {
             String extraDistancePrice = String.format("%.2f",(extraDistancePrice(vehicleType,distance)));
             String status = "Waiting";
             
+            //add this data to bookings database
             populateBookingsDatabase(passengerID, date, time, location, pickupLatitude, pickupLongitude, destination, 
                     destinationLatitude, destinationLongitude, dbVehicle, distance, duration, currentTime, currentDateTime, vehiclePrice, extraDistancePrice, totalPrice, status, driver);            
             
@@ -113,7 +114,7 @@ public class bookRide extends HttpServlet {
     public void populateBookingsDatabase(String passengerID, String date, String time, String location, String pickupLat, String pickupLng,
             String destination, String destinationLat, String destinationLng, String vehicleType, String distance,
             String duration, String currentTime, String currentDate, String vehiclePrice, String extraDistancePrice, String price, String status, String driver) throws SQLException{
-            
+          //function to add data to database  
         String nextRow = (getLastRow()+1)+"";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
@@ -122,6 +123,7 @@ public class bookRide extends HttpServlet {
     }
     
     public int getLastRow() throws SQLException{
+        //get the last row of the database
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID FROM BOOKINGDETAILS");
@@ -182,6 +184,7 @@ public class bookRide extends HttpServlet {
     }// </editor-fold>
 
     private double vehiclePrice(String vehicleType) throws SQLException {
+        //get vehicle price by vehicle name
         double price = 0.00;
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
@@ -198,6 +201,7 @@ public class bookRide extends HttpServlet {
     }
     
     private String getPassengerID(String mail) throws SQLException{
+        //get id of passenger by passenger mail
         String passengerID = "PA1";
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -216,6 +220,7 @@ public class bookRide extends HttpServlet {
     }
     
     private double extraDistancePrice(String vehicleType, String distance){
+        //calculate extra distance price based on vehicle and distance
         double price = 0.00;
         //System.out.println("Distance is "+distance.substring(0,4).trim());
         double distanceDouble = Double.parseDouble(distance.substring(0,4).trim());

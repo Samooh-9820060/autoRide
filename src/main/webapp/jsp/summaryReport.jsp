@@ -174,6 +174,7 @@
 
                 <script>
                     function getCookie(cname) {
+                        //function to get cookie
                         let name = cname + "=";
                         let ca = document.cookie.split(';');
                         for(let i = 0; i < ca.length; i++) {

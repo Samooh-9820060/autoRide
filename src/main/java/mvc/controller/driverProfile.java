@@ -81,7 +81,7 @@ public class driverProfile extends HttpServlet {
                     licenseNo = resultSet.getObject(13).toString().trim();
                 }
             }
-            
+            //get all data about driver from database
             request.setAttribute("firstName", firstName);
             request.setAttribute("lastName", lastName);
             request.setAttribute("phoneNumber", mobileNumber);
@@ -104,6 +104,8 @@ public class driverProfile extends HttpServlet {
     }
     
     private String getDriverID(String mail) throws SQLException{
+        
+        //get driver id by mail
         String driverID = "DR1";
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -122,6 +124,7 @@ public class driverProfile extends HttpServlet {
     }
     
     private String getDriverVehicle(String id) throws SQLException{
+        //get driver vehicle by id
         String vehicle = "0";
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -140,6 +143,7 @@ public class driverProfile extends HttpServlet {
     }
     
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+        //get vehicle type by vehicle id
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statementVehicles = connection.createStatement();

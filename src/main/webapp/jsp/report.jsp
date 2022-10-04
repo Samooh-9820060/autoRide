@@ -71,6 +71,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- jstl function to populate reports data -->
                   <c:forEach var="data" items="${requestScope.reportDetailsList}">
                     <tr>
                         <td><c:out value="${data.driverID}" /></td>

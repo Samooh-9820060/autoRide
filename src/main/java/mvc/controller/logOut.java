@@ -32,10 +32,10 @@ public class logOut extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            
+            //invalidate the session
             HttpSession session = request.getSession();
             session.invalidate();
-            
+            //redirect to sign in page
             response.sendRedirect("./jsp/signIn.jsp");
         }
     }

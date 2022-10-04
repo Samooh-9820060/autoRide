@@ -61,7 +61,7 @@ public class filterBookingsDateReport extends HttpServlet {
                 
                 String userType = resultSet.getObject(2).toString().trim();
                 String userID = resultSet.getObject(1).toString().trim();
-                
+                //for each driver calculate revenue, distance, duration and bookings and add it to a list
                 if (userType.equals("2")){
                     reportDetailsViewModel tempReportDetail = new reportDetailsViewModel();
                     tempReportDetail.driverID = userID;
@@ -84,6 +84,7 @@ public class filterBookingsDateReport extends HttpServlet {
         }
     }
     
+    //get total revenue from database for each driver and date
     private String getRevenue(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -112,6 +113,7 @@ public class filterBookingsDateReport extends HttpServlet {
         return revenue;
     }
     
+    //get completed bookings per driver per date
     private String getCompletedBookings(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -138,6 +140,7 @@ public class filterBookingsDateReport extends HttpServlet {
         return numberString;
     }
     
+    //get distance travelled per driver per date
     private String getDistance(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -167,6 +170,7 @@ public class filterBookingsDateReport extends HttpServlet {
         return numberString;
     }
     
+    //get duration spent during the ride per driver per date
     private String getDuration(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;

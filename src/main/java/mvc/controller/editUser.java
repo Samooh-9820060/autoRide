@@ -60,7 +60,7 @@ public class editUser extends HttpServlet {
             String vehicleRegNo = null;
             String licenseNo  = null;
             String userType = null;
-            
+            //get user details from database
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
@@ -86,7 +86,7 @@ public class editUser extends HttpServlet {
                     licenseNo = resultSet.getObject(16)+"".trim();
                 }
             }
-            
+
             if (type.equals("Passenger")){
                 request.setAttribute("userID", userID);
                 request.setAttribute("firstName", firstName);
@@ -122,7 +122,7 @@ public class editUser extends HttpServlet {
                 request.setAttribute("userType", userType);
                 request.setAttribute("licenseNo", licenseNo);
 
-
+                //add details to response
                 RequestDispatcher rd = request.getRequestDispatcher("./jsp/editDriver.jsp");
                 rd.forward(request, response);
             }

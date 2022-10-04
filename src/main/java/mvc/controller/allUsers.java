@@ -52,7 +52,7 @@ public class allUsers extends HttpServlet {
             ResultSet resultSet = statement.executeQuery("SELECT USERID, FIRSTNAME, LASTNAME, PHONENUMBER, IDNUMBER, ADDRESS, POSTALCODE, DISTRICT, ISLAND, EMAIL, EMERGENCYCONTACTNAME, EMERGENCYCONTACTNUMBER, USERTYPE, VEHICLETYPE, VEHICLEREGNO, LICENSENO FROM USERDETAILS");
 
             List<allUsersViewModel> allUsers = new ArrayList<>();
-            
+            //add all users data from database to arraylist
             while (resultSet.next()){
                 allUsersViewModel user = new allUsersViewModel();
                 user.userID = (resultSet.getObject(1)+"").replace("null", "-");
@@ -83,6 +83,7 @@ public class allUsers extends HttpServlet {
     }
     
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+        //get vehicle name by vehicle id
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statementVehicles = connection.createStatement();
@@ -101,6 +102,7 @@ public class allUsers extends HttpServlet {
     }
     
     private String userType(String userTypeID) throws SQLException{
+        //get usertype name by usertype id
         String userType = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statementUsers = connection.createStatement();

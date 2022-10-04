@@ -54,6 +54,7 @@ public class allBookings extends HttpServlet {
             List<allBookingsViewModel> allBookingsList = new ArrayList<>();
             int i = 1;
             
+            //add booking details one by one to the array list
             while (resultSet.next()){
                 allBookingsViewModel tempList = new allBookingsViewModel();
                     tempList.invoiceNum = i+"";
@@ -84,6 +85,7 @@ public class allBookings extends HttpServlet {
             }
     }
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+        //get vehicle name by vehicle id
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statementVehicles = connection.createStatement();

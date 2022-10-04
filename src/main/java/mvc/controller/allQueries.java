@@ -53,6 +53,7 @@ public class allQueries extends HttpServlet {
     }
 
     public List<queriesViewModel> queries () throws SQLException{
+        // add all queries from database to the arraylist
         List<queriesViewModel> queriesList = new ArrayList<>();
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");

@@ -33,6 +33,7 @@ public class rideStatusUpdate extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -42,25 +43,27 @@ public class rideStatusUpdate extends HttpServlet {
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             String driverIDString = getDriverID(mail);
-            String driverVehicle = vehicleType(getDriverVehicle(driverIDString));
             
             String updateType = request.getParameter("updateType");
             String updateBookingNumber = request.getParameter("bookingNumberRide");
-            
+            //get the next driver in line 
             String nextDriver = getNextDriver(driverIDString, getDriverVehicle(driverIDString));
             if (nextDriver.equals(driverIDString)){
                 nextDriver = getFirstDriver(driverIDString, getDriverVehicle(driverIDString));
             }
             
-            
+            //get the button the user pressed
             switch (updateType) {
                 case "Accept":
+                    //accept the booking and move it to ongoing bookings
                     acceptBooking(updateBookingNumber);
                     break;
                 case "Reject":
+                    //reject the booking and send it to the driver with the same vehicle next in line
                     rejectBooking(updateBookingNumber, nextDriver);
                     break;
                 case "Complete":
+                    //complete the booking from ongoing booking
                     completeBooking(updateBookingNumber);
                     break;
             }
@@ -72,24 +75,28 @@ public class rideStatusUpdate extends HttpServlet {
     }
     
     private void acceptBooking(String bookingNo) throws SQLException{
+        //accept the booking and move it to the ongoing booking
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         statement.executeUpdate("UPDATE BOOKINGDETAILS SET STATUS = 'Driver_Assigned' WHERE ID = '"+bookingNo+"'");
     }
     
     private void rejectBooking(String bookingNo, String nextDriver) throws SQLException{
+        //reject the booking and send it to the next driver in line
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         statement.executeUpdate("UPDATE BOOKINGDETAILS SET DRIVER = '"+nextDriver+"' WHERE ID = '"+bookingNo+"'");
     }
     
     private void completeBooking(String bookingNo) throws SQLException{
+        //complete the booking and mark it as paid
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         statement.executeUpdate("UPDATE BOOKINGDETAILS SET STATUS = 'Complete' WHERE ID = '"+bookingNo+"'");
     }
     
     private String getNextDriver(String currentDriver, String vehicleType) throws SQLException{
+        //get the next driver with the same vehicle
         String nextDriver = currentDriver;
         boolean passedCurrentDriver = false;
         
@@ -123,6 +130,7 @@ public class rideStatusUpdate extends HttpServlet {
     }
     
     private String getFirstDriver(String currentDriver, String vehicleID) throws SQLException{
+        //get the first driver with the same vehicle
         String firstDriver = currentDriver;
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -141,6 +149,7 @@ public class rideStatusUpdate extends HttpServlet {
     }
 
     private String getDriverID(String mail) throws SQLException{
+        //get driver id by mail
         String driverID = "DR1";
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -159,6 +168,7 @@ public class rideStatusUpdate extends HttpServlet {
     }
     
     private String getDriverVehicle(String id) throws SQLException{
+        //get driver vehicle by id
         String vehicle = "0";
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -177,6 +187,7 @@ public class rideStatusUpdate extends HttpServlet {
     }
     
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+        //get vehicle name by vehicle id
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statementVehicles = connection.createStatement();

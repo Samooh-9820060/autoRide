@@ -105,7 +105,7 @@ public class signUp extends HttpServlet {
         return hashedPass;
         
     }
-    
+    //get the last passenger id that was registered
     public int getLastPassenger() throws SQLException{
         int i = 0;
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");

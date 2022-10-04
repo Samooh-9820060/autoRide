@@ -52,7 +52,7 @@ public class myBookings extends HttpServlet {
             Statement statement;
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
-            
+            //add all bookings that were done by the current passenger to a list
             List<myBookingsViewModel> myBookingsList = new ArrayList<>();
             int i = 1;
             
@@ -79,7 +79,7 @@ public class myBookings extends HttpServlet {
                 i++;
             }
             
-            
+            //add the list as a respones and redirect to that page
             Collections.reverse(myBookingsList);
             request.setAttribute("myBookingsList", myBookingsList);
             
@@ -87,7 +87,7 @@ public class myBookings extends HttpServlet {
             rd.forward(request, response);
         }
     }
-    
+    //get vehicle name from vehicle id 
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -105,7 +105,7 @@ public class myBookings extends HttpServlet {
         
         return vehicleName;
     }
-    
+    //get passenger id from mail
     private String getPassengerID(String mail) throws SQLException{
         String passengerID = "PA1";
         

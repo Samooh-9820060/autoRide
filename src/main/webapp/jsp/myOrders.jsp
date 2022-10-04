@@ -83,6 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- populate my orders list for driver from data soruce -->
                   <c:forEach var="data" items="${requestScope.myOrdersList}">
                     <tr>
                         <td><c:out value="${data.invoiceNum}" /></td>

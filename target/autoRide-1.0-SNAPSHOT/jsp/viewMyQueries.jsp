@@ -53,6 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- jstl function to populate table from data source -->
                   <c:forEach var="data" items="${requestScope.queriesList}">
                     <tr>
                         <td><c:out value="${data.queryNo}" /></td>
@@ -97,6 +98,7 @@
   </body>
   <script>
       function getCookie(cname) {
+          //function to get cookie values by name
         let name = cname + "=";
         let ca = document.cookie.split(';');
         for(let i = 0; i < ca.length; i++) {
@@ -111,9 +113,11 @@
             return "";
         }
         if (getCookie("type")!==("Passenger"||"Driver")){
+            //if user is not passenger or driver go to sign in screen
             window.location.href = "./jsp/signIn.jsp";
         }
       function goToHome(){
+          //function to go home
           window.location.href = "./jsp/help.jsp";
       }
   </script>

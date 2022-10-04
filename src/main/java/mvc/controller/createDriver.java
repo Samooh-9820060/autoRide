@@ -43,6 +43,7 @@ public class createDriver extends HttpServlet {
             throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            //get values from form
             String firstName = request.getParameter("firstNameInput");
             String lastName = request.getParameter("lastNameInput");
             String password = request.getParameter("passwordInput");
@@ -62,7 +63,7 @@ public class createDriver extends HttpServlet {
             int vehicleCode = getVehicleCode(vehicleType);
             
             Cookie cookie = new Cookie ("status", "NA");
-
+            //check for any repeats
             //check if the mail or number has been repeated and show error message if it is repeated else go to login page
                 switch (checkRepeat(email, mobileNumber)){
                     case 0:
@@ -94,6 +95,7 @@ public class createDriver extends HttpServlet {
     
     //hash password in SHA 256 format to store in database
     public String hashPass(String password) throws NoSuchAlgorithmException{
+        //function to hash password
         String hashedPass = "";
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
@@ -124,6 +126,7 @@ public class createDriver extends HttpServlet {
     }
     
     public int getVehicleCode(String vehicleName) throws SQLException{
+        //get vehicle id by name
         int i = 0;
         
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -142,6 +145,7 @@ public class createDriver extends HttpServlet {
     
     //check if the user entered email or phone numbers is repeated
     public int checkRepeat(String email, int phoneNumber) throws SQLException{
+        //function to check repeated mail and phone number
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();

@@ -56,7 +56,7 @@ public class myOrders extends HttpServlet {
             
             List<myOrdersListViewModel> myOrdersList = new ArrayList<>();
             int i = 1;
-            
+            //add all orders that were completed by the driver to a list
             while (resultSet.next()){
                 myOrdersListViewModel tempList = new myOrdersListViewModel();
                 String driver = resultSet.getObject(12).toString();
@@ -79,15 +79,15 @@ public class myOrders extends HttpServlet {
                 i++;
             }
             
-            
+            //reverse the list and add it as a response
             Collections.reverse(myOrdersList);
             request.setAttribute("myOrdersList", myOrdersList);
-            
+            //redirect to the orders page
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/myOrders.jsp");
             rd.forward(request, response);
         }
     }
-    
+    //get vehicle name form vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -105,7 +105,7 @@ public class myOrders extends HttpServlet {
         
         return vehicleName;
     }
-    
+    //get driver id from mail
     private String getDriverID(String mail) throws SQLException{
         String driverID = "DR1";
         

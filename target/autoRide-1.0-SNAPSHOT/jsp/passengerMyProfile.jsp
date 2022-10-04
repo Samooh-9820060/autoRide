@@ -242,7 +242,7 @@
         
         function verifyForm(){
             var i = 1;
-            
+            //verify if the details are valid
             //check firstName
             if (document.getElementById("firstName").value===""){
                 i = 0;
@@ -321,6 +321,7 @@
             
             
             if (i===1){
+                //if data is valid
                 document.getElementById("firstNameInput").value = document.getElementById("firstName").value;
                 document.getElementById("lastNameInput").value = document.getElementById("lastName").value;
                 document.getElementById("mobileNumberInput").value = document.getElementById("mobileNumber").value;

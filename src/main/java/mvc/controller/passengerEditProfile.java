@@ -57,7 +57,7 @@ public class passengerEditProfile extends HttpServlet {
             String email = null;
             String emergencyContactName = null;
             String emergencyContactNumber = null;
-            
+            //get all passenger details from the database
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
@@ -79,7 +79,7 @@ public class passengerEditProfile extends HttpServlet {
                     emergencyContactNumber = (resultSet.getObject(12)+"").replace("null", "").replace("0", "");
                 }
             }
-            
+            //add all details as response and redirect to my profile page
             request.setAttribute("userId", userId);
             request.setAttribute("firstName", firstName);
             request.setAttribute("lastName", lastName);
@@ -98,7 +98,7 @@ public class passengerEditProfile extends HttpServlet {
 
         }
     }
-    
+    //get passenger id from mail
     private String getPassengerID(String mail) throws SQLException{
         String passengerID = "PA1";
         

@@ -54,7 +54,7 @@ public class filterPassengerOrDriver extends HttpServlet {
             
             List<allBookingsViewModel> allBookingsList = new ArrayList<>();
             int i = 1;
-            
+            //add all bookings that fall into the given filter range to a list
             while (resultSet.next()){
                 allBookingsViewModel tempList = new allBookingsViewModel();
                 
@@ -155,7 +155,7 @@ public class filterPassengerOrDriver extends HttpServlet {
             rd.forward(request, response);            
         }
     }
-
+    //get vehicle name from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");

@@ -9,7 +9,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -20,7 +19,6 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +45,7 @@ public class reportsData extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            
+            //get current date and time
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
             LocalDateTime now = LocalDateTime.now();  
             String date = (dtf.format(now));
@@ -56,7 +54,7 @@ public class reportsData extends HttpServlet {
             String newDate = dtfLong.format(now);
             
             List<reportDetailsViewModel> reportDetails = new ArrayList<>();
-
+            //add all details required to be shown in the report to a list
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
@@ -79,7 +77,7 @@ public class reportsData extends HttpServlet {
                 }
                 
             }
-            
+            //add the list as a response and redirect to reports page
             request.setAttribute("reportDetailsList", reportDetails);
             request.setAttribute("date", newDate);
             
@@ -87,7 +85,7 @@ public class reportsData extends HttpServlet {
             rd.forward(request, response);
         }
     }
-    
+    //get revenue per driver per date
     private String getRevenue(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -115,7 +113,7 @@ public class reportsData extends HttpServlet {
         
         return revenue;
     }
-    
+    //get completed bookings per driver per date
     private String getCompletedBookings(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -141,7 +139,7 @@ public class reportsData extends HttpServlet {
         String numberString = number+"";
         return numberString;
     }
-    
+    //get distance travelled per driver per date
     private String getDistance(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -168,7 +166,7 @@ public class reportsData extends HttpServlet {
         String numberString = distanceDouble+"";
         return numberString;
     }
-    
+    //get duration spent in ride per driver per date
     private String getDuration(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;

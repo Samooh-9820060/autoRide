@@ -45,6 +45,8 @@ public class deleteUser extends HttpServlet {
             Statement statement;
             statement = connection.createStatement();
             
+            
+            //delete the user from database
             String deleteQueryString = "DELETE FROM USERDETAILS WHERE USERID = '"+userId+"'";
             statement.executeUpdate(deleteQueryString);
             

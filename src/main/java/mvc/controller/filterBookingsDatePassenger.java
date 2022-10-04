@@ -55,7 +55,7 @@ public class filterBookingsDatePassenger extends HttpServlet {
             String mail = (String) session.getAttribute("session");
             String passengerIDString = getPassengerID(mail);
             
-            
+            //get start date and end date form web page
             Date startDate = dateFormatter.parse(request.getParameter("startDateField"));            
             Date endDate = dateFormatter.parse(request.getParameter("endDateField"));
             
@@ -66,7 +66,7 @@ public class filterBookingsDatePassenger extends HttpServlet {
             
             List<myBookingsViewModel> myBookingsList = new ArrayList<>();
             int i = 1;
-            
+            //add all bookings that fall into the selected range to a list
             while (resultSet.next()){
                 
                 myBookingsViewModel tempList = new myBookingsViewModel();
@@ -104,7 +104,7 @@ public class filterBookingsDatePassenger extends HttpServlet {
             rd.forward(request, response);
         }
     }
-    
+    //get vehicle name from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -123,6 +123,7 @@ public class filterBookingsDatePassenger extends HttpServlet {
         return vehicleName;
     }
     
+    //get passenger id from mail
     private String getPassengerID(String mail) throws SQLException{
         String passengerID = "PA1";
         

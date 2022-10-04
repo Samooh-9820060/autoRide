@@ -54,6 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- jstl function to populate queries list from data source -->
                   <c:forEach var="data" items="${requestScope.queriesList}">
                     <tr>
                         <td><c:out value="${data.queryNo}" /></td>

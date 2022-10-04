@@ -44,7 +44,7 @@ public class updatePassenger extends HttpServlet {
             
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
-            
+            //get the inputs from the user
             String firstNameNew = request.getParameter("firstNameInput");
             String lastNameNew = request.getParameter("lastNameInput");
             String mobileNumberNew = request.getParameter("mobileNumberInput");
@@ -56,7 +56,7 @@ public class updatePassenger extends HttpServlet {
             String emailNew = request.getParameter("emailInput");
             String emergencyContactNameNew = request.getParameter("emergencyContactNameInput");
             String emergencyContactNumberNew = request.getParameter("emergencyContactNumberInput");
-                        
+            //validate the inputs            
             String blankValue = "-";
             if (idCardNumberNew.isBlank()){
                 idCardNumberNew = blankValue;
@@ -88,7 +88,7 @@ public class updatePassenger extends HttpServlet {
             String vehicleType = "0";
             
             Cookie cookie = new Cookie ("statusUpdate", "NA");
-            
+            //check if the mobile or email is repeated
             if ((currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
                 //works correctlys
                 System.out.println("all equal running");
@@ -153,6 +153,7 @@ public class updatePassenger extends HttpServlet {
             
         }
     }
+    //add the details to the database
     private void populateDatabase(String userId, String firstName, String lastName, String password, int phoneNumber, String idNumber, String address, String postalCode, String district, String island, String emailValue, String emergencyContactName, String emergencyContactNumber, String userType, String vehicleType) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -160,7 +161,7 @@ public class updatePassenger extends HttpServlet {
         statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER,IDNUMBER,ADDRESS,POSTALCODE,DISTRICT,ISLAND,EMAIL,EMERGENCYCONTACTNAME,EMERGENCYCONTACTNUMBER,USERTYPE,VEHICLETYPE) VALUES ('"+userId+"', '"+firstName+"', '"+lastName+"', '"+password+"', "+phoneNumber+", '"+idNumber+"', '"+address+"', '"+postalCode+"', '"+district+"', '"+island+"', '"+emailValue+"', '"+emergencyContactName+"', "+emergencyContactNumber+", '"+userType+"', '"+vehicleType+"')");
                         
     }
-    
+    //delete the user
     private void deleteUser(String userId) throws SQLException{
             
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
@@ -170,7 +171,7 @@ public class updatePassenger extends HttpServlet {
         String deleteQueryString = "DELETE FROM USERDETAILS WHERE USERID = '"+userId+"'";
         statement.executeUpdate(deleteQueryString);
     }
-    
+    //get the mobile number of passenger using mail
     private String getPassengerMobile(String mail) throws SQLException{
         String phoneNumberValue = "0";
         
@@ -189,6 +190,7 @@ public class updatePassenger extends HttpServlet {
         return phoneNumberValue;
     }
 
+    //get the passenger id using mail
     private String getPassengerID(String mail) throws SQLException{
         String passengerID = "PA1";
         
@@ -206,7 +208,7 @@ public class updatePassenger extends HttpServlet {
         
         return passengerID;
     }
-    
+    //get password by using mail
     private String getPassword(String mail) throws SQLException{
         String passwordString = "PA1";
         
@@ -224,7 +226,7 @@ public class updatePassenger extends HttpServlet {
         
         return passwordString;
     }
-    
+    //get user type by using passenger mail
     private String getUserType(String mail) throws SQLException{
         String userTypeString = "PA1";
         
@@ -270,7 +272,7 @@ public class updatePassenger extends HttpServlet {
         }        
         return 0;
     }
-    
+    //checkif the mail is repaeted in database
     private int checkMailRepeat(String mail) throws SQLException{
         int value = 0;
         
@@ -290,7 +292,7 @@ public class updatePassenger extends HttpServlet {
         
         return value;
     }
-    
+    //check if the phone number is repeated in database
     private int checkPhoneRepeat(String phoneNumber) throws SQLException{
         int value = 0;
         

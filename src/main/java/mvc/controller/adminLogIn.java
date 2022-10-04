@@ -162,6 +162,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String totalRevenue() throws SQLException{
+        //get total revenue of all days
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -181,6 +182,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String todaysRevenue() throws SQLException{
+        //get current days total revenue
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -209,6 +211,7 @@ public class adminLogIn extends HttpServlet {
     }
 
     public String totalBookings() throws SQLException{
+        //get the total number of bookings done by all passengers on all days
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -228,6 +231,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String todaysBookings() throws SQLException{
+        // get current days total number of bookings done by passengers
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -255,6 +259,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String totalDistance() throws SQLException{
+        //get the total distance of all drivers for all days
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -274,6 +279,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String todaysDistance() throws SQLException{
+        //get the current days distacnce from all drivers
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -301,6 +307,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String totalTime() throws SQLException{
+        //get the total time for all drivers for all dates
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -320,6 +327,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String todaysTime() throws SQLException{
+        //get the total time travelled at the current day
         String total = "0";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -347,6 +355,7 @@ public class adminLogIn extends HttpServlet {
     }
     
     public String roundTwoDecimals(double d) {
+        //round values to 2 dp
         DecimalFormat twoDForm = new DecimalFormat("#.##");
         return twoDForm.format(d);
     }

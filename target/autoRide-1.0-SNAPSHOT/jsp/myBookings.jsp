@@ -85,6 +85,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- populate my bookings table for passengers from database -->
                   <c:forEach var="data" items="${requestScope.myBookingsList}">
                     <tr>
                         <td><c:out value="${data.invoiceNum}" /></td>

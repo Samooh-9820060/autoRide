@@ -141,15 +141,12 @@ public class showInvoice extends HttpServlet {
             request.setAttribute("extraDistancePrice", receiptExtraDistancePrice);
             request.setAttribute("totalPrice", receiptTotalPrice);
             
-            /*out.println(invoiceNum+receiptOrderDate+receiptOrderTIme+receiptMail+receiptDate+receiptTime+
-                    receiptLocation+receiptDestination+receiptVehicleType+receiptDistance+receiptDuration+receiptFullName+
-                    receiptPhoneNumber+receiptVehiclePrice+receiptExtraDistancePrice+receiptTotalPrice);
-            */
+            //redirect to invoice page
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/invoice.jsp");
             rd.forward(request, response);
         }
     }
-    
+    //get mail from passenger id
     public String getEmail(String id) throws SQLException{
         String mail = "";
         
@@ -167,7 +164,7 @@ public class showInvoice extends HttpServlet {
         
         return mail;
     }
-    
+    //get full name from passenger id
     public String getFullName(String id) throws SQLException{
         String fullName = "";
         
@@ -186,7 +183,7 @@ public class showInvoice extends HttpServlet {
         }
         return fullName;
     }
-        
+    //get phone number from passenger id   
     public String getPhoneNumber(String id) throws SQLException{
         String phoneNumber = "";
         
@@ -204,7 +201,7 @@ public class showInvoice extends HttpServlet {
         
         return phoneNumber;
     }
-    
+    //get invoice number
     public int getInvoiceNumber(String invoiceNumber) throws SQLException{
         
         if (invoiceNumber.equals("BLANK")){

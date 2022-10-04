@@ -12,17 +12,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mvc.model.reportDetailsViewModel;
 
 /**
  *
@@ -60,6 +55,7 @@ public class generateSummaryReport extends HttpServlet {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, DISTANCE, DURATION, TOTALPRICE, STATUS FROM BOOKINGDETAILS");
             while (resultSet.next()){
+                //get all details requried to fill the summary report from database
                 String orderDate = resultSet.getObject(1).toString().trim();
                 String distance = resultSet.getObject(2).toString().trim().replace(" km", "");
                 String duration = resultSet.getObject(3).toString().trim().replace(" mins", "");

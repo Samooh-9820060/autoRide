@@ -45,12 +45,12 @@ public class filterBookingsDate extends HttpServlet {
             throws ServletException, IOException, ParseException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            
+            //get date in the correct format
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat dateFormatterDatabase = new SimpleDateFormat("dd/MM/yyyy");
 
 
-            
+            //get start date and end date field from page
             Date startDate = dateFormatter.parse(request.getParameter("startDateField"));            
             Date endDate = dateFormatter.parse(request.getParameter("endDateField"));
             
@@ -61,7 +61,7 @@ public class filterBookingsDate extends HttpServlet {
             
             List<allBookingsViewModel> allBookingsList = new ArrayList<>();
             int i = 1;
-            
+            //add all bookings that falls into the selected range to a list
             while (resultSet.next()){
                 allBookingsViewModel tempList = new allBookingsViewModel();
                 Date orderDate = dateFormatterDatabase.parse(resultSet.getObject(4).toString());
@@ -89,7 +89,7 @@ public class filterBookingsDate extends HttpServlet {
                 }
                 i++;
             }
-            
+            //add the list as a response
             Collections.reverse(allBookingsList);   
             request.setAttribute("allBookingsList", allBookingsList);
 
@@ -99,6 +99,7 @@ public class filterBookingsDate extends HttpServlet {
         }
     }
     
+    //get vehicle type name from vehicle id
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");

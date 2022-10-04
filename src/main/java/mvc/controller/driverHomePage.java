@@ -59,7 +59,7 @@ public class driverHomePage extends HttpServlet {
             
             List<driverRidesViewModel> pendingRides = new ArrayList<>();
             int i =1;
-            
+            //add any pending rides to the pending rides list
             while (resultSetPendingRides.next()){
                 driverRidesViewModel tempList = new driverRidesViewModel();
                 String driver = resultSetPendingRides.getObject(1).toString();
@@ -85,7 +85,7 @@ public class driverHomePage extends HttpServlet {
             
             List<driverRidesViewModel> ongoingRides = new ArrayList<>();
             int y = 1;
-            
+            //add any ongoing rides to ongoing rides list
             while (resultSetOngoingRides.next()){
                 driverRidesViewModel tempList = new driverRidesViewModel();
                 String driver = resultSetOngoingRides.getObject(1).toString();
@@ -116,7 +116,7 @@ public class driverHomePage extends HttpServlet {
     
     private String getDriverID(String mail) throws SQLException{
         String driverID = "DR1";
-        
+        //get driver id by mail
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
@@ -134,7 +134,7 @@ public class driverHomePage extends HttpServlet {
     
     private String getDriverVehicle(String id) throws SQLException{
         String vehicle = "0";
-        
+        //get vehicle name by vehicle id 
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, VEHICLETYPE FROM USERDETAILS");
@@ -151,6 +151,7 @@ public class driverHomePage extends HttpServlet {
     }
     
     private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+        //get vehicle type by vehicle id
         String vehicleName = "";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statementVehicles = connection.createStatement();

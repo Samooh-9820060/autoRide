@@ -46,6 +46,7 @@ public class editPassword extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
             Statement statement;
             statement = connection.createStatement();
+            //update password for user from database
             statement.executeUpdate("UPDATE USERDETAILS SET PASSWORD = '"+newPassword+"' WHERE USERID = '"+userId+"'");
             
             response.sendRedirect("allUsers");
@@ -54,6 +55,7 @@ public class editPassword extends HttpServlet {
     
         //hash password in SHA 256 format to store in database
     public String hashPass(String password) throws NoSuchAlgorithmException{
+        //function to hash password in SHA256
         String hashedPass = "";
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));

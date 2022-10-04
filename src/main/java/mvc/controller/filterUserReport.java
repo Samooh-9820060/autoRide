@@ -47,7 +47,7 @@ public class filterUserReport extends HttpServlet {
             
             
             List<reportDetailsViewModel> reportDetails = new ArrayList<>();
-            
+            //add completed bookings, revenue, distance and duration for each driver to a list
             reportDetailsViewModel tempReportDetail = new reportDetailsViewModel();
             tempReportDetail.driverID = userID;
             tempReportDetail.completedBookings = getCompletedBookings(userID, date);
@@ -64,7 +64,7 @@ public class filterUserReport extends HttpServlet {
             rd.forward(request, response); 
         }
     }
-    
+    //get revenue per driver per date
     private String getRevenue(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -92,7 +92,7 @@ public class filterUserReport extends HttpServlet {
         
         return revenue;
     }
-    
+    //get completed bookings per driver per date
     private String getCompletedBookings(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -118,7 +118,7 @@ public class filterUserReport extends HttpServlet {
         String numberString = number+"";
         return numberString;
     }
-    
+    //get distance travelled per driver per date
     private String getDistance(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -147,7 +147,7 @@ public class filterUserReport extends HttpServlet {
         String numberString = distanceDouble+"";
         return numberString;
     }
-    
+    //get total duration per driver per date
     private String getDuration(String userID, String date) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
