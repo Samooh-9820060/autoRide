@@ -57,7 +57,7 @@ public class updatePassenger extends HttpServlet {
             String emergencyContactNameNew = request.getParameter("emergencyContactNameInput");
             String emergencyContactNumberNew = request.getParameter("emergencyContactNumberInput");
             //validate the inputs            
-            String blankValue = "-";
+            String blankValue = null;
             if (idCardNumberNew.isBlank()){
                 idCardNumberNew = blankValue;
             }
@@ -88,10 +88,11 @@ public class updatePassenger extends HttpServlet {
             String vehicleType = "0";
             
             Cookie cookie = new Cookie ("statusUpdate", "NA");
-            //check if the mobile or email is repeated
+            
+            
+            
+            //check if the mobile or email or id is repeated
             if ((currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
-                //works correctlys
-                System.out.println("all equal running");
                 deleteUser(currentUserID);
                 populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
                 cookie.setValue("Registered");
@@ -119,6 +120,7 @@ public class updatePassenger extends HttpServlet {
             } else if ((!currentMobile.equals(mobileNumberNew))&&(currentEmail.equals(emailNew))){
                 int repeatValue = checkPhoneRepeat(mobileNumberNew);
                 if (repeatValue==0){
+                    System.out.println("ok");
                     deleteUser(currentUserID);
                     populateDatabase(currentUserID, firstNameNew, lastNameNew, currentPassword, Integer.parseInt(mobileNumberNew), idCardNumberNew, addressNew, postalCodeNew, districtNew, islandNew, emailNew, emergencyContactNameNew, emergencyContactNumberNew, userType, vehicleType);
                     cookie.setValue("Registered");
@@ -208,6 +210,27 @@ public class updatePassenger extends HttpServlet {
         
         return passengerID;
     }
+    
+    //get the passenger idcard using mail
+    private String getCurrentIDCard(String mail) throws SQLException{
+        String passengerID = null;
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT IDNUMBER, EMAIL FROM USERDETAILS");
+        while (resultSet.next()){
+            String userId = (String) resultSet.getObject(1);
+            String email = (String) resultSet.getObject(2);
+            
+            if (email.equals(mail)){
+                passengerID = userId;
+            }
+        }
+        
+        return passengerID;
+    }
+    
+    
     //get password by using mail
     private String getPassword(String mail) throws SQLException{
         String passwordString = "PA1";
@@ -313,6 +336,25 @@ public class updatePassenger extends HttpServlet {
         return value;
     }
     
+    private int checkIDCardRepeat(String idNumber) throws SQLException{
+        int value = 0;
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT IDNUMBER FROM USERDETAILS");
+        
+        //loop through the selected data in the database
+        while (resultSet.next()){
+            String id = resultSet.getObject(1).toString();
+            
+            if (id.equalsIgnoreCase(idNumber)){
+                value = 1;
+            }
+        }
+        
+        return value;
+    }
     
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

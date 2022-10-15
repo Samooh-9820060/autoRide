@@ -318,7 +318,7 @@ public class adminLogIn extends HttpServlet {
         while (resultSet.next()){
             String status = resultSet.getObject(2).toString();
             if (status.equalsIgnoreCase("Complete")){
-                totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" mins", ""));                
+                totalValue += Double.parseDouble(resultSet.getObject(1).toString().replace(" mins", "").replace(" min", ""));                
             }
         }
         total = totalValue+"";
