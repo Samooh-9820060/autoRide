@@ -136,10 +136,10 @@
                                 <input type="time" name="bookedTime" placeholder="Time" data-form-field="time" class="form-control" value="" id="bookingTime" required>
                             </div>
                             <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="currentAddress">
-                                <input type="location" name="bookedCurrentLocation" placeholder="Current Location" data-form-field="currentLocation" class="form-control" value="" id="bookingCurrentLocation" required>
+                                <input type="location" name="bookedCurrentLocation" placeholder="Current Location" data-form-field="currentLocation" class="form-control" value="" id="bookingCurrentLocation" required autocomplete="off">
                             </div>
                             <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="destination">
-                                <input type="location" name="bookedDestination" placeholder="Destination" data-form-field="destination" class="form-control" value="" id="bookingDestination" required>
+                                <input type="location" name="bookedDestination" placeholder="Destination" data-form-field="destination" class="form-control" value="" id="bookingDestination" required autocomplete="off">
                             </div>
                             <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="type">
                                 <select name="vehicleType" class="form-control" id="typeVehicle">
@@ -530,6 +530,7 @@
         
         function doGeocodePickupLocation() {
             var bookingLocation = document.getElementById("bookingCurrentLocation");
+            document.getElementById("carryLocation").value = document.getElementById("bookingCurrentLocation").value;
             // Get geocoder instance
             var geocoder = new google.maps.Geocoder();
             //alert(bookingLocation.value);
@@ -564,6 +565,7 @@
         
         function doGeocodeDestinationLocation() {
             var destinationLocation = document.getElementById("bookingDestination");
+            document.getElementById("carryDestination").value = document.getElementById("bookingDestination").value;
             // Get geocoder instance
             var geocoder = new google.maps.Geocoder();
             //alert(bookingLocation.value);
@@ -627,6 +629,8 @@
                                 //document.cookie = "duration = "+encodeURIComponent(duration);
                                 document.getElementById("inputDuration").value = encodeURIComponent(duration);
                                 document.getElementById("inputDistance").value = encodeURIComponent(distance);
+                                document.getElementById("bookingCurrentLocation").value = document.getElementById("carryLocation").value;
+                                document.getElementById("bookingDestination").value = document.getElementById("carryDestination").value;
                                 //bookRide();
                                 document.getElementById("confirmOrderButton").hidden = false;
                                 document.getElementById("cancelOrderButton").hidden = false;
@@ -635,8 +639,8 @@
                                 
                                 document.getElementById("carryDate").value = document.getElementById("bookedDate").value;
                                 document.getElementById("carryTime").value = document.getElementById("bookingTime").value;
-                                document.getElementById("carryLocation").value = document.getElementById("bookingCurrentLocation").value;
-                                document.getElementById("carryDestination").value = document.getElementById("bookingDestination").value;
+                                //document.getElementById("carryLocation").value = document.getElementById("bookingCurrentLocation").value;
+                                //document.getElementById("carryDestination").value = document.getElementById("bookingDestination").value;
                                 document.getElementById("carryVehicle").value = document.getElementById("typeVehicle").value;
                         
                                 document.getElementById("bookedDate").disabled = true;
