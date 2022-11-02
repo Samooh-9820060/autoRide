@@ -124,7 +124,7 @@ public class adminLogIn extends HttpServlet {
     
     
     
-    //function to check if password and mail matches in database
+    //validate username and password from database
     public boolean checkPassowrd(String username, String password) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
@@ -145,7 +145,7 @@ public class adminLogIn extends HttpServlet {
         return false;
     }
     
-    //hash the user entered password so that it can be compared to the one in the database
+    //convert the entered password into a hash to compare the passwords in the database
     public String hashPass(String password) throws NoSuchAlgorithmException{
         String hashedPass = "";
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
