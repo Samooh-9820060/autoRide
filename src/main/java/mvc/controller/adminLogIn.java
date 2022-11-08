@@ -123,32 +123,9 @@ public class adminLogIn extends HttpServlet {
     }
     
     
-    public boolean checkPassword(String username, String password) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
-        Statement statement;
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT USERID, PASSWORD, USERTYPE FROM USERDETAILS");
-        
-        //loop through the selected rows to see if any of them matches
-        while (resultSet.next()){
-                String resultUserID = resultSet.getObject(1).toString().trim();
-                String resultPassword = resultSet.getObject(2).toString().trim();
-                String resultUserType = resultSet.getObject(3).toString().trim();
-                
-                System.out.println(resultUserID + resultPassword+resultUserType);
-                
-                if (resultUserType.equals("3")){
-                    System.out.println("ok");
-                    if (username.equals(resultUserID)){
-                        return resultPassword.equals(password); //Correct login details
-                        // else wrong login details
-                    }
-                }
-        }
-        return false;
-    }
-    //function to check if password and mail matches in database
-    /*public boolean checkPassowrd(String username, String password) throws SQLException{
+    
+    //validate username and password from database
+    public boolean checkPassowrd(String username, String password) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
@@ -168,7 +145,7 @@ public class adminLogIn extends HttpServlet {
         return false;
     }*/
     
-    //hash the user entered password so that it can be compared to the one in the database
+    //convert the entered password into a hash to compare the passwords in the database
     public String hashPass(String password) throws NoSuchAlgorithmException{
         String hashedPass = "";
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
