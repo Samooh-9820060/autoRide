@@ -58,7 +58,7 @@ public class generateSummaryReport extends HttpServlet {
                 //get all details requried to fill the summary report from database
                 String orderDate = resultSet.getObject(1).toString().trim();
                 String distance = resultSet.getObject(2).toString().trim().replace(" km", "");
-                String duration = resultSet.getObject(3).toString().trim().replace(" mins", "");
+                String duration = resultSet.getObject(3).toString().trim().replace(" mins", "").replace(" min", "");
                 String totalPrice = resultSet.getObject(4).toString().trim();
                 String status = resultSet.getObject(5).toString().trim();
                 

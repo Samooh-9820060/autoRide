@@ -109,15 +109,12 @@ public class rideStatusUpdate extends HttpServlet {
             String userType = resultSet.getObject(2).toString().trim();
            
             if (passedCurrentDriver == true){
-                System.out.println(userType);
-                System.out.println(vehicleType);
-                String vehicle = resultSet.getObject(3).toString().trim();
-                System.out.println(vehicle);
-                System.out.println("--------");
-                if ((userType.equals("2"))&&(vehicleType.equals(vehicle))){
-                    System.out.println("ok");
-                    nextDriver = userId;
-                    return nextDriver;
+                if (userId.startsWith("DR")){
+                    String vehicle = resultSet.getObject(3).toString().trim();
+                    if ((userType.equals("2"))&&(vehicleType.equals(vehicle))){
+                        nextDriver = userId;
+                        return nextDriver;
+                    }                    
                 }
             }
             

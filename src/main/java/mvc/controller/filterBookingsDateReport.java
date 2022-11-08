@@ -183,7 +183,7 @@ public class filterBookingsDateReport extends HttpServlet {
             String driverID = resultSet.getObject(1).toString().trim();
             String status = resultSet.getObject(2).toString().trim();
             String currentDate = resultSet.getObject(3).toString().trim();
-            String duration = resultSet.getObject(4).toString().trim().replace(" mins","");
+            String duration = resultSet.getObject(4).toString().trim().replace(" mins","").replace(" min", "");
             
             if (status.equalsIgnoreCase("Complete")){
                 if (driverID.equalsIgnoreCase(userID)){

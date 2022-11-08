@@ -65,7 +65,7 @@ public class adminLogIn extends HttpServlet {
                 //create cookie to store user mail and default it to NA with no mail
                 Cookie cookie = new Cookie ("status", "NA");
 
-                if (checkPassowrd(usernameInput, hashPass(passwordInput))==true){
+                if (checkPassword(usernameInput, hashPass(passwordInput))==true){
                     Thread.sleep(500);
                     cookie.setValue(usernameInput);
                     response.addCookie(cookie);
@@ -123,9 +123,32 @@ public class adminLogIn extends HttpServlet {
     }
     
     
-    
+    public boolean checkPassword(String username, String password) throws SQLException{
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, PASSWORD, USERTYPE FROM USERDETAILS");
+        
+        //loop through the selected rows to see if any of them matches
+        while (resultSet.next()){
+                String resultUserID = resultSet.getObject(1).toString().trim();
+                String resultPassword = resultSet.getObject(2).toString().trim();
+                String resultUserType = resultSet.getObject(3).toString().trim();
+                
+                System.out.println(resultUserID + resultPassword+resultUserType);
+                
+                if (resultUserType.equals("3")){
+                    System.out.println("ok");
+                    if (username.equals(resultUserID)){
+                        return resultPassword.equals(password); //Correct login details
+                        // else wrong login details
+                    }
+                }
+        }
+        return false;
+    }
     //function to check if password and mail matches in database
-    public boolean checkPassowrd(String username, String password) throws SQLException{
+    /*public boolean checkPassowrd(String username, String password) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
@@ -143,7 +166,7 @@ public class adminLogIn extends HttpServlet {
                 }
         }        
         return false;
-    }
+    }*/
     
     //hash the user entered password so that it can be compared to the one in the database
     public String hashPass(String password) throws NoSuchAlgorithmException{
@@ -342,7 +365,7 @@ public class adminLogIn extends HttpServlet {
         while (resultSet.next()){
             String status = resultSet.getObject(3).toString();
             String date = resultSet.getObject(1).toString();
-            String duration = resultSet.getObject(2).toString().replace(" mins", "");
+            String duration = resultSet.getObject(2).toString().replace(" mins", "").replace(" min", "");
             if (status.equalsIgnoreCase("Complete")){
                 if (formattedDate.equals(date)){
                     totalValue += Double.parseDouble(duration);

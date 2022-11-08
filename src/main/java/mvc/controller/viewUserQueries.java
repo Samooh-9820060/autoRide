@@ -69,6 +69,7 @@ public class viewUserQueries extends HttpServlet {
             
             //redirect to the qeuery page
             request.setAttribute("queriesList", queries);
+            System.out.println("ok");
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/viewMyQueries.jsp");
             rd.forward(request, response);
         }

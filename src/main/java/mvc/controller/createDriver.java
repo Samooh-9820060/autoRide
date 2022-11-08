@@ -71,7 +71,9 @@ public class createDriver extends HttpServlet {
                         Statement statement;
                         statement = connection.createStatement();
                         String userID = "DR"+(getLastDriver()+1);
-                        statement.executeUpdate("INSERT INTO USERDETAILS VALUES ('"+userID+"', '"+firstName+"', '"+lastName+"', '"+hashPass(password)+"', "+mobileNumber+", '"+idCardNumber+"', '"+address+"', '"+postalcode+"', '"+district+"', '"+island+"', '"+email+"', '"+emergencyContactName+"', "+emergencyContactNumber+", '"+userType+"', '"+vehicleCode+"', '"+vehicleRegNo+"', '"+licenseNo+"')");
+                        String query = "INSERT INTO USERDETAILS VALUES ('"+userID+"', '"+firstName+"', '"+lastName+"', '"+hashPass(password)+"', "+mobileNumber+", '"+idCardNumber+"', '"+address+"', '"+postalcode+"', '"+district+"', '"+island+"', '"+email+"', '"+emergencyContactName+"', "+emergencyContactNumber+", '"+userType+"', '"+vehicleCode+"', '"+vehicleRegNo+"', '"+licenseNo+"')"; 
+                        System.out.println(query);
+                        statement.executeUpdate(query);
                         response.sendRedirect("./allUsers");
                         break;
                     case 1:
