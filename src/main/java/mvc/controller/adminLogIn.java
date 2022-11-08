@@ -125,11 +125,11 @@ public class adminLogIn extends HttpServlet {
     
     
     //validate username and password from database
-    public boolean checkPassowrd(String username, String password) throws SQLException{
+    public boolean checkPassword(String username, String password) throws SQLException{
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement;
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT USERNAME, PASSWORD FROM ADMINDETAILS");
+        ResultSet resultSet = statement.executeQuery("SELECT USERID, PASSWORD FROM USERDETAILS");
         
         //loop through the selected rows to see if any of them matches
         while (resultSet.next()){
@@ -143,7 +143,7 @@ public class adminLogIn extends HttpServlet {
                 }
         }        
         return false;
-    }*/
+    }
     
     //convert the entered password into a hash to compare the passwords in the database
     public String hashPass(String password) throws NoSuchAlgorithmException{
