@@ -118,8 +118,13 @@ public class bookRide extends HttpServlet {
         String nextRow = (getLastRow()+1)+"";
         Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO BOOKINGDETAILS VALUES ('"+nextRow+"', '"+passengerID+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
-                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"', '"+driver+"')");
+        location = location.replace("'", "");
+        destination = destination.replace("'", "");
+
+        String query = "INSERT INTO BOOKINGDETAILS VALUES ('"+nextRow+"', '"+passengerID+"', '"+date+"', '"+time+"', '"+location+"', '"+pickupLat+"', '"+pickupLng+"', '"+destination+"', '"
+                + ""+destinationLat+"', '"+destinationLng+"', '"+vehicleType+"','"+distance+"', '"+duration+"', '"+currentTime+"', '"+currentDate+"', '"+vehiclePrice+"', '"+extraDistancePrice+"', '"+price+"', '"+status+"', '"+driver+"')";
+        System.out.println(query);
+        statement.executeUpdate(query);
     }
     
     public int getLastRow() throws SQLException{
