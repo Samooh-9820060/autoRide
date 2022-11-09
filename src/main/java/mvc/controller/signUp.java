@@ -24,7 +24,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author samoo
@@ -35,19 +34,20 @@ public class signUp extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws ServletException                       if a servlet-specific error
+     *                                                occurs
+     * @throws IOException                            if an I/O error occurs
      * @throws java.sql.SQLException
      * @throws java.security.NoSuchAlgorithmException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            if (request.getParameter("signUpButton") != null){
-                //get data from the user inputs and store them in string for temporary use
+        try (PrintWriter out = response.getWriter()) {
+            if (request.getParameter("signUpButton") != null) {
+                // get data from the user inputs and store them in string for temporary use
                 String signUpFirstName = request.getParameter("signUpFirstName");
                 String signUpLastName = request.getParameter("signUpLastName");
                 String signUpEmail = request.getParameter("signUpEmail");
@@ -55,20 +55,26 @@ public class signUp extends HttpServlet {
                 String signUpPassword = hashPass(request.getParameter("signUpPassword"));
                 int type = 1;
                 int vehicleType = 0;
-                
-                Cookie cookie = new Cookie ("status", "NA");
-                
-                //check if the mail or number has been repeated and show error message if it is repeated else go to login page
-                switch (checkRepeat(signUpEmail, signUpTelephone)){
+
+                Cookie cookie = new Cookie("status", "NA");
+
+                // check if the mail or number has been repeated and show error message if it is
+                // repeated else go to login page
+                switch (checkRepeat(signUpEmail, signUpTelephone)) {
                     case 0:
-                        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+                        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide",
+                                "username", "password");
                         Statement statement;
                         statement = connection.createStatement();
-                        String userID = "PA"+(getLastPassenger()+1);
+                        String userID = "PA" + (getLastPassenger() + 1);
                         System.out.println(userID);
                         System.out.println(signUpTelephone);
                         System.out.println(signUpEmail);
-                        statement.executeUpdate("INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER, EMAIL, USERTYPE,VEHICLETYPE) VALUES ('"+userID+"', '"+signUpFirstName+"', '"+signUpLastName+"', '"+signUpPassword+"', "+signUpTelephone+", '"+signUpEmail+"', '"+type+"', '"+vehicleType+"')");
+                        statement.executeUpdate(
+                                "INSERT INTO USERDETAILS (USERID,FIRSTNAME,LASTNAME,PASSWORD,PHONENUMBER, EMAIL, USERTYPE,VEHICLETYPE) VALUES ('"
+                                        + userID + "', '" + signUpFirstName + "', '" + signUpLastName + "', '"
+                                        + signUpPassword + "', " + signUpTelephone + ", '" + signUpEmail + "', '" + type
+                                        + "', '" + vehicleType + "')");
                         cookie.setValue("Registered");
                         response.addCookie(cookie);
                         response.sendRedirect("./jsp/Loading.jsp");
@@ -92,9 +98,9 @@ public class signUp extends HttpServlet {
             }
         }
     }
-    
-    //hash password in SHA 256 format to store in database
-    public String hashPass(String password) throws NoSuchAlgorithmException{
+
+    // hash password in SHA 256 format to store in database
+    public String hashPass(String password) throws NoSuchAlgorithmException {
         String hashedPass = "";
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
@@ -104,62 +110,66 @@ public class signUp extends HttpServlet {
             s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         }
         hashedPass = s.toString();
-        
+
         return hashedPass;
-        
+
     }
-    //get the last passenger id that was registered
-    public int getLastPassenger() throws SQLException{
+
+    // get the last passenger id that was registered
+    public int getLastPassenger() throws SQLException {
         int i = 0;
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement;
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERTYPE FROM USERDETAILS");
-        while (resultSet.next()){
+        while (resultSet.next()) {
             String type = resultSet.getObject(1).toString().trim();
-            if (type.equals("1")){
+            if (type.equals("1")) {
                 i++;
             }
         }
         return i;
     }
-    
-    //check if the user entered email or phone numbers is repeated
-    public int checkRepeat(String email, int phoneNumber) throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+    // check if the user entered email or phone numbers is repeated
+    public int checkRepeat(String email, int phoneNumber) throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement;
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT EMAIL, PHONENUMBER FROM USERDETAILS");
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numberOfColumns = metaData.getColumnCount();
-        
-        //loop through the selected data in the database
-        while (resultSet.next()){
+
+        // loop through the selected data in the database
+        while (resultSet.next()) {
             for (int i = 1; i <= numberOfColumns; i++) {
                 String resultEmail = (String) resultSet.getObject(i);
-                int resultPhone = Integer.parseInt(resultSet.getObject(i+1).toString());
-                
-                if ((resultEmail.equalsIgnoreCase(email))&&(resultPhone == phoneNumber)){
+                int resultPhone = Integer.parseInt(resultSet.getObject(i + 1).toString());
+
+                if ((resultEmail.equalsIgnoreCase(email)) && (resultPhone == phoneNumber)) {
                     return 3;
-                } else if (resultEmail.equalsIgnoreCase(email)){
+                } else if (resultEmail.equalsIgnoreCase(email)) {
                     return 2;
-                } else if (resultPhone == phoneNumber){
+                } else if (resultPhone == phoneNumber) {
                     return 1;
                 }
                 i++;
             }
-        }        
+        }
         return 0;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -176,10 +186,10 @@ public class signUp extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -28,57 +28,59 @@ public class changeQueryStatus extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             String queryNo = request.getParameter("queryNo");
-            
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement;
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT STATUS FROM QUERIES");
 
             String currentStatus = null;
             String newStatus = null;
-            //loop through the selected rows to see if any of them matches
+            // loop through the selected rows to see if any of them matches
             int i = 1;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String resultStatus = (String) resultSet.getObject(1);
 
-                if (queryNo.equals(i+"")){
+                if (queryNo.equals(i + "")) {
                     currentStatus = resultStatus;
                 }
                 i++;
             }
-            //change the status to the opposite of what currently is
-            if (currentStatus.equals("Not_Fixed")){
+            // change the status to the opposite of what currently is
+            if (currentStatus.equals("Not_Fixed")) {
                 newStatus = "Fixed";
-            } else if (currentStatus.equals("Fixed")){
+            } else if (currentStatus.equals("Fixed")) {
                 newStatus = "Not_Fixed";
             }
-            
-            //update updated status in database
-            String updateQueryString = "update queries set Status='"+newStatus+"' where QueryNo='"+queryNo+"'";
+
+            // update updated status in database
+            String updateQueryString = "update queries set Status='" + newStatus + "' where QueryNo='" + queryNo + "'";
             statement.executeUpdate(updateQueryString);
-            
+
             response.sendRedirect("allQueries");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -93,10 +95,10 @@ public class changeQueryStatus extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

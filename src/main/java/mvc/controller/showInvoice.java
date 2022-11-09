@@ -22,7 +22,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author samoo
@@ -33,17 +32,17 @@ public class showInvoice extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            
-            //Values needed for receipt
+        try (PrintWriter out = response.getWriter()) {
+
+            // Values needed for receipt
             String receiptOrderDate = null;
             String receiptOrderTIme = null;
             String receiptPassengerID = null;
@@ -57,42 +56,42 @@ public class showInvoice extends HttpServlet {
             String receiptVehiclePrice = null;
             String receiptExtraDistancePrice = null;
             String receiptTotalPrice = null;
-            
+
             String receiptFullName = null;
             String receiptPhoneNumber = null;
 
-            
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
-            
+
             String firstName = null;
             String invoiceNumber = "BLANK";
-            
+
             Cookie[] cookies = request.getCookies();
-            for (Cookie cookie: cookies) {
-                switch (cookie.getName()){
+            for (Cookie cookie : cookies) {
+                switch (cookie.getName()) {
                     case "firstName":
                         firstName = cookie.getValue();
                         break;
                     case "invoiceNo":
                         invoiceNumber = cookie.getValue();
                         cookie.setMaxAge(0);
-                        response.addCookie(cookie); 
+                        response.addCookie(cookie);
                         break;
                 }
             }
-            
-            
-            //get values from bookingsdata database
+
+            // get values from bookingsdata database
             int invoiceNum = getInvoiceNumber(invoiceNumber);
-            
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT CURRENTDATE, CURRENTTIME, PASSENGERID, DATE, TIME, LOCATION, DESTINATION, "
-                    + "VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE FROM BOOKINGDETAILS");
+            ResultSet resultSet = statement
+                    .executeQuery("SELECT CURRENTDATE, CURRENTTIME, PASSENGERID, DATE, TIME, LOCATION, DESTINATION, "
+                            + "VEHICLETYPE, DISTANCE, DURATION, VEHICLEPRICE, EXTRADISTANCEPRICE, TOTALPRICE FROM BOOKINGDETAILS");
             int count = 1;
-            while (resultSet.next()){
-                if (count==invoiceNum){
+            while (resultSet.next()) {
+                if (count == invoiceNum) {
                     receiptOrderDate = (String) resultSet.getObject(1);
                     receiptOrderTIme = (String) resultSet.getObject(2);
                     receiptPassengerID = (String) resultSet.getObject(3);
@@ -110,20 +109,20 @@ public class showInvoice extends HttpServlet {
                 }
                 count++;
             }
-            
-            //get vehicle name from vehicle type
+
+            // get vehicle name from vehicle type
             String receiptVehicleName = null;
             Statement statementVehicles = connection.createStatement();
             ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
-            while (resultSetVehicles.next()){
+            while (resultSetVehicles.next()) {
                 String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
                 String resultVehicleName = resultSetVehicles.getObject(2).toString();
-                if (receiptVehicleTypeID.equals(resultVehicleID)){
+                if (receiptVehicleTypeID.equals(resultVehicleID)) {
                     receiptVehicleName = resultVehicleName;
                 }
             }
-            
-            //Send values for invoice
+
+            // Send values for invoice
             request.setAttribute("invoiceNum", invoiceNum);
             request.setAttribute("receiptOrderDate", receiptOrderDate);
             request.setAttribute("receiptOrderTIme", receiptOrderTIme);
@@ -140,98 +139,107 @@ public class showInvoice extends HttpServlet {
             request.setAttribute("vehiclePrice", receiptVehiclePrice);
             request.setAttribute("extraDistancePrice", receiptExtraDistancePrice);
             request.setAttribute("totalPrice", receiptTotalPrice);
-            
-            //redirect to invoice page
+
+            // redirect to invoice page
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/invoice.jsp");
             rd.forward(request, response);
         }
     }
-    //get mail from passenger id
-    public String getEmail(String id) throws SQLException{
+
+    // get mail from passenger id
+    public String getEmail(String id) throws SQLException {
         String mail = "";
-        
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
-        
-        while (resultSet.next()){
+
+        while (resultSet.next()) {
             String userID = resultSet.getObject(1).toString().trim();
-            
-            if (userID.equals(id)){
+
+            if (userID.equals(id)) {
                 mail = resultSet.getObject(2).toString().trim();
             }
         }
-        
+
         return mail;
     }
-    //get full name from passenger id
-    public String getFullName(String id) throws SQLException{
+
+    // get full name from passenger id
+    public String getFullName(String id) throws SQLException {
         String fullName = "";
-        
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, FIRSTNAME, LASTNAME FROM USERDETAILS");
-        
-        while (resultSet.next()){
+
+        while (resultSet.next()) {
             String userID = resultSet.getObject(1).toString().trim();
-            if (userID.equals(id)){
+            if (userID.equals(id)) {
                 String firstName = resultSet.getObject(2).toString().trim();
                 String lastName = resultSet.getObject(3).toString().trim();
-                
-                fullName = firstName+" "+lastName;
+
+                fullName = firstName + " " + lastName;
             }
         }
         return fullName;
     }
-    //get phone number from passenger id   
-    public String getPhoneNumber(String id) throws SQLException{
+
+    // get phone number from passenger id
+    public String getPhoneNumber(String id) throws SQLException {
         String phoneNumber = "";
-        
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, PHONENUMBER FROM USERDETAILS");
-        
-        while (resultSet.next()){
+
+        while (resultSet.next()) {
             String userID = resultSet.getObject(1).toString().trim();
-            
-            if (userID.equals(id)){
+
+            if (userID.equals(id)) {
                 phoneNumber = resultSet.getObject(2).toString().trim();
             }
         }
-        
+
         return phoneNumber;
     }
-    //get invoice number
-    public int getInvoiceNumber(String invoiceNumber) throws SQLException{
-        
-        if (invoiceNumber.equals("BLANK")){
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+    // get invoice number
+    public int getInvoiceNumber(String invoiceNumber) throws SQLException {
+
+        if (invoiceNumber.equals("BLANK")) {
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID FROM BOOKINGDETAILS");
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             int count = 0;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 for (int i = 1; i <= numberOfColumns; i++) {
 
                     i++;
                 }
                 count++;
             }
-            return count;   
+            return count;
         } else {
             return Integer.parseInt(invoiceNumber);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -246,10 +254,10 @@ public class showInvoice extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -35,40 +35,41 @@ public class driverHomePage extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             String driverIDString = getDriverID(mail);
             String driverVehicle = vehicleType(getDriverVehicle(driverIDString));
-            
-            
-            //get pending rides for this driver
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+            // get pending rides for this driver
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSetPendingRides = statement.executeQuery("SELECT DRIVER, STATUS, VEHICLETYPE, DATE, TIME, LOCATION, DESTINATION, TOTALPRICE FROM BOOKINGDETAILS");
-            
+            ResultSet resultSetPendingRides = statement.executeQuery(
+                    "SELECT DRIVER, STATUS, VEHICLETYPE, DATE, TIME, LOCATION, DESTINATION, TOTALPRICE FROM BOOKINGDETAILS");
+
             List<driverRidesViewModel> pendingRides = new ArrayList<>();
-            int i =1;
-            //add any pending rides to the pending rides list
-            while (resultSetPendingRides.next()){
+            int i = 1;
+            // add any pending rides to the pending rides list
+            while (resultSetPendingRides.next()) {
                 driverRidesViewModel tempList = new driverRidesViewModel();
                 String driver = resultSetPendingRides.getObject(1).toString();
                 String status = resultSetPendingRides.getObject(2).toString();
                 String vehicle = vehicleType(resultSetPendingRides.getObject(3).toString().trim());
-                
-                
-                if ((driverIDString.equals(driver))&&(status.equalsIgnoreCase("Waiting"))&&(driverVehicle.equals(vehicle))){
-                    tempList.id=i+"";
+
+                if ((driverIDString.equals(driver)) && (status.equalsIgnoreCase("Waiting"))
+                        && (driverVehicle.equals(vehicle))) {
+                    tempList.id = i + "";
                     tempList.bookDate = (String) resultSetPendingRides.getObject(4);
                     tempList.bookTime = (String) resultSetPendingRides.getObject(5);
                     tempList.location = (String) resultSetPendingRides.getObject(6);
@@ -79,22 +80,23 @@ public class driverHomePage extends HttpServlet {
                 i++;
             }
             request.setAttribute("pendingRides", pendingRides);
-            
-            //get pending rides for this driver
-            ResultSet resultSetOngoingRides = statement.executeQuery("SELECT DRIVER, STATUS, VEHICLETYPE, DATE, TIME, LOCATION, DESTINATION, TOTALPRICE FROM BOOKINGDETAILS");
-            
+
+            // get pending rides for this driver
+            ResultSet resultSetOngoingRides = statement.executeQuery(
+                    "SELECT DRIVER, STATUS, VEHICLETYPE, DATE, TIME, LOCATION, DESTINATION, TOTALPRICE FROM BOOKINGDETAILS");
+
             List<driverRidesViewModel> ongoingRides = new ArrayList<>();
             int y = 1;
-            //add any ongoing rides to ongoing rides list
-            while (resultSetOngoingRides.next()){
+            // add any ongoing rides to ongoing rides list
+            while (resultSetOngoingRides.next()) {
                 driverRidesViewModel tempList = new driverRidesViewModel();
                 String driver = resultSetOngoingRides.getObject(1).toString();
                 String status = resultSetOngoingRides.getObject(2).toString();
                 String vehicle = vehicleType(resultSetOngoingRides.getObject(3).toString().trim());
-                
-                
-                if ((driverIDString.equals(driver))&&(status.equalsIgnoreCase("Driver_Assigned"))&&(driverVehicle.equals(vehicle))){
-                    tempList.id=y+"";
+
+                if ((driverIDString.equals(driver)) && (status.equalsIgnoreCase("Driver_Assigned"))
+                        && (driverVehicle.equals(vehicle))) {
+                    tempList.id = y + "";
                     tempList.bookDate = (String) resultSetOngoingRides.getObject(4);
                     tempList.bookTime = (String) resultSetOngoingRides.getObject(5);
                     tempList.location = (String) resultSetOngoingRides.getObject(6);
@@ -105,78 +107,81 @@ public class driverHomePage extends HttpServlet {
                 y++;
             }
             request.setAttribute("ongoingRides", ongoingRides);
-            //set pending and ongoing number
+            // set pending and ongoing number
             request.setAttribute("pendingRidesNum", pendingRides.size());
             request.setAttribute("ongoingRidesNum", ongoingRides.size());
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/driverHomePage.jsp");
             rd.forward(request, response);
         }
     }
-    
-    private String getDriverID(String mail) throws SQLException{
+
+    private String getDriverID(String mail) throws SQLException {
         String driverID = "DR1";
-        //get driver id by mail
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        // get driver id by mail
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
-        while (resultSet.next()){
+        while (resultSet.next()) {
             String userId = (String) resultSet.getObject(1);
             String email = (String) resultSet.getObject(2);
-            
-            if (email.equals(mail)){
+
+            if (email.equals(mail)) {
                 driverID = userId;
             }
         }
-        
+
         return driverID;
     }
-    
-    private String getDriverVehicle(String id) throws SQLException{
+
+    private String getDriverVehicle(String id) throws SQLException {
         String vehicle = "0";
-        //get vehicle name by vehicle id 
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        // get vehicle name by vehicle id
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, VEHICLETYPE FROM USERDETAILS");
-        while (resultSet.next()){
+        while (resultSet.next()) {
             String userId = (String) resultSet.getObject(1);
             String vehicleID = (String) resultSet.getObject(2);
-            
-            if (userId.equals(id)){
+
+            if (userId.equals(id)) {
                 vehicle = vehicleID;
             }
         }
-        
+
         return vehicle;
     }
-    
-    private String vehicleType(String receiptVehicleTypeID) throws SQLException{
-        //get vehicle type by vehicle id
+
+    private String vehicleType(String receiptVehicleTypeID) throws SQLException {
+        // get vehicle type by vehicle id
         String vehicleName = "";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statementVehicles = connection.createStatement();
         ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
 
-        while (resultSetVehicles.next()){
+        while (resultSetVehicles.next()) {
             String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
             String resultVehicleName = resultSetVehicles.getObject(2).toString();
-            if (receiptVehicleTypeID.equals(resultVehicleID)){
+            if (receiptVehicleTypeID.equals(resultVehicleID)) {
                 vehicleName = resultVehicleName;
             }
         }
-        
-        
+
         return vehicleName;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -191,10 +196,10 @@ public class driverHomePage extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

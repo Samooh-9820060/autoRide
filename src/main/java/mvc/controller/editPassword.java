@@ -31,31 +31,33 @@ public class editPassword extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             String userId = request.getParameter("editPasswordID");
             String newPassword = hashPass(request.getParameter("editPasswordValue"));
-            
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement;
             statement = connection.createStatement();
-            //update password for user from database
-            statement.executeUpdate("UPDATE USERDETAILS SET PASSWORD = '"+newPassword+"' WHERE USERID = '"+userId+"'");
-            
+            // update password for user from database
+            statement.executeUpdate(
+                    "UPDATE USERDETAILS SET PASSWORD = '" + newPassword + "' WHERE USERID = '" + userId + "'");
+
             response.sendRedirect("allUsers");
         }
     }
-    
-        //hash password in SHA 256 format to store in database
-    public String hashPass(String password) throws NoSuchAlgorithmException{
-        //function to hash password in SHA256
+
+    // hash password in SHA 256 format to store in database
+    public String hashPass(String password) throws NoSuchAlgorithmException {
+        // function to hash password in SHA256
         String hashedPass = "";
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
@@ -65,19 +67,20 @@ public class editPassword extends HttpServlet {
             s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         }
         hashedPass = s.toString();
-        
+
         return hashedPass;
-        
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -94,10 +97,10 @@ public class editPassword extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -24,7 +24,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mvc.model.myOrdersListViewModel;
 
-
 /**
  *
  * @author samoo
@@ -35,34 +34,35 @@ public class myOrders extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
             String driverIDString = getDriverID(mail);
-            
-            
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement;
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
-            
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT PASSENGERID, DATE, TIME, CURRENTDATE, CURRENTTIME, LOCATION, DESTINATION, VEHICLETYPE, DISTANCE, DURATION, TOTALPRICE, DRIVER, STATUS FROM BOOKINGDETAILS");
+
             List<myOrdersListViewModel> myOrdersList = new ArrayList<>();
             int i = 1;
-            //add all orders that were completed by the driver to a list
-            while (resultSet.next()){
+            // add all orders that were completed by the driver to a list
+            while (resultSet.next()) {
                 myOrdersListViewModel tempList = new myOrdersListViewModel();
                 String driver = resultSet.getObject(12).toString();
-                
-                if (driverIDString.equals(driver)){
-                    tempList.invoiceNum = i+"";
+
+                if (driverIDString.equals(driver)) {
+                    tempList.invoiceNum = i + "";
                     tempList.passengerID = (String) resultSet.getObject(1);
                     tempList.bookDate = (String) resultSet.getObject(2);
                     tempList.bookTime = (String) resultSet.getObject(3);
@@ -78,60 +78,64 @@ public class myOrders extends HttpServlet {
                 }
                 i++;
             }
-            
-            //reverse the list and add it as a response
+
+            // reverse the list and add it as a response
             Collections.reverse(myOrdersList);
             request.setAttribute("myOrdersList", myOrdersList);
-            //redirect to the orders page
+            // redirect to the orders page
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/myOrders.jsp");
             rd.forward(request, response);
         }
     }
-    //get vehicle name form vehicle id
-    private String vehicleType(String receiptVehicleTypeID) throws SQLException{
+
+    // get vehicle name form vehicle id
+    private String vehicleType(String receiptVehicleTypeID) throws SQLException {
         String vehicleName = "";
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statementVehicles = connection.createStatement();
         ResultSet resultSetVehicles = statementVehicles.executeQuery("SELECT VEHICLEID, VEHICLENAME FROM VEHICLES");
 
-        while (resultSetVehicles.next()){
+        while (resultSetVehicles.next()) {
             String resultVehicleID = resultSetVehicles.getObject(1).toString().trim();
             String resultVehicleName = resultSetVehicles.getObject(2).toString();
-            if (receiptVehicleTypeID.equals(resultVehicleID)){
+            if (receiptVehicleTypeID.equals(resultVehicleID)) {
                 vehicleName = resultVehicleName;
             }
         }
-        
-        
+
         return vehicleName;
     }
-    //get driver id from mail
-    private String getDriverID(String mail) throws SQLException{
+
+    // get driver id from mail
+    private String getDriverID(String mail) throws SQLException {
         String driverID = "DR1";
-        
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                "password");
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT USERID, EMAIL FROM USERDETAILS");
-        while (resultSet.next()){
+        while (resultSet.next()) {
             String userId = (String) resultSet.getObject(1);
             String email = (String) resultSet.getObject(2);
-            
-            if (email.equals(mail)){
+
+            if (email.equals(mail)) {
                 driverID = userId;
             }
         }
-        
+
         return driverID;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -146,10 +150,10 @@ public class myOrders extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

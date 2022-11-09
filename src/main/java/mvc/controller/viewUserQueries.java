@@ -23,7 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mvc.model.viewQueriesViewModel;
 
-
 /**
  *
  * @author samoo
@@ -34,28 +33,30 @@ public class viewUserQueries extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             String mail = (String) session.getAttribute("session");
 
             List<viewQueriesViewModel> queries = new ArrayList<>();
-            
-            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide","username","password");
+
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/autoRide", "username",
+                    "password");
             Statement statement;
             statement = connection.createStatement();
-            //add all queries to a list
-            ResultSet resultSet = statement.executeQuery("SELECT MAIL, TYPE, DETAILS, CURRENTDATE, CURRENTTIME, STATUS, QUERYNO FROM QUERIES");
-            while (resultSet.next()){
-                String mailValue = resultSet.getObject(1)+"".trim();
-                if (mailValue.equals(mail)){
+            // add all queries to a list
+            ResultSet resultSet = statement
+                    .executeQuery("SELECT MAIL, TYPE, DETAILS, CURRENTDATE, CURRENTTIME, STATUS, QUERYNO FROM QUERIES");
+            while (resultSet.next()) {
+                String mailValue = resultSet.getObject(1) + "".trim();
+                if (mailValue.equals(mail)) {
                     viewQueriesViewModel tempList = new viewQueriesViewModel();
                     tempList.type = resultSet.getObject(2).toString().trim();
                     tempList.details = resultSet.getObject(3).toString().trim();
@@ -66,8 +67,8 @@ public class viewUserQueries extends HttpServlet {
                     queries.add(tempList);
                 }
             }
-            
-            //redirect to the qeuery page
+
+            // redirect to the qeuery page
             request.setAttribute("queriesList", queries);
             System.out.println("ok");
             RequestDispatcher rd = request.getRequestDispatcher("./jsp/viewMyQueries.jsp");
@@ -75,14 +76,15 @@ public class viewUserQueries extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -97,10 +99,10 @@ public class viewUserQueries extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
